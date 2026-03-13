@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model City {
+  id        Int      @id @default(autoincrement())
+  nameEn    String
+  nameRu    String
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profiles  Profile[]
+
+  @@map("cities")
+}
+
+model Profile {
+  id        Int      @id @default(autoincrement())
+  name      String
+  age       Int
+  gender    Gender
+  cityId    Int
+  city      City     @relation(fields: [cityId], references: [id])
+  avatar    String
+  photos    String[]
+  tel       String
+  email     String
+  height    Int?
+  weight    Int?
+  about     String?
+  services  String   @default("[]")
+  languages String   @default("[]")
+  workType  String   @default("[]")
+  isActive  Boolean  @default(true)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("profiles")
+}
+
+enum Gender {
+  FEMALE
+  MALE
+  TRANSGENDER
+}
+
+model CartItem {
+  id        String   @id @default(uuid())
+  profileId Int
+  userId    String?
+  sessionId String?
+  plan      Plan
+  price     Int
+  createdAt DateTime @default(now())
+
+  @@map("cart_items")
+}
+
+enum Plan {
+  ONE_MONTH
+  THREE_MONTHS
+  SIX_MONTHS
+}
+
+model Payment {
+  id              String   @id @default(uuid())
+  userId          String?
+  sessionId       String?
+  profileId       Int
+  amount          Int
+  currency        String   @default("usd")
+  status          PaymentStatus @default(PENDING)
+  stripeSessionId String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("payments")
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}

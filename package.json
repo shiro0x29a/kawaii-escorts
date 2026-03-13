@@ -1,0 +1,27 @@
+{
+  "name": "kawaii-escorts",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "apps/*",
+    "packages/*",
+    "features/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"yarn workspace @kawaii/api dev\" \"yarn workspace @kawaii/web dev\"",
+    "build": "yarn workspace @kawaii/api build && yarn workspace @kawaii/web build",
+    "start": "yarn workspace @kawaii/api start && yarn workspace @kawaii/web start",
+    "lint": "yarn workspaces foreach -A run lint",
+    "db:generate": "yarn workspace @kawaii/database generate",
+    "db:migrate": "yarn workspace @kawaii/database migrate",
+    "db:push": "yarn workspace @kawaii/database push",
+    "db:seed": "yarn workspace @kawaii/database seed"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

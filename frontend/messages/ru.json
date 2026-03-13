@@ -1,0 +1,127 @@
+{
+  "Common": {
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "submit": "Отправить",
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "search": "Поиск",
+    "back": "Назад"
+  },
+  "Nav": {
+    "home": "Главная",
+    "profiles": "Профили",
+    "search": "Поиск",
+    "cart": "Корзина",
+    "login": "Вход",
+    "register": "Регистрация",
+    "logout": "Выход",
+    "profile": "Профиль"
+  },
+  "Home": {
+    "title": "Kawaii Escorts",
+    "subtitle": "Найдите идеального компаньона",
+    "searchPlaceholder": "Поиск по городу...",
+    "featuredProfiles": "Избранные профили",
+    "viewAll": "Показать все"
+  },
+  "Profiles": {
+    "title": "Профили",
+    "filters": "Фильтры",
+    "city": "Город",
+    "allCities": "Все города",
+    "gender": "Пол",
+    "allGenders": "Все полы",
+    "female": "Женский",
+    "male": "Мужской",
+    "transgender": "Трансгендер",
+    "ageRange": "Возраст",
+    "minAge": "От",
+    "maxAge": "До",
+    "applyFilters": "Применить",
+    "clearFilters": "Сбросить",
+    "noProfiles": "Профили не найдены",
+    "loadMore": "Загрузить еще"
+  },
+  "Profile": {
+    "name": "Имя",
+    "age": "Возраст",
+    "gender": "Пол",
+    "city": "Город",
+    "height": "Рост",
+    "weight": "Вес",
+    "about": "О себе",
+    "languages": "Языки",
+    "services": "Услуги",
+    "contact": "Контакт",
+    "years": "лет",
+    "cm": "см",
+    "kg": "кг"
+  },
+  "Search": {
+    "title": "Поиск профилей",
+    "placeholder": "Введите название города...",
+    "noResults": "Ничего не найдено",
+    "results": "результатов"
+  },
+  "Cart": {
+    "title": "Корзина",
+    "empty": "Ваша корзина пуста",
+    "items": "Товары",
+    "total": "Итого",
+    "checkout": "Оформить",
+    "continueShopping": "Продолжить покупки",
+    "remove": "Удалить",
+    "plan": "План",
+    "price": "Цена",
+    "oneMonth": "1 месяц",
+    "threeMonths": "3 месяца",
+    "sixMonths": "6 месяцев"
+  },
+  "Auth": {
+    "login": "Вход",
+    "register": "Регистрация",
+    "email": "Email",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "forgotPassword": "Забыли пароль?",
+    "noAccount": "Нет аккаунта?",
+    "hasAccount": "Уже есть аккаунт?",
+    "loginSuccess": "Вход успешен",
+    "registerSuccess": "Регистрация успешна",
+    "loginError": "Ошибка входа",
+    "registerError": "Ошибка регистрации"
+  },
+  "Payment": {
+    "title": "Оплата",
+    "success": "Оплата успешна",
+    "failed": "Оплата не удалась",
+    "processing": "Обработка платежа...",
+    "redirecting": "Перенаправление на оплату..."
+  },
+  "Upload": {
+    "avatar": "Фото профиля",
+    "photos": "Дополнительные фото",
+    "dropzone": "Перетащите файлы сюда или нажмите для загрузки",
+    "maxSize": "Макс. размер файла: 5МБ",
+    "uploadError": "Ошибка загрузки"
+  },
+  "Validation": {
+    "required": "Это поле обязательно",
+    "invalidEmail": "Неверный email",
+    "minLength": "Минимум {min} символов",
+    "maxLength": "Максимум {max} символов",
+    "passwordMatch": "Пароли не совпадают",
+    "minAge": "Минимум {min} лет",
+    "maxAge": "Максимум {max} лет"
+  },
+  "Footer": {
+    "about": "О нас",
+    "contact": "Контакты",
+    "privacy": "Политика конфиденциальности",
+    "terms": "Условия использования",
+    "copyright": "© 2024 Kawaii Escorts. Все права защищены."
+  }
+}
