@@ -52,18 +52,11 @@ export function Header() {
                 </li>
               </>
             ) : (
-              <>
-                <li>
-                  <Link href="/login" className={styles.menuLink}>
-                    {t('login')}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/register" className={styles.registerButton}>
-                    {t('register')}
-                  </Link>
-                </li>
-              </>
+              <li>
+                <Link href="/login" className={styles.authButton}>
+                  {t('login')}
+                </Link>
+              </li>
             )}
           </ul>
         </nav>

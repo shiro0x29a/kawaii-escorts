@@ -46,7 +46,7 @@
   color: #db2777;
 }
 
-.registerButton {
+.authButton {
   background: #db2777;
   color: white;
   padding: 0.5rem 1rem;
@@ -55,7 +55,7 @@
   transition: background 0.2s;
 }
 
-.registerButton:hover {
+.authButton:hover {
   background: #be185d;
 }
 
