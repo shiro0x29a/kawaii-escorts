@@ -10,6 +10,7 @@ import { Footer } from '@/components/layout/footer';
 import { LocaleSwitcher } from '@/components/locale-switcher';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { Eruda } from '@/components/eruda';
+import { LayoutWrapper } from './layout-wrapper';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -50,10 +51,14 @@ export default async function RootLayout({
           <Providers>
             <Eruda />
             <ThemeSwitcher />
-            <Header />
             <LocaleSwitcher />
+            <LayoutWrapper>
+              <Header />
+            </LayoutWrapper>
             <main className="flex-1">{children}</main>
-            <Footer />
+            <LayoutWrapper>
+              <Footer />
+            </LayoutWrapper>
           </Providers>
         </NextIntlClientProvider>
       </body>
