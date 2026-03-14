@@ -33,6 +33,6 @@ export class PaymentController {
     @Headers('stripe-signature') signature: string,
     @Req() req: RawBodyRequest<Request>,
   ) {
-    return this.paymentService.handleWebhook(signature, req.rawBody);
+    return this.paymentService.handleWebhook(signature, req.rawBody || Buffer.from(''));
   }
 }

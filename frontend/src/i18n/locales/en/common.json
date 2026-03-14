@@ -93,7 +93,8 @@
     "loginSuccess": "Login successful",
     "registerSuccess": "Registration successful",
     "loginError": "Login failed",
-    "registerError": "Registration failed"
+    "registerError": "Registration failed",
+    "loading": "Loading..."
   },
   "Payment": {
     "title": "Payment",

@@ -25,7 +25,7 @@ export class ProfilesController {
 
   @Post()
   @UseInterceptors(FileInterceptor('avatar'))
-  async createProfile(@Body() body: any, @UploadedFile() file?: Express.Multer.File) {
+  async createProfile(@Body() body: any, @UploadedFile() file?: any) {
     const data = {
       ...body,
       avatar: file?.path || body.avatar,

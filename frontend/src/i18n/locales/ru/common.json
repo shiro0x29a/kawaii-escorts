@@ -92,7 +92,8 @@
     "loginSuccess": "Вход успешен",
     "registerSuccess": "Регистрация успешна",
     "loginError": "Ошибка входа",
-    "registerError": "Ошибка регистрации"
+    "registerError": "Ошибка регистрации",
+    "loading": "Загрузка..."
   },
   "Payment": {
     "title": "Оплата",
