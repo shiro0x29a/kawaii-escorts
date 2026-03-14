@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useRegister } from '@/hooks/use-auth';
 import { useAuthStore } from '@/stores/auth-store';
+import styles from './login-form.module.css';
 
 export function RegisterForm() {
   const t = useTranslations('Auth');
@@ -12,6 +13,7 @@ export function RegisterForm() {
   const { token } = useAuthStore();
   const register = useRegister();
 
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -22,17 +24,12 @@ export function RegisterForm() {
     setError('');
 
     if (password !== confirmPassword) {
-      setError(t('passwordMatch'));
-      return;
-    }
-
-    if (password.length < 6) {
-      setError(t('minLength').replace('{min}', '6'));
+      setError(t('registerError') || 'Passwords do not match');
       return;
     }
 
     try {
-      await register.mutateAsync({ email, password });
+      await register.mutateAsync({ username, email, password });
       router.push('/profiles');
     } catch (err) {
       setError(t('registerError'));
@@ -45,64 +42,68 @@ export function RegisterForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      {error && (
-        <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>
-      )}
+    <div className={`${styles.formBg} ${styles.active}`}>
+      <div className={styles.formWrapper}>
+        <div className={styles.iconClose} onClick={() => router.push('/')}>
+          ✕
+        </div>
+        <div className={styles.formBox}>
+          <h2 className={styles.formTitle}>{t('register')}</h2>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          {t('email')}
-        </label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-pink-400 focus:outline-none"
-          required
-        />
+          {error && <div className={styles.errorBox}>{error}</div>}
+
+          <form onSubmit={handleSubmit}>
+            <div className={styles.inputBox}>
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+              <label>Username</label>
+            </div>
+
+            <div className={styles.inputBox}>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <label>{t('email')}</label>
+            </div>
+
+            <div className={styles.inputBox}>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <label>{t('password')}</label>
+            </div>
+
+            <div className={styles.inputBox}>
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+              <label>{t('confirmPassword')}</label>
+            </div>
+
+            <button type="submit" disabled={register.isPending} className={styles.submitBtn}>
+              {register.isPending ? t('loading') : t('register')}
+            </button>
+
+            <div className={styles.registerBlock}>
+              {t('hasAccount')}{' '}
+              <a href="/login">{t('login')}</a>
+            </div>
+          </form>
+        </div>
       </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          {t('password')}
-        </label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-pink-400 focus:outline-none"
-          required
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          {t('confirmPassword')}
-        </label>
-        <input
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-pink-400 focus:outline-none"
-          required
-        />
-      </div>
-
-      <button
-        type="submit"
-        disabled={register.isPending}
-        className="w-full bg-pink-600 text-white py-3 rounded-lg hover:bg-pink-700 transition font-medium disabled:opacity-50"
-      >
-        {register.isPending ? t('loading') : t('register')}
-      </button>
-
-      <p className="text-center text-sm text-gray-600">
-        {t('hasAccount')}{' '}
-        <a href="/login" className="text-pink-600 hover:underline">
-          {t('login')}
-        </a>
-      </p>
-    </form>
+    </div>
   );
 }

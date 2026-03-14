@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useLogin } from '@/hooks/use-auth';
 import { useAuthStore } from '@/stores/auth-store';
+import styles from './login-form.module.css';
 
 export function LoginForm() {
   const t = useTranslations('Auth');
@@ -34,51 +35,55 @@ export function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      {error && (
-        <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>
-      )}
+    <div className={`${styles.formBg} ${styles.active}`}>
+      <div className={styles.formWrapper}>
+        <div className={styles.iconClose} onClick={() => router.push('/')}>
+          ✕
+        </div>
+        <div className={styles.formBox}>
+          <h2 className={styles.formTitle}>{t('login')}</h2>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          {t('email')}
-        </label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-pink-400 focus:outline-none"
-          required
-        />
+          {error && <div className={styles.errorBox}>{error}</div>}
+
+          <form onSubmit={handleSubmit}>
+            <div className={styles.inputBox}>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <label>{t('email')}</label>
+            </div>
+
+            <div className={styles.inputBox}>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <label>{t('password')}</label>
+            </div>
+
+            <div className={styles.forget}>
+              <label>
+                <input type="checkbox" /> {t('rememberMe') || 'Remember me'}
+              </label>
+              <a href="/forgot-password">{t('forgotPassword')}</a>
+            </div>
+
+            <button type="submit" disabled={login.isPending} className={styles.submitBtn}>
+              {login.isPending ? t('loading') : t('login')}
+            </button>
+
+            <div className={styles.registerBlock}>
+              {t('noAccount')}{' '}
+              <a href="/register">{t('register')}</a>
+            </div>
+          </form>
+        </div>
       </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          {t('password')}
-        </label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-pink-400 focus:outline-none"
-          required
-        />
-      </div>
-
-      <button
-        type="submit"
-        disabled={login.isPending}
-        className="w-full bg-pink-600 text-white py-3 rounded-lg hover:bg-pink-700 transition font-medium disabled:opacity-50"
-      >
-        {login.isPending ? t('loading') : t('login')}
-      </button>
-
-      <p className="text-center text-sm text-gray-600">
-        {t('noAccount')}{' '}
-        <a href="/register" className="text-pink-600 hover:underline">
-          {t('register')}
-        </a>
-      </p>
-    </form>
+    </div>
   );
 }
