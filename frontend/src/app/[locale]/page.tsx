@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
-import { SearchBox } from '@/components/search-box';
-import { FeaturedProfiles } from '@/components/featured-profiles';
+import { SearchBox } from '@/components/searchBox';
+import { FeaturedProfiles } from '@/components/featuredProfiles';
 import styles from './page.module.css';
 
 export default async function HomePage() {

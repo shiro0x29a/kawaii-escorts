@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useSearch } from '@/hooks/use-search';
-import { SearchBox } from '@/components/search-box';
+import { SearchBox } from '@/components/searchBox';
 
 interface SearchResultsProps {
   initialCity?: string;

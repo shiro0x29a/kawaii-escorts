@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import { ProfileView } from '@/components/profile-view';
+import { ProfileView } from '@/components/profileView';
 
 interface ProfilePageProps {
   params: Promise<{ id: string }>;

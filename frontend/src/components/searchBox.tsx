@@ -1,7 +1,7 @@
 'use client';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import styles from './search-box.module.css';
+import styles from './searchBox.module.css';
 
 interface SearchBoxProps {
   placeholder?: string;

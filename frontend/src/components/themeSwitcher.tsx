@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import styles from './theme-switcher.module.css';
+import styles from './themeSwitcher.module.css';
 
 type Theme = 'light' | 'dark' | 'system';
 

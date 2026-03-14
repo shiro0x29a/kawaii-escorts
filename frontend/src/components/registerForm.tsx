@@ -5,7 +5,9 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useRegister } from '@/hooks/use-auth';
 import { useAuthStore } from '@/stores/auth-store';
-import styles from './login-form.module.css';
+import { LocaleSwitcher } from './localeSwitcher';
+import { ThemeSwitcher } from './themeSwitcher';
+import styles from './loginForm.module.css';
 
 export function RegisterForm() {
   const t = useTranslations('Auth');
@@ -43,6 +45,10 @@ export function RegisterForm() {
 
   return (
     <div className={`${styles.formBg} ${styles.active}`}>
+      <div className={styles.switchersWrapper}>
+        <ThemeSwitcher />
+        <LocaleSwitcher />
+      </div>
       <div className={styles.formWrapper}>
         <div className={styles.iconClose} onClick={() => router.push('/')}>
           ✕

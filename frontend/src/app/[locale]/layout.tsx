@@ -7,10 +7,10 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { Providers } from '@/components/providers';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
-import { LocaleSwitcher } from '@/components/locale-switcher';
-import { ThemeSwitcher } from '@/components/theme-switcher';
+import { LocaleSwitcher } from '@/components/localeSwitcher';
+import { ThemeSwitcher } from '@/components/themeSwitcher';
 import { Eruda } from '@/components/eruda';
-import { LayoutWrapper } from './layout-wrapper';
+import { LayoutWrapper } from './layoutWrapper';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -50,8 +50,10 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <Eruda />
-            <ThemeSwitcher />
-            <LocaleSwitcher />
+            <LayoutWrapper>
+              <ThemeSwitcher />
+              <LocaleSwitcher />
+            </LayoutWrapper>
             <LayoutWrapper>
               <Header />
             </LayoutWrapper>

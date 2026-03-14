@@ -1,8 +1,8 @@
 'use client';
 
 import { useProfiles } from '@/hooks/use-profiles';
-import { ProfileView } from './profile-view';
-import styles from './featured-profiles.module.css';
+import { ProfileView } from './profileView';
+import styles from './featuredProfiles.module.css';
 
 export function FeaturedProfiles() {
   const { data: profiles, isLoading } = useProfiles({ limit: 6 });
