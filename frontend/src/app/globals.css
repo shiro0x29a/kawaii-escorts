@@ -3,6 +3,15 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --header-bg: #ffffff;
+  --header-text: #374151;
+  --header-shadow: rgba(0, 0, 0, 0.1);
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
+  --input-text: #1f2937;
+  --hero-gradient: linear-gradient(to right bottom, #fce7f3, #f5f3ff, #dbeafe);
+  --hero-title: #1f2937;
+  --hero-subtitle: #4b5563;
 }
 
 @theme inline {
@@ -12,11 +21,18 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+[data-theme="dark"] {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --header-bg: #1f2937;
+  --header-text: #e5e7eb;
+  --header-shadow: rgba(0, 0, 0, 0.5);
+  --input-bg: #1f2937;
+  --input-border: #4b5563;
+  --input-text: #e5e7eb;
+  --hero-gradient: linear-gradient(to right bottom, #374151, #1f2937, #111827);
+  --hero-title: #e5e7eb;
+  --hero-subtitle: #9ca3af;
 }
 
 body {

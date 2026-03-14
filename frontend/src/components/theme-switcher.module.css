@@ -1,7 +1,7 @@
 .switcher {
   position: fixed;
   top: 5rem;
-  right: 1rem;
+  right: 5rem;
   z-index: 50;
 }
 
@@ -25,9 +25,4 @@
   outline: none;
   border-color: #db2777;
   box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.1);
-}
-
-.option {
-  background: var(--input-bg);
-  color: var(--input-text);
 }

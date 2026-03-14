@@ -1,6 +1,6 @@
 .hero {
   position: relative;
-  background: linear-gradient(to right bottom, #fce7f3, #f5f3ff, #dbeafe);
+  background: var(--hero-gradient);
   padding: 5rem 0;
 }
 
@@ -19,12 +19,12 @@
 .title {
   font-size: 2.25rem;
   font-weight: 700;
-  color: #1f2937;
+  color: var(--hero-title);
   margin-bottom: 1rem;
 }
 
 .subtitle {
   font-size: 1.25rem;
-  color: #4b5563;
+  color: var(--hero-subtitle);
   margin-bottom: 2rem;
 }

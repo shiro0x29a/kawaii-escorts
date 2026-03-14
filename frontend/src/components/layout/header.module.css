@@ -1,6 +1,6 @@
 .header {
-  background: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: var(--header-bg);
+  box-shadow: 0 1px 3px var(--header-shadow);
 }
 
 .container {
@@ -37,7 +37,7 @@
 }
 
 .menuLink {
-  color: #374151;
+  color: var(--header-text);
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -62,7 +62,7 @@
 .logoutButton {
   background: none;
   border: none;
-  color: #374151;
+  color: var(--header-text);
   cursor: pointer;
   transition: color 0.2s;
 }

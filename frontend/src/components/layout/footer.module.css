@@ -33,6 +33,10 @@
   margin-bottom: 1rem;
 }
 
+[data-theme="dark"] .title {
+  color: #f9fafb;
+}
+
 .description {
   color: #9ca3af;
   font-size: 0.875rem;
