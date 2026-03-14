@@ -1,58 +1,26 @@
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import { useProfiles } from '@/hooks/use-profiles';
+import { ProfileView } from './profile-view';
+import styles from './featured-profiles.module.css';
 
 export function FeaturedProfiles() {
-  const t = useTranslations('Profiles');
-  const { data, isLoading } = useProfiles({ limit: 6 });
+  const { data: profiles, isLoading } = useProfiles({ limit: 6 });
 
   if (isLoading) {
-    return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {[...Array(6)].map((_, i) => (
-          <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
-            <div className="h-64 bg-gray-200" />
-            <div className="p-4">
-              <div className="h-4 bg-gray-200 rounded w-3/4 mb-2" />
-              <div className="h-3 bg-gray-200 rounded w-1/2" />
-            </div>
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  if (!data?.data?.length) {
-    return <p className="text-center text-gray-500">{t('noProfiles')}</p>;
+    return <div>Loading...</div>;
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {data.data.map((profile: any) => (
-        <Link
-          key={profile.id}
-          href={`/profiles/${profile.id}`}
-          className="group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition"
-        >
-          <div className="relative h-64 w-full">
-            <Image
-              src={profile.avatar}
-              alt={profile.name}
-              fill
-              className="object-cover group-hover:scale-105 transition duration-300"
-            />
-          </div>
-          <div className="p-4">
-            <h3 className="text-lg font-semibold text-gray-800">
-              {profile.name}, {profile.age}
-            </h3>
-            <p className="text-gray-500 text-sm mt-1">{profile.city.nameEn}</p>
-          </div>
-        </Link>
-      ))}
-    </div>
+    <section className={styles.section}>
+      <div className={styles.container}>
+        <h2 className={styles.title}>Featured Profiles</h2>
+        <div className={styles.grid}>
+          {profiles?.map((profile) => (
+            <ProfileView key={profile.id} profile={profile} />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

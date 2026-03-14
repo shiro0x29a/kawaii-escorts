@@ -2,6 +2,7 @@
 
 import { useLocale } from 'next-intl';
 import { useRouter, usePathname } from 'next/navigation';
+import styles from './locale-switcher.module.css';
 
 const locales = ['en', 'ru'] as const;
 const localeNames: Record<string, string> = {
@@ -19,14 +20,14 @@ export function LocaleSwitcher() {
   };
 
   return (
-    <div className="fixed top-20 right-4 z-50">
+    <div className={styles.switcher}>
       <select
         value={locale}
         onChange={(e) => handleLocaleChange(e.target.value)}
-        className="bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm shadow-md hover:border-pink-400 transition cursor-pointer"
+        className={styles.select}
       >
         {locales.map((loc) => (
-          <option key={loc} value={loc}>
+          <option key={loc} value={loc} className={styles.option}>
             {localeNames[loc]}
           </option>
         ))}

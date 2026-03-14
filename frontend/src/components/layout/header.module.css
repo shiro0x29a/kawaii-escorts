@@ -1,0 +1,72 @@
+.header {
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #db2777;
+  text-decoration: none;
+}
+
+.logo:hover {
+  color: #be185d;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menuLink {
+  color: #374151;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.menuLink:hover {
+  color: #db2777;
+}
+
+.registerButton {
+  background: #db2777;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.registerButton:hover {
+  background: #be185d;
+}
+
+.logoutButton {
+  background: none;
+  border: none;
+  color: #374151;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.logoutButton:hover {
+  color: #db2777;
+}

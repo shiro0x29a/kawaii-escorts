@@ -1,0 +1,32 @@
+.switcher {
+  position: fixed;
+  top: 5rem;
+  right: 1rem;
+  z-index: 50;
+}
+
+.select {
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+
+.select:hover {
+  border-color: #f472b6;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #db2777;
+  box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.1);
+}
+
+.option {
+  background: white;
+  color: #1f2937;
+}

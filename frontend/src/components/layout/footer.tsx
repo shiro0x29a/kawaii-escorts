@@ -1,50 +1,51 @@
 import { useTranslations } from 'next-intl';
+import styles from './footer.module.css';
 
 export function Footer() {
   const t = useTranslations('Footer');
 
   return (
-    <footer className="bg-gray-800 text-white py-12">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <h3 className="text-lg font-semibold mb-4">{t('about')}</h3>
-            <p className="text-gray-400 text-sm">
+    <footer className={styles.footer}>
+      <div className={styles.container}>
+        <div className={styles.grid}>
+          <div className={styles.section}>
+            <h3 className={styles.title}>{t('about')}</h3>
+            <p className={styles.description}>
               Kawaii Escorts - ваш надежный партнер в поиске идеального компаньона.
             </p>
           </div>
 
-          <div>
-            <h3 className="text-lg font-semibold mb-4">{t('contact')}</h3>
-            <ul className="space-y-2 text-gray-400 text-sm">
+          <div className={styles.section}>
+            <h3 className={styles.title}>{t('contact')}</h3>
+            <ul className={styles.contactList}>
               <li>
-                <a href="tel:+972534997866" className="hover:text-pink-400 transition">
+                <a href="tel:+972534997866" className={styles.contactLink}>
                   +972 53 499 7866
                 </a>
               </li>
               <li>
-                <a href="https://t.me/sexy_alexbaby" className="hover:text-pink-400 transition">
+                <a href="https://t.me/sexy_alexbaby" className={styles.contactLink}>
                   Telegram
                 </a>
               </li>
               <li>
-                <a href="https://l.clck.bar/ba669" className="hover:text-pink-400 transition">
+                <a href="https://l.clck.bar/ba669" className={styles.contactLink}>
                   WhatsApp
                 </a>
               </li>
             </ul>
           </div>
 
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Информация</h3>
-            <ul className="space-y-2 text-gray-400 text-sm">
+          <div className={styles.section}>
+            <h3 className={styles.title}>Информация</h3>
+            <ul className={styles.infoList}>
               <li>
-                <a href="/privacy" className="hover:text-pink-400 transition">
+                <a href="/privacy" className={styles.infoLink}>
                   {t('privacy')}
                 </a>
               </li>
               <li>
-                <a href="/terms" className="hover:text-pink-400 transition">
+                <a href="/terms" className={styles.infoLink}>
                   {t('terms')}
                 </a>
               </li>
@@ -52,9 +53,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
-          {t('copyright')}
-        </div>
+        <div className={styles.copyright}>{t('copyright')}</div>
       </div>
     </footer>
   );
