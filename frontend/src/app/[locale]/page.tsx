@@ -2,13 +2,8 @@ import { getTranslations } from 'next-intl/server';
 import { SearchBox } from '@/components/search-box';
 import { FeaturedProfiles } from '@/components/featured-profiles';
 
-export default async function HomePage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'Home' });
+export default async function HomePage() {
+  const t = await getTranslations('Home');
 
   return (
     <div>
