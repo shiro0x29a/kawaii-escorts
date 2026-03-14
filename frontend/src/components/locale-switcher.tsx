@@ -1,6 +1,7 @@
 'use client';
 
-import { useLocale, useRouter, usePathname } from 'next-intl';
+import { useLocale } from 'next-intl';
+import { useRouter, usePathname } from 'next/navigation';
 
 const locales = ['en', 'ru'] as const;
 const localeNames: Record<string, string> = {
@@ -14,7 +15,7 @@ export function LocaleSwitcher() {
   const pathname = usePathname();
 
   const handleLocaleChange = (newLocale: string) => {
-    router.replace(pathname, { locale: newLocale as 'en' | 'ru' });
+    router.replace(`/${newLocale}${pathname}`);
   };
 
   return (
