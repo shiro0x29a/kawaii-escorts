@@ -24,8 +24,8 @@ export function Header() {
               </Link>
             </li>
             <li>
-              <Link href="/profiles" className={styles.menuLink}>
-                {t('profiles')}
+              <Link href="/ads" className={styles.menuLink}>
+                {t('ads')}
               </Link>
             </li>
             <li>
@@ -38,6 +38,19 @@ export function Header() {
                 {t('cart')}
               </Link>
             </li>
+            {isAuthenticated ? (
+              <li>
+                <Link href="/ads/add" className={styles.authButton}>
+                  {t('addAd')}
+                </Link>
+              </li>
+            ) : (
+              <li>
+                <Link href="/login" className={styles.authButton}>
+                  {t('login')}
+                </Link>
+              </li>
+            )}
             {isAuthenticated ? (
               <>
                 <li>

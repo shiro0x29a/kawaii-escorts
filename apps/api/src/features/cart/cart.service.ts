@@ -11,7 +11,7 @@ export class CartService {
     if (userId) where.userId = userId;
 
     const items = await this.prisma.cartItem.findMany({ where });
-    const total = items.reduce((sum, item) => sum + item.price, 0);
+    const total = items.reduce((sum: number, item: { price: number }) => sum + item.price, 0);
 
     return { items, total };
   }

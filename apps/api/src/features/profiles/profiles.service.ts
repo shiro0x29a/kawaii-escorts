@@ -38,7 +38,7 @@ export class ProfilesService {
     ]);
 
     return {
-      data: profiles.map((p) => this.mapProfile(p)),
+      data: profiles.map((p: any) => this.mapProfile(p)),
       pagination: { page, limit, total, pages: Math.ceil(total / limit) },
     };
   }

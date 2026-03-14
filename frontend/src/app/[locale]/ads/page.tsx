@@ -1,9 +1,9 @@
 import { useTranslations } from 'next-intl';
-import { ProfilesList } from '@/components/profiles-list';
+import { AdsList } from '@/components/adsList';
 import { Filters } from '@/components/filters';
 
-export default function ProfilesPage() {
-  const t = useTranslations('Profiles');
+export default function AdsPage() {
+  const t = useTranslations('Ads');
 
   return (
     <div className="container py-8">
@@ -15,7 +15,7 @@ export default function ProfilesPage() {
         </aside>
 
         <main className="flex-1">
-          <ProfilesList />
+          <AdsList />
         </main>
       </div>
     </div>

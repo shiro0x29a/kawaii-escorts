@@ -1,12 +1,12 @@
-import { useTranslations } from 'next-intl';
-import { SearchResults } from '@/components/search-results';
+import { getTranslations } from 'next-intl/server';
+import { SearchResults } from '@/components/searchResults';
 
 interface SearchPageProps {
   searchParams: Promise<{ city?: string }>;
 }
 
 export default async function SearchPage({ searchParams }: SearchPageProps) {
-  const t = useTranslations('Search');
+  const t = await getTranslations('Search');
   const { city } = await searchParams;
 
   return (

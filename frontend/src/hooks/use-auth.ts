@@ -12,6 +12,9 @@ export function useLogin() {
       setUser(user);
       setToken(token);
     },
+    onError(err: any) {
+      console.error(err)
+    }
   });
 }
 
@@ -25,5 +28,8 @@ export function useRegister() {
       setUser(user);
       setToken(token);
     },
+    onError(err: any) {
+      console.error(err)
+    }
   });
 }

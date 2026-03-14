@@ -10,7 +10,7 @@ export class CitiesService {
       orderBy: { nameEn: 'asc' },
     });
 
-    return cities.map((city) => ({
+    return cities.map((city: { id: number; nameRu: string; nameEn: string; slug: string }) => ({
       id: city.id,
       name: lang === 'ru' ? city.nameRu : city.nameEn,
       slug: city.slug,

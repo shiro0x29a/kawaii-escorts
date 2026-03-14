@@ -1,13 +1,13 @@
 import { useTranslations } from 'next-intl';
-import { CartView } from '@/components/cart-view';
+import { CheckoutForm } from '@/components/checkoutForm';
 
-export default function CartPage() {
-  const t = useTranslations('Cart');
+export default function CheckoutPage() {
+  const t = useTranslations('Payment');
 
   return (
     <div className="container py-8">
       <h1 className="text-3xl font-bold mb-8 text-center">{t('title')}</h1>
-      <CartView />
+      <CheckoutForm />
     </div>
   );
 }

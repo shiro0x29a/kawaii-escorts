@@ -51,14 +51,14 @@ export class SearchService {
     let filtered = profiles;
 
     if (query.lang) {
-      filtered = profiles.filter((p) => {
+      filtered = profiles.filter((p: any) => {
         const languages = typeof p.languages === 'string' ? JSON.parse(p.languages) : p.languages;
         return languages?.includes(query.lang);
       });
     }
 
     return {
-      data: filtered.map((p) => ({
+      data: filtered.map((p: any) => ({
         ...p,
         services: typeof p.services === 'string' ? JSON.parse(p.services) : p.services,
         languages: typeof p.languages === 'string' ? JSON.parse(p.languages) : p.languages,

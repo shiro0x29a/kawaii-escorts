@@ -12,23 +12,24 @@
   },
   "Nav": {
     "home": "Home",
-    "profiles": "Profiles",
+    "ads": "Ads",
     "search": "Search",
     "cart": "Cart",
     "login": "Login",
     "register": "Register",
     "logout": "Logout",
-    "profile": "Profile"
+    "profile": "Profile",
+    "addAd": "Add Ad"
   },
   "Home": {
     "title": "Kawaii Escorts",
     "subtitle": "Find your perfect companion",
     "searchPlaceholder": "Search by city...",
-    "featuredProfiles": "Featured Profiles",
+    "featuredAds": "Featured Ads",
     "viewAll": "View All"
   },
-  "Profiles": {
-    "title": "Profiles",
+  "Ads": {
+    "title": "Ads",
     "filters": "Filters",
     "city": "City",
     "allCities": "All Cities",
@@ -42,10 +43,10 @@
     "maxAge": "Max Age",
     "applyFilters": "Apply Filters",
     "clearFilters": "Clear Filters",
-    "noProfiles": "No profiles found",
+    "noAds": "No ads found",
     "loadMore": "Load More"
   },
-  "Profile": {
+  "Ad": {
     "name": "Name",
     "age": "Age",
     "gender": "Gender",
@@ -53,6 +54,15 @@
     "height": "Height",
     "weight": "Weight",
     "about": "About",
+    "languages": "Languages",
+    "contact": "Contact",
+    "years": "years",
+    "cm": "cm",
+    "kg": "kg",
+    "female": "Female",
+    "male": "Male",
+    "transgender": "Transgender"
+  },
     "languages": "Languages",
     "services": "Services",
     "contact": "Contact",
