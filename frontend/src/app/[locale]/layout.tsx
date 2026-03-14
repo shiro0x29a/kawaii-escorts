@@ -8,6 +8,7 @@ import { Providers } from '@/components/providers';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { LocaleSwitcher } from '@/components/locale-switcher';
+import { Eruda } from '@/components/eruda';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -46,6 +47,7 @@ export default async function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
           <Providers>
+            <Eruda />
             <Header />
             <LocaleSwitcher />
             <main className="flex-1">{children}</main>
