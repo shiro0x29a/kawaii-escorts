@@ -1,7 +1,11 @@
-.searchBox {
+.searchBoxWrapper {
   position: relative;
   max-width: 24rem;
   margin: 0 auto;
+}
+
+.searchBox {
+  position: relative;
 }
 
 .input {
@@ -60,4 +64,32 @@
   width: 1.25rem;
   height: 1.25rem;
   color: #9ca3af;
+}
+
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 0.5rem;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 0.5rem 0;
+  max-height: 16rem;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.suggestion {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: #1f2937;
+}
+
+.suggestion:hover {
+  background: #f3f4f6;
 }

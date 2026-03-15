@@ -15,18 +15,18 @@ export class SearchService {
     const where: any = { isActive: true };
 
     if (query.city) {
-      const city = await this.prisma.city.findFirst({
+      const cities = await this.prisma.city.findMany({
         where: {
           OR: [
             { slug: query.city },
-            { nameEn: { contains: query.city, mode: 'insensitive' } },
-            { nameRu: { contains: query.city, mode: 'insensitive' } },
+            { nameEn: { startsWith: query.city, mode: 'insensitive' } },
+            { nameRu: { startsWith: query.city, mode: 'insensitive' } },
           ],
         },
       });
 
-      if (city) {
-        where.cityId = city.id;
+      if (cities && cities.length > 0) {
+        where.cityId = { in: cities.map(c => c.id) };
       } else {
         return { data: [], pagination: { page: 1, limit: 0, total: 0, pages: 0 } };
       }
