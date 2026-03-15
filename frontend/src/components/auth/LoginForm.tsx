@@ -25,14 +25,14 @@ export function LoginForm() {
 
     try {
       await login.mutateAsync({ email, password });
-      router.push('/profiles');
+      router.push('/');
     } catch (err) {
       setError(t('loginError'));
     }
   };
 
   if (token) {
-    router.push('/profiles');
+    router.push('/');
     return null;
   }
 

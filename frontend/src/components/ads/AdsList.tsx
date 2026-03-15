@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useAds } from '@/hooks/use-ads';
 import { useState } from 'react';
+import styles from './AdsList.module.css';
 
 export function AdsList() {
   const t = useTranslations('Ads');
@@ -13,13 +14,13 @@ export function AdsList() {
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className={styles.grid}>
         {[...Array(6)].map((_, i) => (
-          <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
-            <div className="h-64 bg-gray-200" />
-            <div className="p-4">
-              <div className="h-4 bg-gray-200 rounded w-3/4 mb-2" />
-              <div className="h-3 bg-gray-200 rounded w-1/2" />
+          <div key={i} className={styles.skeleton}>
+            <div className={styles.skeletonImage} />
+            <div className={styles.skeletonInfo}>
+              <div className={styles.skeletonTitle} />
+              <div className={styles.skeletonText} />
             </div>
           </div>
         ))}
@@ -33,37 +34,37 @@ export function AdsList() {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className={styles.grid}>
         {data.data.map((ad: any) => (
           <Link
             key={ad.id}
             href={`/ads/${ad.id}`}
-            className="group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition"
+            className={styles.card}
           >
-            <div className="relative h-64 w-full">
+            <div className={styles.imageWrapper}>
               <Image
                 src={ad.avatar}
                 alt={ad.name}
                 fill
-                className="object-cover group-hover:scale-105 transition duration-300"
+                className="object-cover"
               />
             </div>
-            <div className="p-4">
-              <h3 className="text-lg font-semibold text-gray-800">
+            <div className={styles.info}>
+              <h3 className={styles.name}>
                 {ad.name}, {ad.age}
               </h3>
-              <p className="text-gray-500 text-sm mt-1">{ad.city.nameEn}</p>
+              <p className={styles.city}>{ad.city.nameEn}</p>
             </div>
           </Link>
         ))}
       </div>
 
       {data.pagination.pages > 1 && (
-        <div className="flex justify-center mt-8">
+        <div className={styles.pagination}>
           <button
             onClick={() => setPage((p) => p + 1)}
             disabled={page >= data.pagination.pages}
-            className="bg-pink-600 text-white px-6 py-2 rounded-full hover:bg-pink-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className={styles.loadMoreBtn}
           >
             {t('loadMore')}
           </button>

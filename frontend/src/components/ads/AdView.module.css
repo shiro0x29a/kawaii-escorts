@@ -1,0 +1,187 @@
+.container {
+  max-width: 56rem;
+  margin: 0 auto;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  height: 24rem;
+}
+
+@media (min-width: 768px) {
+  .imageWrapper {
+    height: 100%;
+    min-height: 24rem;
+  }
+}
+
+.content {
+  padding: 2rem;
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.city {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.detailLabel {
+  color: #6b7280;
+}
+
+.detailValue {
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.section {
+  margin-top: 1.5rem;
+}
+
+.sectionTitle {
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.sectionText {
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.tag {
+  background: #fce7f3;
+  color: #9d174d;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+}
+
+.contactBtn {
+  display: block;
+  width: 100%;
+  background: #ec4899;
+  color: white;
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  margin-top: 2rem;
+}
+
+.contactBtn:hover {
+  background: #db2777;
+}
+
+.gallery {
+  padding: 2rem;
+}
+
+.galleryTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .galleryGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.galleryItem {
+  position: relative;
+  height: 12rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.skeleton {
+  background: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .skeletonGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.skeletonImage {
+  height: 24rem;
+  background: #e5e7eb;
+}
+
+.skeletonContent {
+  padding: 2rem;
+}
+
+.skeletonTitle {
+  height: 1.5rem;
+  background: #e5e7eb;
+  border-radius: 0.25rem;
+  width: 75%;
+  margin-bottom: 1rem;
+}
+
+.skeletonText {
+  height: 1rem;
+  background: #e5e7eb;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+}

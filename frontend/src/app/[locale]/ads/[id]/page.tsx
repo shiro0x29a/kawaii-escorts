@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import { AdView } from '@/components/profiles/AdView';
+import { AdView } from '@/components/ads/AdView';
 
 interface AdPageProps {
   params: Promise<{ id: string }>;

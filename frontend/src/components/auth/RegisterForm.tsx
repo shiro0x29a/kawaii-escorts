@@ -32,14 +32,14 @@ export function RegisterForm() {
 
     try {
       await register.mutateAsync({ username, email, password });
-      router.push('/profiles');
+      router.push('/');
     } catch (err) {
       setError(t('registerError'));
     }
   };
 
   if (token) {
-    router.push('/profiles');
+    router.push('/');
     return null;
   }
 

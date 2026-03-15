@@ -1,35 +1,33 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { AdsList } from '@/components/profiles/AdsList';
 import { useAuthStore } from '@/stores/auth-store';
 import Link from 'next/link';
+import styles from './page.module.css';
 
 export default function AdsPage() {
   const t = useTranslations('Ads');
   const { isAuthenticated } = useAuthStore();
 
   return (
-    <div className="container py-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">{t('title')}</h1>
+    <div className={styles.page}>
+      <div className={styles.container}>
+        <h1 className={styles.title}>{t('title')}</h1>
 
-      {!isAuthenticated && (
-        <div className="bg-pink-50 border border-pink-200 rounded-lg p-6 text-center mb-8">
-          <p className="text-gray-700 mb-4">
-            {t('loginToViewAds')}
-          </p>
-          <Link
-            href="/login"
-            className="inline-block bg-pink-600 text-white px-6 py-2 rounded-lg hover:bg-pink-700 transition"
-          >
-            {t('login')}
-          </Link>
-        </div>
-      )}
-
-      <main>
-        <AdsList />
-      </main>
+        {!isAuthenticated && (
+          <div className={styles.loginPrompt}>
+            <p className={styles.loginPromptText}>
+              {t('loginToViewAds')}
+            </p>
+            <Link
+              href="/login"
+              className={styles.loginBtn}
+            >
+              {t('login')}
+            </Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
