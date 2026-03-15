@@ -55,6 +55,7 @@
     "weight": "Weight",
     "about": "About",
     "languages": "Languages",
+    "services": "Services",
     "contact": "Contact",
     "years": "years",
     "cm": "cm",
@@ -62,13 +63,6 @@
     "female": "Female",
     "male": "Male",
     "transgender": "Transgender"
-  },
-    "languages": "Languages",
-    "services": "Services",
-    "contact": "Contact",
-    "years": "years",
-    "cm": "cm",
-    "kg": "kg"
   },
   "Search": {
     "title": "Search Profiles",
