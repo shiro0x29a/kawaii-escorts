@@ -1,12 +1,16 @@
 'use client';
 
+import { useState } from 'react';
 import { useAds } from '@/hooks/use-ads';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Profiles.module.css';
 
+type Gender = 'FEMALE' | 'MALE';
+
 export function Profiles() {
-  const { data, isLoading } = useAds({ limit: 6 });
+  const [gender, setGender] = useState<Gender>('FEMALE');
+  const { data, isLoading } = useAds({ limit: 6, gender });
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -15,7 +19,21 @@ export function Profiles() {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
-        <h2 className={styles.title}>Profiles</h2>
+        <div className={styles.tabs}>
+          <button
+            className={`${styles.tab} ${gender === 'FEMALE' ? styles.active : ''}`}
+            onClick={() => setGender('FEMALE')}
+          >
+            Female
+          </button>
+          <button
+            className={`${styles.tab} ${gender === 'MALE' ? styles.active : ''}`}
+            onClick={() => setGender('MALE')}
+          >
+            Male
+          </button>
+        </div>
+
         <div className={styles.grid}>
           {data?.data?.map((profile) => (
             <Link key={profile.id} href={`/profiles/${profile.id}`} className={styles.card}>
