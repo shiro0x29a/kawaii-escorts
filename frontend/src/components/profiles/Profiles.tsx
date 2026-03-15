@@ -5,16 +5,20 @@ import { useAds } from '@/hooks/use-ads';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Profiles.module.css';
+import { Pagination } from './Pagination';
 
 type Gender = 'FEMALE' | 'MALE';
 
 export function Profiles() {
   const [gender, setGender] = useState<Gender>('FEMALE');
-  const { data, isLoading } = useAds({ limit: 6, gender });
+  const [page, setPage] = useState(1);
+  const { data, isLoading } = useAds({ limit: 6, gender, page });
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
+  const totalPages = data?.pagination?.pages || 1;
 
   return (
     <section className={styles.section}>
@@ -22,13 +26,13 @@ export function Profiles() {
         <div className={styles.tabs}>
           <button
             className={`${styles.tab} ${gender === 'FEMALE' ? styles.active : ''}`}
-            onClick={() => setGender('FEMALE')}
+            onClick={() => { setGender('FEMALE'); setPage(1); }}
           >
             Female
           </button>
           <button
             className={`${styles.tab} ${gender === 'MALE' ? styles.active : ''}`}
-            onClick={() => setGender('MALE')}
+            onClick={() => { setGender('MALE'); setPage(1); }}
           >
             Male
           </button>
@@ -47,6 +51,12 @@ export function Profiles() {
             </Link>
           ))}
         </div>
+
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+        />
       </div>
     </section>
   );
