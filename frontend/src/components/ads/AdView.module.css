@@ -1,10 +1,10 @@
 .container {
   max-width: 56rem;
   margin: 0 auto;
-  background: white;
+  background: transparent;
   border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  color: white;
 }
 
 .grid {
@@ -37,12 +37,12 @@
 .title {
   font-size: 1.875rem;
   font-weight: 700;
-  color: #1f2937;
+  color: white;
   margin-bottom: 0.5rem;
 }
 
 .city {
-  color: #6b7280;
+  color: #d1d5db;
   margin-bottom: 1.5rem;
 }
 
@@ -60,12 +60,12 @@
 }
 
 .detailLabel {
-  color: #6b7280;
+  color: #d1d5db;
 }
 
 .detailValue {
   font-weight: 500;
-  color: #1f2937;
+  color: white;
 }
 
 .section {
@@ -74,12 +74,12 @@
 
 .sectionTitle {
   font-weight: 600;
-  color: #1f2937;
+  color: white;
   margin-bottom: 0.5rem;
 }
 
 .sectionText {
-  color: #6b7280;
+  color: #d1d5db;
   line-height: 1.6;
 }
 
