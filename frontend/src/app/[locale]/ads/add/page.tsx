@@ -46,33 +46,6 @@ export default function AddAdPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showOtherLang, setShowOtherLang] = useState(false);
-
-  // If not authenticated, show login/register message
-  if (!isAuthenticated) {
-    return (
-      <div className="container py-8 max-w-2xl">
-        <h1 className="text-3xl font-bold mb-8 text-center">{t('title')}</h1>
-        <div className="bg-white p-8 rounded-lg shadow-md text-center">
-          <p className="text-lg text-gray-700 mb-6">{t('loginRequired')}</p>
-          <div className="flex gap-4 justify-center">
-            <Link
-              href="/login"
-              className="bg-pink-600 text-white px-6 py-3 rounded-lg hover:bg-pink-700 transition font-medium"
-            >
-              {tNav('login')}
-            </Link>
-            <Link
-              href="/register"
-              className="bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-900 transition font-medium"
-            >
-              {tNav('register')}
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  
   const [formData, setFormData] = useState<FormData>({
     name: '',
     age: '',
@@ -97,6 +70,32 @@ export default function AddAdPage() {
     photos: [],
     plan: '1_week',
   });
+
+  // If not authenticated, show login/register message
+  if (!isAuthenticated) {
+    return (
+      <div className="formContainer">
+        <h1 className="text-3xl font-bold mb-8 text-center">{t('title')}</h1>
+        <div className="bg-white p-8 rounded-lg shadow-md text-center">
+          <p className="text-lg text-gray-700 mb-6">{t('loginRequired')}</p>
+          <div className="flex gap-4 justify-center">
+            <Link
+              href="/login"
+              className="bg-pink-600 text-white px-6 py-3 rounded-lg hover:bg-pink-700 transition font-medium"
+            >
+              {tNav('login')}
+            </Link>
+            <Link
+              href="/register"
+              className="bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-900 transition font-medium"
+            >
+              {tNav('register')}
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -199,7 +198,7 @@ export default function AddAdPage() {
   };
 
   return (
-    <div className="container py-8 max-w-2xl">
+    <div className="formContainer">
       <h1 className="text-3xl font-bold mb-8 text-center">{t('title')}</h1>
 
       {error && (
