@@ -2,7 +2,7 @@
 
 import { useLocale } from 'next-intl';
 import { useRouter, usePathname } from 'next/navigation';
-import styles from './localeSwitcher.module.css';
+import styles from './LangSwitcher.module.css';
 
 const locales = ['en', 'ru'] as const;
 const localeNames: Record<string, string> = {
@@ -10,7 +10,7 @@ const localeNames: Record<string, string> = {
   ru: 'Русский',
 };
 
-export function LocaleSwitcher() {
+export function LangSwitcher() {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();

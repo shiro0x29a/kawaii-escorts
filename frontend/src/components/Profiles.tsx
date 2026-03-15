@@ -3,7 +3,7 @@
 import { useAds } from '@/hooks/use-ads';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from './profiles.module.css';
+import styles from './Profiles.module.css';
 
 export function Profiles() {
   const { data: profiles, isLoading } = useAds({ limit: 6 });

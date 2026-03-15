@@ -43,7 +43,9 @@
     "maxAge": "Max Age",
     "applyFilters": "Apply Filters",
     "clearFilters": "Clear Filters",
-    "noAds": "No ads found",
+    "loginToViewAds": "You need to log in to add an ad",
+    "login": "Log in",
+    "noAds": "No ads found. Please log in to add your ad.",
     "loadMore": "Load More"
   },
   "Ad": {

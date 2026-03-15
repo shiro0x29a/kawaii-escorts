@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useAuthStore } from '@/stores/auth-store';
-import styles from './header.module.css';
+import styles from './Header.module.css';
 
 export function Header() {
   const t = useTranslations('Nav');
@@ -36,13 +36,8 @@ export function Header() {
             {isAuthenticated ? (
               <>
                 <li>
-                  <Link href="/ads/add" className={styles.authButton}>
-                    {t('addAd')}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/profile" className={styles.menuLink}>
-                    {t('profile')}
+                  <Link href="/ads/add" className={styles.menuLink}>
+                    {t('ads')}
                   </Link>
                 </li>
                 <li>

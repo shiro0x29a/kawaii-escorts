@@ -5,12 +5,12 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { Providers } from '@/components/providers';
-import { Header } from '@/components/layout/header';
-import { Footer } from '@/components/layout/footer';
-import { LocaleSwitcher } from '@/components/localeSwitcher';
-import { ThemeSwitcher } from '@/components/themeSwitcher';
-import { Eruda } from '@/components/eruda';
-import { LayoutWrapper } from './layoutWrapper';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
+import { LangSwitcher } from '@/components/LangSwitcher';
+import { ThemeSwitcher } from '@/components/ThemeSwitcher';
+import { Eruda } from '@/components/Eruda';
+import { LayoutWrapper } from './LayoutWrapper';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -52,7 +52,7 @@ export default async function RootLayout({
             <Eruda />
             <LayoutWrapper>
               <ThemeSwitcher />
-              <LocaleSwitcher />
+              <LangSwitcher />
             </LayoutWrapper>
             <LayoutWrapper>
               <Header />

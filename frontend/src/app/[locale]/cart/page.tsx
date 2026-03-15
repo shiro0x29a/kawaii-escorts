@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import { CartView } from '@/components/cartView';
+import { CartView } from '@/components/CartView';
 
 export default function CartPage() {
   const t = useTranslations('Cart');

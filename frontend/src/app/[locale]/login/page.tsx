@@ -1,4 +1,4 @@
-import { LoginForm } from '@/components/loginForm';
+import { LoginForm } from '@/components/LoginForm';
 import { routing } from '@/i18n/routing';
 
 export function generateStaticParams() {

@@ -1,4 +1,4 @@
-import { RegisterForm } from '@/components/registerForm';
+import { RegisterForm } from '@/components/RegisterForm';
 import { routing } from '@/i18n/routing';
 
 export function generateStaticParams() {
