@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import { CheckoutForm } from '@/components/CheckoutForm';
+import { CheckoutForm } from '@/components/cart/CheckoutForm';
 
 export default function CheckoutPage() {
   const t = useTranslations('Payment');

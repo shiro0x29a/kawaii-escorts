@@ -4,12 +4,12 @@ import '../globals.css';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import { Providers } from '@/components/providers';
+import { Providers } from '@/components/shared/Providers';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { LangSwitcher } from '@/components/LangSwitcher';
-import { ThemeSwitcher } from '@/components/ThemeSwitcher';
-import { Eruda } from '@/components/Eruda';
+import { LangSwitcher } from '@/components/shared/LangSwitcher';
+import { ThemeSwitcher } from '@/components/shared/ThemeSwitcher';
+import { Eruda } from '@/components/shared/Eruda';
 import { LayoutWrapper } from './LayoutWrapper';
 
 const geistSans = Geist({

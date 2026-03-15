@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import { SearchResults } from '@/components/SearchResults';
+import { SearchResults } from '@/components/search/SearchResults';
 
 interface SearchPageProps {
   searchParams: Promise<{ city?: string }>;

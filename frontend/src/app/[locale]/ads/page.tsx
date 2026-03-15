@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { AdsList } from '@/components/AdsList';
+import { AdsList } from '@/components/profiles/AdsList';
 import { useAuthStore } from '@/stores/auth-store';
 import Link from 'next/link';
 
