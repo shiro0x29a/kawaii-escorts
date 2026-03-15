@@ -8,12 +8,12 @@ export class ProfilesController {
 
   @Get()
   async getProfiles(
-    @Query('cityId', ParseIntPipe) cityId?: number,
+    @Query('cityId', new ParseIntPipe({ optional: true })) cityId?: number,
     @Query('gender') gender?: string,
-    @Query('minAge', ParseIntPipe) minAge?: number,
-    @Query('maxAge', ParseIntPipe) maxAge?: number,
-    @Query('page', ParseIntPipe) page?: number,
-    @Query('limit', ParseIntPipe) limit?: number,
+    @Query('minAge', new ParseIntPipe({ optional: true })) minAge?: number,
+    @Query('maxAge', new ParseIntPipe({ optional: true })) maxAge?: number,
+    @Query('page', new ParseIntPipe({ optional: true })) page?: number,
+    @Query('limit', new ParseIntPipe({ optional: true })) limit?: number,
   ) {
     return this.profilesService.findAll({ cityId, gender, minAge, maxAge, page, limit });
   }

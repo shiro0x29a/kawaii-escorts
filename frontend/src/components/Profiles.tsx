@@ -6,7 +6,7 @@ import Link from 'next/link';
 import styles from './Profiles.module.css';
 
 export function Profiles() {
-  const { data: profiles, isLoading } = useAds({ limit: 6 });
+  const { data, isLoading } = useAds({ limit: 6 });
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -17,7 +17,7 @@ export function Profiles() {
       <div className={styles.container}>
         <h2 className={styles.title}>Profiles</h2>
         <div className={styles.grid}>
-          {profiles?.map((profile) => (
+          {data?.data?.map((profile) => (
             <Link key={profile.id} href={`/profiles/${profile.id}`} className={styles.card}>
               <div className={styles.imageWrapper}>
                 <Image src={profile.avatar} alt={profile.name} fill className="object-cover" />
