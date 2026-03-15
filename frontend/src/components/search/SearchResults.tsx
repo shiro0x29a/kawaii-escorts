@@ -9,33 +9,37 @@ import { useSearch } from '@/hooks/use-search';
 import { SearchBox } from '@/components/search/SearchBox';
 
 interface SearchResultsProps {
-  initialCity?: string;
+  city?: string;
+  showSearchBox?: boolean;
 }
 
-export function SearchResults({ initialCity }: SearchResultsProps) {
+export function SearchResults({ city = '', showSearchBox = true }: SearchResultsProps) {
   const t = useTranslations('Search');
   const router = useRouter();
-  const [city, setCity] = useState(initialCity || '');
-  const { data, isLoading } = useSearch(city ? { city } : undefined);
+  const [searchCity, setSearchCity] = useState(city);
+  const { data, isLoading } = useSearch(searchCity ? { city: searchCity } : undefined);
 
   useEffect(() => {
-    if (initialCity) {
-      setCity(initialCity);
-    }
-  }, [initialCity]);
+    setSearchCity(city);
+  }, [city]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (city.trim()) {
-      router.push(`/search?city=${encodeURIComponent(city.trim())}`);
+    if (searchCity.trim()) {
+      router.push(`/search?city=${encodeURIComponent(searchCity.trim())}`);
     }
   };
 
   return (
     <div>
-      <form onSubmit={handleSearch} className="max-w-xl mx-auto mb-8">
-        <SearchBox placeholder={t('placeholder')} />
-      </form>
+      {showSearchBox && (
+        <SearchBox
+          placeholder={t('placeholder')}
+          value={searchCity}
+          onChange={setSearchCity}
+          onSubmit={handleSearch}
+        />
+      )}
 
       {isLoading && (
         <div className="text-center text-gray-500">{t('loading')}</div>

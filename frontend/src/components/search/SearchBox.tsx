@@ -5,17 +5,22 @@ import styles from './SearchBox.module.css';
 
 interface SearchBoxProps {
   placeholder?: string;
+  value?: string;
+  onChange?: (value: string) => void;
+  onSubmit?: (e: React.FormEvent) => void;
 }
 
-export function SearchBox({ placeholder }: SearchBoxProps) {
+export function SearchBox({ placeholder, value, onChange, onSubmit }: SearchBoxProps) {
   return (
-    <div className={styles.searchBox}>
+    <form onSubmit={onSubmit} className={styles.searchBox}>
       <MagnifyingGlassIcon className={styles.icon} />
       <input
         type="text"
         className={styles.input}
         placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange?.(e.target.value)}
       />
-    </div>
+    </form>
   );
 }
