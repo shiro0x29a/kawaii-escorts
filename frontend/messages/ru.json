@@ -21,7 +21,7 @@
     "profile": "Профиль"
   },
   "Home": {
-    "title": "Kawaii Escorts",
+    "title": "kawaii escorts",
     "subtitle": "Найдите идеального компаньона",
     "searchPlaceholder": "Поиск по городу...",
     "featuredProfiles": "Избранные профили",
@@ -120,8 +120,9 @@
   "Footer": {
     "about": "О нас",
     "contact": "Контакты",
+    "info": "Информация",
     "privacy": "Политика конфиденциальности",
     "terms": "Условия использования",
-    "copyright": "© 2024 Kawaii Escorts. Все права защищены."
+    "copyright": "© kawaii escorts"
   }
 }

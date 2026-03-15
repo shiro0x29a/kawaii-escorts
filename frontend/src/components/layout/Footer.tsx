@@ -11,7 +11,7 @@ export function Footer() {
           <div className={styles.section}>
             <h3 className={styles.title}>{t('about')}</h3>
             <p className={styles.description}>
-              Kawaii Escorts - ваш надежный партнер в поиске идеального компаньона.
+              kawaii escorts - your trusted partner in finding the perfect companion.
             </p>
           </div>
 
@@ -19,17 +19,17 @@ export function Footer() {
             <h3 className={styles.title}>{t('contact')}</h3>
             <ul className={styles.contactList}>
               <li>
-                <a href="tel:+972534997866" className={styles.contactLink}>
-                  +972 53 499 7866
+                <a href="tel:+888" className={styles.contactLink}>
+                  +888
                 </a>
               </li>
               <li>
-                <a href="https://t.me/sexy_alexbaby" className={styles.contactLink}>
+                <a href="https://t.me/" className={styles.contactLink}>
                   Telegram
                 </a>
               </li>
               <li>
-                <a href="https://l.clck.bar/ba669" className={styles.contactLink}>
+                <a href="https://whatsapp" className={styles.contactLink}>
                   WhatsApp
                 </a>
               </li>
@@ -37,7 +37,7 @@ export function Footer() {
           </div>
 
           <div className={styles.section}>
-            <h3 className={styles.title}>Информация</h3>
+            <h3 className={styles.title}>{t('info')}</h3>
             <ul className={styles.infoList}>
               <li>
                 <a href="/privacy" className={styles.infoLink}>
