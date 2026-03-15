@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { SearchBox } from '@/components/searchBox';
-import { FeaturedAds } from '@/components/featuredAds';
+import { Profiles } from '@/components/profiles';
 import styles from './page.module.css';
 
 export default async function HomePage() {
@@ -18,7 +18,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <FeaturedAds />
+      <Profiles />
     </div>
   );
 }

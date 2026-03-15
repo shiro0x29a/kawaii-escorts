@@ -24,11 +24,6 @@ export function Header() {
               </Link>
             </li>
             <li>
-              <Link href="/ads" className={styles.menuLink}>
-                {t('ads')}
-              </Link>
-            </li>
-            <li>
               <Link href="/search" className={styles.menuLink}>
                 {t('search')}
               </Link>
@@ -39,20 +34,12 @@ export function Header() {
               </Link>
             </li>
             {isAuthenticated ? (
-              <li>
-                <Link href="/ads/add" className={styles.authButton}>
-                  {t('addAd')}
-                </Link>
-              </li>
-            ) : (
-              <li>
-                <Link href="/login" className={styles.authButton}>
-                  {t('login')}
-                </Link>
-              </li>
-            )}
-            {isAuthenticated ? (
               <>
+                <li>
+                  <Link href="/ads/add" className={styles.authButton}>
+                    {t('addAd')}
+                  </Link>
+                </li>
                 <li>
                   <Link href="/profile" className={styles.menuLink}>
                     {t('profile')}
@@ -65,11 +52,18 @@ export function Header() {
                 </li>
               </>
             ) : (
-              <li>
-                <Link href="/login" className={styles.authButton}>
-                  {t('login')}
-                </Link>
-              </li>
+              <>
+                <li>
+                  <Link href="/ads" className={styles.menuLink}>
+                    {t('ads')}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/login" className={styles.authButton}>
+                    {t('login')}
+                  </Link>
+                </li>
+              </>
             )}
           </ul>
         </nav>
