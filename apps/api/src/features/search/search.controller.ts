@@ -12,6 +12,8 @@ export class SearchController {
     @Query('maxAge') maxAge?: number,
     @Query('gender') gender?: string,
     @Query('lang') lang?: string,
+    @Query('page') page?: number,
+    @Query('limit') limit?: number,
   ) {
     return this.searchService.search({
       city,
@@ -19,6 +21,8 @@ export class SearchController {
       maxAge: maxAge ? Number(maxAge) : undefined,
       gender,
       lang,
+      page: page ? Number(page) : 1,
+      limit: limit ? Number(limit) : 6,
     });
   }
 }

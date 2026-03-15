@@ -1,3 +1,7 @@
 .searchResults {
   padding: 2rem 0;
 }
+
+.paginationWrapper {
+  margin-top: 2rem;
+}

@@ -11,7 +11,10 @@ export class SearchService {
     maxAge?: number;
     gender?: string;
     lang?: string;
+    page?: number;
+    limit?: number;
   }) {
+    const { page = 1, limit = 12 } = query;
     const where: any = { isActive: true };
 
     if (query.city) {
@@ -42,23 +45,27 @@ export class SearchService {
       if (query.maxAge) where.age.lte = query.maxAge;
     }
 
-    const profiles = await this.prisma.profile.findMany({
+    let profiles = await this.prisma.profile.findMany({
       where,
       include: { city: true },
       orderBy: { createdAt: 'desc' },
     });
 
-    let filtered = profiles;
-
+    // Filter by language after fetching
     if (query.lang) {
-      filtered = profiles.filter((p: any) => {
+      profiles = profiles.filter((p: any) => {
         const languages = typeof p.languages === 'string' ? JSON.parse(p.languages) : p.languages;
         return languages?.includes(query.lang);
       });
     }
 
+    // Calculate pagination after filtering
+    const total = profiles.length;
+    const totalPages = Math.ceil(total / limit);
+    const paginatedProfiles = profiles.slice((page - 1) * limit, page * limit);
+
     return {
-      data: filtered.map((p: any) => ({
+      data: paginatedProfiles.map((p: any) => ({
         ...p,
         services: typeof p.services === 'string' ? JSON.parse(p.services) : p.services,
         languages: typeof p.languages === 'string' ? JSON.parse(p.languages) : p.languages,
@@ -70,7 +77,7 @@ export class SearchService {
           slug: p.city.slug,
         },
       })),
-      pagination: { page: 1, limit: filtered.length, total: filtered.length, pages: 1 },
+      pagination: { page, limit, total, pages: totalPages },
     };
   }
 }

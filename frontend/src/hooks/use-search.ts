@@ -7,6 +7,8 @@ export function useSearch(params?: {
   maxAge?: number;
   gender?: string;
   lang?: string;
+  page?: number;
+  limit?: number;
 }) {
   return useQuery({
     queryKey: ['search', params],

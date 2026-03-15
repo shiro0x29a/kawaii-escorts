@@ -5,7 +5,7 @@ import { useAds } from '@/hooks/use-ads';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Profiles.module.css';
-import { Pagination } from './Pagination';
+import { Pagination } from '@/components/shared/Pagination';
 
 type Gender = 'FEMALE' | 'MALE';
 
