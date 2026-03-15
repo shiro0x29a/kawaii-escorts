@@ -113,6 +113,7 @@
   "Search": {
     "title": "Search Profiles",
     "placeholder": "Enter city name...",
+    "loading": "Loading...",
     "noResults": "No results found",
     "results": "results"
   },

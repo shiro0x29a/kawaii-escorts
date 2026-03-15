@@ -1,6 +1,6 @@
 'use client';
 
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import styles from './SearchBox.module.css';
 
 interface SearchBoxProps {
@@ -11,6 +11,10 @@ interface SearchBoxProps {
 }
 
 export function SearchBox({ placeholder, value, onChange, onSubmit }: SearchBoxProps) {
+  const handleClear = () => {
+    onChange?.('');
+  };
+
   return (
     <form onSubmit={onSubmit} className={styles.searchBox}>
       <MagnifyingGlassIcon className={styles.icon} />
@@ -21,6 +25,16 @@ export function SearchBox({ placeholder, value, onChange, onSubmit }: SearchBoxP
         value={value}
         onChange={(e) => onChange?.(e.target.value)}
       />
+      {value && (
+        <button
+          type="button"
+          onClick={handleClear}
+          className={styles.clearBtn}
+          aria-label="Clear search"
+        >
+          <XMarkIcon className={styles.clearIcon} />
+        </button>
+      )}
     </form>
   );
 }

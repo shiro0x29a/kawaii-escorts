@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useSearch } from '@/hooks/use-search';
 import { SearchBox } from '@/components/search/SearchBox';
+import styles from './SearchResults.module.css';
 
 interface SearchResultsProps {
   city?: string;
@@ -31,7 +32,7 @@ export function SearchResults({ city = '', showSearchBox = true }: SearchResults
   };
 
   return (
-    <div>
+    <div className={styles.searchResults}>
       {showSearchBox && (
         <SearchBox
           placeholder={t('placeholder')}
@@ -50,34 +51,29 @@ export function SearchResults({ city = '', showSearchBox = true }: SearchResults
       )}
 
       {!isLoading && data?.data && data.data.length > 0 && (
-        <div>
-          <p className="text-gray-600 mb-4">
-            {data.data.length} {t('results')}
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {data.data.map((profile: any) => (
-              <Link
-                key={profile.id}
-                href={`/profiles/${profile.id}`}
-                className="group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition"
-              >
-                <div className="relative h-64 w-full">
-                  <Image
-                    src={profile.avatar}
-                    alt={profile.name}
-                    fill
-                    className="object-cover group-hover:scale-105 transition duration-300"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold text-gray-800">
-                    {profile.name}, {profile.age}
-                  </h3>
-                  <p className="text-gray-500 text-sm mt-1">{profile.city.nameEn}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {data.data.map((profile: any) => (
+            <Link
+              key={profile.id}
+              href={`/profiles/${profile.id}`}
+              className="group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition"
+            >
+              <div className="relative h-64 w-full">
+                <Image
+                  src={profile.avatar}
+                  alt={profile.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition duration-300"
+                />
+              </div>
+              <div className="p-4">
+                <h3 className="text-lg font-semibold text-gray-800">
+                  {profile.name}, {profile.age}
+                </h3>
+                <p className="text-gray-500 text-sm mt-1">{profile.city.nameEn}</p>
+              </div>
+            </Link>
+          ))}
         </div>
       )}
     </div>
