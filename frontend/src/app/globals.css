@@ -24,13 +24,15 @@
 [data-theme="dark"] {
   --background: #0a0a0a;
   --foreground: #ededed;
-  --header-bg: #1f2937;
+  --header-bg: #0a0a0a;
   --header-text: #e5e7eb;
   --header-shadow: rgba(0, 0, 0, 0.5);
-  --input-bg: #1f2937;
+  --input-bg: #282828;
   --input-border: #4b5563;
   --input-text: #e5e7eb;
-  --hero-gradient: linear-gradient(to right bottom, #374151, #1f2937, #111827);
+  --hero-gradient: linear-gradient(to right bottom, #121212, #111111, #101010);
+  /* --hero-gradient: linear-gradient(to right bottom, #3a3a3a, #282828, #1a1a1a); */
+  /* --hero-gradient: linear-gradient(to right bottom, #374151, #1f2937, #111827); */
   --hero-title: #e5e7eb;
   --hero-subtitle: #9ca3af;
 }

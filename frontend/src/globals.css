@@ -1,8 +1,24 @@
 @import 'tailwindcss';
 
+:root {
+  --bg-primary: #282828;
+  --bg-secondary: #3a3a3a;
+  --bg-tertiary: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+  --border-color: #4a4a4a;
+  --header-bg: #3a3a3a;
+  --header-text: #ffffff;
+  --header-shadow: rgba(0, 0, 0, 0.3);
+  --input-bg: #3a3a3a;
+  --input-border: #4a4a4a;
+  --input-text: #ffffff;
+}
+
 body {
   font-family: 'Noto Sans', system-ui, -apple-system, sans-serif;
-  background-color: #f5f5f5;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .container {
