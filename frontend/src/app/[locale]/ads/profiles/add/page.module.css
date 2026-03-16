@@ -25,7 +25,7 @@
 
 .loginText {
   font-size: 1.125rem;
-  color: #374151;
+  color: var(--text-secondary);
   margin-bottom: 1.5rem;
 }
 
@@ -62,8 +62,8 @@
 }
 
 .errorBox {
-  background: #fef2f2;
-  color: #dc2626;
+  background: var(--bg-secondary);
+  color: #ef4444;
   padding: 1rem;
   border-radius: 0.5rem;
   margin-bottom: 1.5rem;
@@ -84,7 +84,7 @@
 .label {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #374151;
+  color: var(--text-secondary);
 }
 
 .required {
@@ -94,10 +94,11 @@
 .input {
   width: 100%;
   padding: 0.5rem 1rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--input-border);
   border-radius: 0.5rem;
   font-size: 1rem;
-  background: white;
+  background: var(--input-bg);
+  color: var(--input-text);
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -110,12 +111,13 @@
 .textarea {
   width: 100%;
   padding: 0.5rem 1rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--input-border);
   border-radius: 0.5rem;
   font-size: 1rem;
   resize: vertical;
   font-family: inherit;
-  background: white;
+  background: var(--input-bg);
+  color: var(--input-text);
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -127,7 +129,7 @@
 
 .hint {
   font-size: 0.75rem;
-  color: #6b7280;
+  color: var(--text-secondary);
   margin-top: 0.25rem;
 }
 
@@ -180,10 +182,11 @@
 .fileInput {
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--input-border);
   border-radius: 0.5rem;
   font-size: 0.875rem;
-  background: white;
+  background: var(--input-bg);
+  color: var(--input-text);
   cursor: pointer;
 }
 
@@ -196,10 +199,11 @@
 .select {
   width: 100%;
   padding: 0.5rem 1rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--input-border);
   border-radius: 0.5rem;
   font-size: 1rem;
-  background: white;
+  background: var(--input-bg);
+  color: var(--input-text);
   cursor: pointer;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -235,10 +239,12 @@
 .otherLangInput {
   margin-left: 1.5rem;
   padding: 0.5rem 0.75rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--input-border);
   border-radius: 0.25rem;
   font-size: 0.875rem;
   margin-top: 0.5rem;
+  background: var(--input-bg);
+  color: var(--input-text);
 }
 
 .otherLangInput:focus {
