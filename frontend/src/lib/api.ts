@@ -70,12 +70,19 @@ export const api = {
     },
     getOne: (id: number) =>
       fetchApi<any>(`/profiles/${id}`),
-    getMy: (userId: string, token: string) =>
-      fetchApi<any[]>(`/profiles/my?userId=${userId}`, {
+    getMy: (userId: string, token: string, params?: { page?: number; limit?: number }) => {
+      const searchParams = new URLSearchParams();
+      if (params?.page) searchParams.set('page', String(params.page));
+      if (params?.limit) searchParams.set('limit', String(params.limit));
+      return fetchApi<{
+        data: any[];
+        pagination: { page: number; limit: number; total: number; pages: number };
+      }>(`/profiles/my?userId=${userId}&${searchParams.toString()}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }),
+      });
+    },
   },
 
   // Search

@@ -21,8 +21,12 @@ export class ProfilesController {
 
   @Get('my')
   @UseGuards(JwtAuthGuard)
-  async getMyProfiles(@Query('userId') userId: string) {
-    return this.profilesService.findByUser(userId);
+  async getMyProfiles(
+    @Query('userId') userId: string,
+    @Query('page', new ParseIntPipe({ optional: true })) page?: number,
+    @Query('limit', new ParseIntPipe({ optional: true })) limit?: number,
+  ) {
+    return this.profilesService.findByUser(userId, page, limit);
   }
 
   @Get(':id')

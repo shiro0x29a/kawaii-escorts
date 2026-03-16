@@ -1,15 +1,18 @@
 'use client';
 
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useAuthStore } from '@/stores/auth-store';
 import Link from 'next/link';
 import { useMyProfiles } from '@/hooks/useMyProfiles';
+import { Pagination } from '@/components/shared/Pagination';
 import styles from './page.module.css';
 
 export default function ProfilesPage() {
   const t = useTranslations('Ads.profiles');
   const { isAuthenticated } = useAuthStore();
-  const { data: profiles, isLoading } = useMyProfiles();
+  const [page, setPage] = useState(1);
+  const { data, isLoading } = useMyProfiles({ page, limit: 6 });
 
   if (!isAuthenticated) {
     return (
@@ -29,6 +32,9 @@ export default function ProfilesPage() {
     );
   }
 
+  const profiles = data?.data || [];
+  const totalPages = data?.pagination?.pages || 1;
+
   return (
     <div className={styles.page}>
       <div className={styles.container}>
@@ -41,26 +47,33 @@ export default function ProfilesPage() {
 
         {isLoading ? (
           <div className={styles.loading}>{t('loading')}</div>
-        ) : profiles && profiles.length > 0 ? (
-          <div className={styles.grid}>
-            {profiles.map((profile) => (
-              <Link
-                key={profile.id}
-                href={`/ads/${profile.id}`}
-                className={styles.card}
-              >
-                <img
-                  src={profile.avatar}
-                  alt={profile.name}
-                  className={styles.avatar}
-                />
-                <div className={styles.info}>
-                  <h3 className={styles.name}>{profile.name}, {profile.age}</h3>
-                  <p className={styles.city}>{profile.city.nameEn}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
+        ) : profiles.length > 0 ? (
+          <>
+            <div className={styles.grid}>
+              {profiles.map((profile) => (
+                <Link
+                  key={profile.id}
+                  href={`/ads/${profile.id}`}
+                  className={styles.card}
+                >
+                  <img
+                    src={profile.avatar}
+                    alt={profile.name}
+                    className={styles.avatar}
+                  />
+                  <div className={styles.info}>
+                    <h3 className={styles.name}>{profile.name}, {profile.age}</h3>
+                    <p className={styles.city}>{profile.city.nameEn}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <Pagination
+              currentPage={page}
+              totalPages={totalPages}
+              onPageChange={setPage}
+            />
+          </>
         ) : (
           <div className={styles.empty}>
             <p className={styles.emptyText}>{t('noProfiles')}</p>
