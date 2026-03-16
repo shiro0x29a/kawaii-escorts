@@ -53,7 +53,11 @@ export default function ProfilesPage() {
           <>
             <div className={styles.grid}>
               {profiles.map((profile) => {
-                const avatarUrl = profile.avatar ? `${API_URL}${profile.avatar.startsWith('/') ? profile.avatar : `/${profile.avatar}`}` : null;
+                const avatarUrl = profile.avatar
+                  ? profile.avatar.startsWith('http')
+                    ? profile.avatar
+                    : `${API_URL}${profile.avatar.startsWith('/') ? profile.avatar : `/${profile.avatar}`}`
+                  : null;
                 if (!avatarUrl) return null;
                 return (
                   <Link

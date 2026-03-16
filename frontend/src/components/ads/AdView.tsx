@@ -34,7 +34,11 @@ export function AdView({ id }: AdViewProps) {
     return <p className="text-center text-gray-500">Ad not found</p>;
   }
 
-  const avatarUrl = ad.avatar ? `${API_URL}${ad.avatar.startsWith('/') ? ad.avatar : `/${ad.avatar}`}` : null;
+  const avatarUrl = ad.avatar 
+    ? ad.avatar.startsWith('http') 
+      ? ad.avatar 
+      : `${API_URL}${ad.avatar.startsWith('/') ? ad.avatar : `/${ad.avatar}`}`
+    : null;
 
   return (
     <div className={styles.container}>
@@ -112,7 +116,11 @@ export function AdView({ id }: AdViewProps) {
           <h3 className={styles.galleryTitle}>Gallery</h3>
           <div className={styles.galleryGrid}>
             {ad.photos.map((photo: string, index: number) => {
-              const photoUrl = photo ? `${API_URL}${photo.startsWith('/') ? photo : `/${photo}`}` : null;
+              const photoUrl = photo
+                ? photo.startsWith('http')
+                  ? photo
+                  : `${API_URL}${photo.startsWith('/') ? photo : `/${photo}`}`
+                : null;
               if (!photoUrl) return null;
               return (
                 <div key={index} className={styles.galleryItem}>
