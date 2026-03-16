@@ -70,6 +70,12 @@ export const api = {
     },
     getOne: (id: number) =>
       fetchApi<any>(`/profiles/${id}`),
+    getMy: (userId: string, token: string) =>
+      fetchApi<any[]>(`/profiles/my?userId=${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
   },
 
   // Search

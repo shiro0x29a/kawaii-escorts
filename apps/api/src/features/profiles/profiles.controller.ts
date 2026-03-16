@@ -1,5 +1,6 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, Query, ParseIntPipe, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, Query, ParseIntPipe, UseInterceptors, UploadedFile, UseGuards } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ProfilesService } from './profiles.service';
 
 @Controller('profiles')
@@ -18,6 +19,12 @@ export class ProfilesController {
     return this.profilesService.findAll({ cityId, gender, minAge, maxAge, page, limit });
   }
 
+  @Get('my')
+  @UseGuards(JwtAuthGuard)
+  async getMyProfiles(@Query('userId') userId: string) {
+    return this.profilesService.findByUser(userId);
+  }
+
   @Get(':id')
   async getProfile(@Param('id', ParseIntPipe) id: number) {
     return this.profilesService.findOne(id);
@@ -26,19 +33,26 @@ export class ProfilesController {
   @Post()
   @UseInterceptors(FileInterceptor('avatar'))
   async createProfile(@Body() body: any, @UploadedFile() file?: any) {
-    const data = {
+    const photos = body.photos ? (Array.isArray(body.photos) ? body.photos : JSON.parse(body.photos)) : [];
+    
+    const data: any = {
       ...body,
       avatar: file?.path || body.avatar,
-      photos: body.photos ? JSON.parse(body.photos) : [],
-      services: body.services ? JSON.parse(body.services) : [],
-      languages: body.languages ? JSON.parse(body.languages) : [],
-      workType: body.workType ? JSON.parse(body.workType) : [],
+      photos: photos,
+      services: body.services ? (typeof body.services === 'string' ? JSON.parse(body.services) : body.services) : [],
+      languages: body.languages ? (typeof body.languages === 'string' ? JSON.parse(body.languages) : body.languages) : [],
+      workType: body.workType ? (typeof body.workType === 'string' ? JSON.parse(body.workType) : body.workType) : [],
       age: parseInt(body.age),
       cityId: parseInt(body.cityId),
       height: body.height ? parseInt(body.height) : null,
       weight: body.weight ? parseInt(body.weight) : null,
-      expiresAt: new Date(body.expiresAt),
+      expiresAt: body.expiresAt ? new Date(body.expiresAt) : new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
     };
+
+    // Add userId if provided
+    if (body.userId) {
+      data.userId = body.userId;
+    }
 
     return this.profilesService.create(data);
   }

@@ -42,7 +42,7 @@ export default function AddAdPage() {
   const t = useTranslations('AddAd');
   const tNav = useTranslations('Nav');
   const router = useRouter();
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, user } = useAuthStore();
   const { data: cities } = useCities();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -176,6 +176,11 @@ export default function AddAdPage() {
       };
       form.append('price', String(prices[formData.plan]));
       form.append('plan', formData.plan);
+      
+      // Add userId if authenticated
+      if (user?.id) {
+        form.append('userId', user.id);
+      }
 
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/profiles`, {
         method: 'POST',

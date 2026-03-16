@@ -89,6 +89,16 @@ export class ProfilesService {
     await this.prisma.profile.delete({ where: { id } });
   }
 
+  async findByUser(userId: string) {
+    const profiles = await this.prisma.profile.findMany({
+      where: { userId },
+      include: { city: true },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    return profiles.map((p: any) => this.mapProfile(p));
+  }
+
   private mapProfile(profile: any) {
     return {
       ...profile,

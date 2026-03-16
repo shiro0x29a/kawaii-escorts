@@ -406,7 +406,7 @@ async function main() {
       role: 'ADMIN',
     },
   });
-  console.log(`  ✓ Created admin user: ${admin.email}\n`);
+  console.log(`  ✓ Created admin user: ${admin.email} (ID: ${admin.id})\n`);
 
   // Seed profiles
   console.log('Seeding profiles...');
@@ -423,6 +423,7 @@ async function main() {
         age: profile.age,
         gender: profile.gender,
         cityId,
+        userId: admin.id,
         avatar: profile.avatar,
         photos: profile.photos,
         tel: profile.tel,

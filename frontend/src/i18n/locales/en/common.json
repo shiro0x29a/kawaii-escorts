@@ -19,7 +19,9 @@
     "register": "Register",
     "logout": "Logout",
     "profile": "Profile",
-    "addAd": "Add Ad"
+    "addAd": "Add Ad",
+    "myProfiles": "My Profiles",
+    "addProfile": "Add Profile"
   },
   "Home": {
     "title": "Kawaii Escorts",
@@ -46,7 +48,16 @@
     "loginToViewAds": "You need to log in to add an ad",
     "login": "Log in",
     "noAds": "No ads found. Please log in to add your ad.",
-    "loadMore": "Load More"
+    "loadMore": "Load More",
+    "profiles": {
+      "myProfiles": "My Profiles",
+      "addProfile": "Add Profile",
+      "loginToView": "You need to log in to view your profiles",
+      "loading": "Loading...",
+      "noProfiles": "You haven't created any profiles yet",
+      "edit": "Edit",
+      "delete": "Delete"
+    }
   },
   "Ad": {
     "name": "Name",

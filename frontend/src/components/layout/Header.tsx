@@ -36,8 +36,8 @@ export function Header() {
             {isAuthenticated ? (
               <>
                 <li>
-                  <Link href="/ads/add" className={styles.menuLink}>
-                    {t('ads')}
+                  <Link href="/ads/profiles" className={styles.menuLink}>
+                    {t('myProfiles')}
                   </Link>
                 </li>
                 <li>
