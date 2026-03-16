@@ -16,15 +16,6 @@
   pointer-events: all;
 }
 
-.switchersWrapper {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 100;
-  display: flex;
-  gap: 1rem;
-}
-
 .formWrapper {
   position: fixed;
   top: 50%;

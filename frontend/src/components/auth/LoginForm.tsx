@@ -5,8 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useLogin } from '@/hooks/use-auth';
 import { useAuthStore } from '@/stores/auth-store';
-import { LangSwitcher } from '../shared/LangSwitcher';
-import { ThemeSwitcher } from '../shared/ThemeSwitcher';
 import styles from './LoginForm.module.css';
 
 export function LoginForm() {
@@ -38,10 +36,6 @@ export function LoginForm() {
 
   return (
     <div className={`${styles.formBg} ${styles.active}`}>
-      <div className={styles.switchersWrapper}>
-        <ThemeSwitcher />
-        <LangSwitcher />
-      </div>
       <div className={styles.formWrapper}>
         <div className={styles.iconClose} onClick={() => router.push('/')}>
           ✕

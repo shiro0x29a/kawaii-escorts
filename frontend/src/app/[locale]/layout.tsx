@@ -51,12 +51,12 @@ export default async function RootLayout({
           <Providers>
             <Eruda />
             <LayoutWrapper>
-              <ThemeSwitcher />
-              <LangSwitcher />
-            </LayoutWrapper>
-            <LayoutWrapper>
               <Header />
             </LayoutWrapper>
+                <div className="switchersContainer">
+                <ThemeSwitcher />
+                <LangSwitcher />
+                </div>
             <main className="flex-1">{children}</main>
             <LayoutWrapper>
               <Footer />
