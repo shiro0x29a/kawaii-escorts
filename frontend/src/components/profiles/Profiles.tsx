@@ -2,12 +2,13 @@
 
 import { useState } from 'react';
 import { useAds } from '@/hooks/use-ads';
-import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Profiles.module.css';
 import { Pagination } from '@/components/shared/Pagination';
 
 type Gender = 'FEMALE' | 'MALE';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4001';
 
 export function Profiles() {
   const [gender, setGender] = useState<Gender>('FEMALE');
@@ -39,17 +40,25 @@ export function Profiles() {
         </div>
 
         <div className={styles.grid}>
-          {data?.data?.map((profile) => (
-            <Link key={profile.id} href={`/profiles/${profile.id}`} className={styles.card}>
-              <div className={styles.imageWrapper}>
-                <Image src={profile.avatar} alt={profile.name} fill className="object-cover" />
-              </div>
-              <div className={styles.info}>
-                <h3 className={styles.name}>{profile.name}, {profile.age}</h3>
-                <p className={styles.city}>{profile.city.nameEn}</p>
-              </div>
-            </Link>
-          ))}
+          {data?.data?.map((profile) => {
+            const avatarUrl = profile.avatar
+              ? profile.avatar.startsWith('http')
+                ? profile.avatar
+                : `${API_URL}${profile.avatar.startsWith('/') ? profile.avatar : `/${profile.avatar}`}`
+              : null;
+            if (!avatarUrl) return null;
+            return (
+              <Link key={profile.id} href={`/profiles/${profile.id}`} className={styles.card}>
+                <div className={styles.imageWrapper}>
+                  <img src={avatarUrl} alt={profile.name} className="object-cover w-full h-full" />
+                </div>
+                <div className={styles.info}>
+                  <h3 className={styles.name}>{profile.name}, {profile.age}</h3>
+                  <p className={styles.city}>{profile.city.nameEn}</p>
+                </div>
+              </Link>
+            );
+          })}
         </div>
 
         <Pagination
