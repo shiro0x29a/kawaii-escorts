@@ -8,6 +8,8 @@ import { useMyProfiles } from '@/hooks/useMyProfiles';
 import { Pagination } from '@/components/shared/Pagination';
 import styles from './page.module.css';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4001';
+
 export default function ProfilesPage() {
   const t = useTranslations('Ads.profiles');
   const { isAuthenticated } = useAuthStore();
@@ -50,23 +52,27 @@ export default function ProfilesPage() {
         ) : profiles.length > 0 ? (
           <>
             <div className={styles.grid}>
-              {profiles.map((profile) => (
-                <Link
-                  key={profile.id}
-                  href={`/ads/${profile.id}`}
-                  className={styles.card}
-                >
-                  <img
-                    src={profile.avatar}
-                    alt={profile.name}
-                    className={styles.avatar}
-                  />
-                  <div className={styles.info}>
-                    <h3 className={styles.name}>{profile.name}, {profile.age}</h3>
-                    <p className={styles.city}>{profile.city.nameEn}</p>
-                  </div>
-                </Link>
-              ))}
+              {profiles.map((profile) => {
+                const avatarUrl = profile.avatar ? `${API_URL}${profile.avatar.startsWith('/') ? profile.avatar : `/${profile.avatar}`}` : null;
+                if (!avatarUrl) return null;
+                return (
+                  <Link
+                    key={profile.id}
+                    href={`/ads/${profile.id}`}
+                    className={styles.card}
+                  >
+                    <img
+                      src={avatarUrl}
+                      alt={profile.name}
+                      className={styles.avatar}
+                    />
+                    <div className={styles.info}>
+                      <h3 className={styles.name}>{profile.name}, {profile.age}</h3>
+                      <p className={styles.city}>{profile.city.nameEn}</p>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
             <Pagination
               currentPage={page}

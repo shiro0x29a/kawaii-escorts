@@ -21,6 +21,18 @@
 .imageWrapper {
   position: relative;
   height: 24rem;
+  background: var(--bg-secondary);
+}
+
+.noAvatar {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 @media (min-width: 768px) {

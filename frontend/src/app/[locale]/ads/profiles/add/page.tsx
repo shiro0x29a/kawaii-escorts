@@ -126,6 +126,9 @@ export default function AddAdPage() {
     }
 
     try {
+      console.log('Avatar file:', formData.avatar);
+      console.log('Photos files:', formData.photos);
+      
       const form = new FormData();
       form.append('name', formData.name);
       form.append('age', formData.age);
@@ -138,32 +141,34 @@ export default function AddAdPage() {
       form.append('about', formData.about);
       
       // Contact methods
-      const answer: Record<string, string | null> = {
-        to_calls: formData.toCalls ? 'לשיחות' : null,
-        sms: formData.sms ? 'SMS' : null,
-        whatsapp: formData.whatsapp ? 'WhatsApp' : null,
-        viber: formData.viber ? 'Viber' : null,
-        telegram: formData.telegram ? 'Telegram' : null,
+      const answer: Record<string, boolean> = {
+        to_calls: formData.toCalls,
+        sms: formData.sms,
+        whatsapp: formData.whatsapp,
+        viber: formData.viber,
+        telegram: formData.telegram,
       };
       form.append('answer', JSON.stringify(answer));
-      
+
       // Languages
-      const langs: Record<string, string | null> = {
-        russian: formData.russian ? 'רוסית' : null,
-        english: formData.english ? 'אנגלית' : null,
-        other_lang: formData.otherLang || null,
+      const langs: Record<string, boolean> = {
+        russian: formData.russian,
+        english: formData.english,
+        other_lang: !!formData.otherLang,
       };
       form.append('languages', JSON.stringify(langs));
-      
+
       // Services
-      const work: Record<string, string | null> = {
-        apartments: formData.apartments ? 'בדירה דיסקרטית' : null,
-        on_departure: formData.onDeparture ? 'ביתך או מלון' : null,
+      const work: Record<string, boolean> = {
+        apartments: formData.apartments,
+        on_departure: formData.onDeparture,
       };
       form.append('workType', JSON.stringify(work));
 
-      form.append('avatar', formData.avatar);
-      
+      if (formData.avatar) {
+        form.append('avatar', formData.avatar);
+      }
+
       formData.photos.forEach((photo) => {
         form.append('photos', photo);
       });
@@ -249,7 +254,7 @@ export default function AddAdPage() {
           <div className={styles.errorBox}>{error}</div>
         )}
 
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <form onSubmit={handleSubmit} className={styles.form} encType="multipart/form-data">
           {/* Name */}
           <div className={styles.formGroup}>
             <label className={styles.label}>

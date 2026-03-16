@@ -47,7 +47,7 @@ model Profile {
   city      City     @relation(fields: [cityId], references: [id])
   userId    String?
   user      User?    @relation(fields: [userId], references: [id])
-  avatar    String
+  avatar    String?
   photos    String[]
   tel       String
   email     String

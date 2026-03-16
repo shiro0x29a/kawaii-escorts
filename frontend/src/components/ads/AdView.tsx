@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useAd } from '@/hooks/use-ads';
 import styles from './AdView.module.css';
@@ -8,6 +7,8 @@ import styles from './AdView.module.css';
 interface AdViewProps {
   id: number;
 }
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4001';
 
 export function AdView({ id }: AdViewProps) {
   const t = useTranslations('Ad');
@@ -33,11 +34,21 @@ export function AdView({ id }: AdViewProps) {
     return <p className="text-center text-gray-500">Ad not found</p>;
   }
 
+  const avatarUrl = ad.avatar ? `${API_URL}${ad.avatar.startsWith('/') ? ad.avatar : `/${ad.avatar}`}` : null;
+
   return (
     <div className={styles.container}>
       <div className={styles.grid}>
         <div className={styles.imageWrapper}>
-          <Image src={ad.avatar} alt={ad.name} fill className="object-cover" />
+          {avatarUrl ? (
+            <img
+              src={avatarUrl}
+              alt={ad.name}
+              className="object-cover w-full h-full"
+            />
+          ) : (
+            <div className={styles.noAvatar}>No Avatar</div>
+          )}
         </div>
 
         <div className={styles.content}>
@@ -100,11 +111,19 @@ export function AdView({ id }: AdViewProps) {
         <div className={styles.gallery}>
           <h3 className={styles.galleryTitle}>Gallery</h3>
           <div className={styles.galleryGrid}>
-            {ad.photos.map((photo: string, index: number) => (
-              <div key={index} className={styles.galleryItem}>
-                <Image src={photo} alt={`${ad.name} ${index + 1}`} fill className="object-cover" />
-              </div>
-            ))}
+            {ad.photos.map((photo: string, index: number) => {
+              const photoUrl = photo ? `${API_URL}${photo.startsWith('/') ? photo : `/${photo}`}` : null;
+              if (!photoUrl) return null;
+              return (
+                <div key={index} className={styles.galleryItem}>
+                  <img
+                    src={photoUrl}
+                    alt={`${ad.name} ${index + 1}`}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
