@@ -43,7 +43,7 @@ export default function AddAdPage() {
   const tNav = useTranslations('Nav');
   const router = useRouter();
   const { isAuthenticated, user } = useAuthStore();
-  const { data: cities } = useCities();
+  const { data: cities, isLoading: citiesLoading } = useCities('en');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showOtherLang, setShowOtherLang] = useState(false);
@@ -340,11 +340,15 @@ export default function AddAdPage() {
               className={styles.select}
             >
               <option value="">{t('selectCity')}</option>
-              {cities?.map((city: any) => (
-                <option key={city.id} value={city.nameEn}>
-                  {city.nameEn}
-                </option>
-              ))}
+              {cities && cities.length > 0 ? (
+                cities.map((city) => (
+                  <option key={city.id} value={city.id}>
+                    {city.name}
+                  </option>
+                ))
+              ) : (
+                <option value="" disabled>No cities available</option>
+              )}
             </select>
           </div>
 
