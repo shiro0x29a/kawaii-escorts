@@ -205,10 +205,45 @@ export default function AddAdPage() {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const handleAutoFill = () => {
+    const firstCity = cities?.[0]?.id || '';
+    setFormData({
+      ...formData,
+      name: 'Anna',
+      age: '25',
+      gender: 'female',
+      tel: '+972-50-123-4567',
+      email: 'anna@example.com',
+      city: String(firstCity),
+      height: '168',
+      weight: '52',
+      about: 'Friendly and outgoing, love to meet new people and explore new places. I will be happy to accompany you on your journey!',
+      toCalls: true,
+      sms: true,
+      whatsapp: true,
+      viber: true,
+      telegram: true,
+      russian: true,
+      english: true,
+      otherLang: '',
+      apartments: true,
+      onDeparture: true,
+    });
+  };
+
   return (
     <div className={styles.page}>
       <div className={styles.container}>
-        <h1 className={styles.title}>{t('title')}</h1>
+        <div className={styles.titleWrapper}>
+          <h1 className={styles.title}>{t('title')}</h1>
+          <button
+            type="button"
+            onClick={handleAutoFill}
+            className={styles.autoFillBtn}
+          >
+            Auto Fill
+          </button>
+        </div>
 
         {error && (
           <div className={styles.errorBox}>{error}</div>

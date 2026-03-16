@@ -15,8 +15,33 @@
   margin-bottom: 2rem;
 }
 
+.titleWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.autoFillBtn {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  border: 1px solid var(--input-border);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.875rem;
+}
+
+.autoFillBtn:hover {
+  background: var(--input-bg);
+  border-color: #ec4899;
+}
+
 .loginBox {
-  background: white;
+  background: var(--bg-secondary);
   padding: 2rem;
   border-radius: 0.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -53,12 +78,12 @@
 }
 
 .loginBtnSecondary {
-  background: #1f2937;
-  color: white;
+  background: var(--text-primary);
+  color: var(--bg-primary);
 }
 
 .loginBtnSecondary:hover {
-  background: #111827;
+  background: var(--text-secondary);
 }
 
 .errorBox {
