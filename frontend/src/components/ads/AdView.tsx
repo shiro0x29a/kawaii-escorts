@@ -8,7 +8,7 @@ interface AdViewProps {
   id: number;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4001';
+const API_URL = '';
 
 export function AdView({ id }: AdViewProps) {
   const t = useTranslations('Ad');
@@ -34,10 +34,10 @@ export function AdView({ id }: AdViewProps) {
     return <p className="text-center text-gray-500">Ad not found</p>;
   }
 
-  const avatarUrl = ad.avatar 
-    ? ad.avatar.startsWith('http') 
-      ? ad.avatar 
-      : `${API_URL}${ad.avatar.startsWith('/') ? ad.avatar : `/${ad.avatar}`}`
+  const avatarUrl = ad.avatar
+    ? ad.avatar.startsWith('http')
+      ? ad.avatar
+      : `/api${ad.avatar.startsWith('/') ? ad.avatar : `/${ad.avatar}`}`
     : null;
 
   return (
@@ -119,7 +119,7 @@ export function AdView({ id }: AdViewProps) {
               const photoUrl = photo
                 ? photo.startsWith('http')
                   ? photo
-                  : `${API_URL}${photo.startsWith('/') ? photo : `/${photo}`}`
+                  : `/api${photo.startsWith('/') ? photo : `/${photo}`}`
                 : null;
               if (!photoUrl) return null;
               return (

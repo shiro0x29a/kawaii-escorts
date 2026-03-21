@@ -8,7 +8,7 @@ import { Pagination } from '@/components/shared/Pagination';
 
 type Gender = 'FEMALE' | 'MALE';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4001';
+const API_URL = '';
 
 export function Profiles() {
   const [gender, setGender] = useState<Gender>('FEMALE');
@@ -44,7 +44,7 @@ export function Profiles() {
             const avatarUrl = profile.avatar
               ? profile.avatar.startsWith('http')
                 ? profile.avatar
-                : `${API_URL}${profile.avatar.startsWith('/') ? profile.avatar : `/${profile.avatar}`}`
+                : `/api${profile.avatar.startsWith('/') ? profile.avatar : `/${profile.avatar}`}`
               : null;
             if (!avatarUrl) return null;
             return (

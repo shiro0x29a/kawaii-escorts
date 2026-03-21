@@ -187,7 +187,7 @@ export default function AddAdPage() {
         form.append('userId', user.id);
       }
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/profiles`, {
+      const response = await fetch(`/api/profiles`, {
         method: 'POST',
         body: form,
       });

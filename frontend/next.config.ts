@@ -2,6 +2,16 @@ import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 
 const nextConfig: NextConfig = {
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/api/:path*',
+          destination: 'http://localhost:4001/:path*',
+        },
+      ],
+    };
+  },
   images: {
     remotePatterns: [
       {

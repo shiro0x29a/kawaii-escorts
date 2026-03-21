@@ -11,7 +11,7 @@ export function CheckoutForm() {
 
   const handlePayment = async () => {
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4001';
+      const API_URL = '/api';
 
       const response = await fetch(`${API_URL}/payments`, {
         method: 'POST',

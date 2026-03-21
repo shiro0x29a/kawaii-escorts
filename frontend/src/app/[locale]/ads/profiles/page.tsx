@@ -8,7 +8,7 @@ import { useMyProfiles } from '@/hooks/useMyProfiles';
 import { Pagination } from '@/components/shared/Pagination';
 import styles from './page.module.css';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4001';
+const API_URL = '';
 
 export default function ProfilesPage() {
   const t = useTranslations('Ads.profiles');
@@ -56,7 +56,7 @@ export default function ProfilesPage() {
                 const avatarUrl = profile.avatar
                   ? profile.avatar.startsWith('http')
                     ? profile.avatar
-                    : `${API_URL}${profile.avatar.startsWith('/') ? profile.avatar : `/${profile.avatar}`}`
+                    : `/api${profile.avatar.startsWith('/') ? profile.avatar : `/${profile.avatar}`}`
                   : null;
                 if (!avatarUrl) return null;
                 return (
