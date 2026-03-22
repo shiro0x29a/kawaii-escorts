@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { useAd } from '@/hooks/use-ads';
 import { useMyProfiles } from '@/hooks/useMyProfiles';
 import { useAuthStore } from '@/stores/auth-store';
@@ -16,10 +16,11 @@ const API_URL = '';
 
 export function AdView({ id }: AdViewProps) {
   const t = useTranslations('Ad');
+  const locale = useLocale();
   const { user } = useAuthStore();
   const { data: ad, isLoading, refetch } = useAd(id);
   const { updateProfile, isUpdating } = useMyProfiles();
-  const { data: cities } = useCities('en');
+  const { data: cities } = useCities(locale === 'ru' ? 'ru' : 'en');
 
   // State for managing edit modes
   const [editingField, setEditingField] = useState<string | null>(null);
@@ -160,10 +161,10 @@ export function AdView({ id }: AdViewProps) {
             </div>
           ) : (
             <p className={styles.city}>
-              {ad.city.name}
+              {locale === 'ru' ? ad.city.nameRu : ad.city.nameEn}
               {isOwner && (
                 <button
-                  onClick={() => startEditing('city', ad.city.name)}
+                  onClick={() => startEditing('city', locale === 'ru' ? ad.city.nameRu : ad.city.nameEn)}
                   className={styles.editIcon}
                 >
                   ✏️
