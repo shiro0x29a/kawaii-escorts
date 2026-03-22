@@ -25,6 +25,7 @@ export function AdView({ id }: AdViewProps) {
   // State for managing edit modes
   const [editingField, setEditingField] = useState<string | null>(null);
   const [editValue, setEditValue] = useState<string>('');
+  const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
 
   // Check if current user owns this ad
   const isOwner = user && ad && user.id === ad.userId;
@@ -84,6 +85,7 @@ export function AdView({ id }: AdViewProps) {
   const cancelEditing = () => {
     setEditingField(null);
     setEditValue('');
+    setDropdownOpen(null);
   };
 
   return (
@@ -138,18 +140,31 @@ export function AdView({ id }: AdViewProps) {
 
           {editingField === 'city' ? (
             <div className={styles.editContainer}>
-              <select
-                value={editValue}
-                onChange={(e) => setEditValue(e.target.value)}
-                className={styles.editSelect}
-                autoFocus
-              >
-                {cities?.map((city) => (
-                  <option key={city.id} value={city.name}>
-                    {city.name}
-                  </option>
-                ))}
-              </select>
+              <div className={styles.dropdownWrapper}>
+                <button
+                  onClick={() => setDropdownOpen(dropdownOpen === 'city' ? null : 'city')}
+                  className={styles.dropdownBtn}
+                >
+                  {editValue || t('selectCity')}
+                  <span className={styles.dropdownArrow}>{dropdownOpen === 'city' ? '▲' : '▼'}</span>
+                </button>
+                {dropdownOpen === 'city' && (
+                  <div className={styles.dropdownMenu}>
+                    {cities?.map((city) => (
+                      <button
+                        key={city.id}
+                        onClick={() => {
+                          setEditValue(city.name);
+                          setDropdownOpen(null);
+                        }}
+                        className={`${styles.dropdownItem} ${editValue === city.name ? styles.selected : ''}`}
+                      >
+                        {city.name}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
               <div className={styles.editButtons}>
                 <button onClick={saveChanges} className={styles.applyBtn} disabled={isUpdating}>
                   {isUpdating ? t('saving') : t('apply')}
@@ -179,16 +194,46 @@ export function AdView({ id }: AdViewProps) {
               <span className={styles.detailValue}>
                 {editingField === 'gender' ? (
                   <div className={styles.editContainer}>
-                    <select
-                      value={editValue}
-                      onChange={(e) => setEditValue(e.target.value)}
-                      className={styles.editSelect}
-                      autoFocus
-                    >
-                      <option value="female">{t('female')}</option>
-                      <option value="male">{t('male')}</option>
-                      <option value="trans">{t('trans')}</option>
-                    </select>
+                    <div className={styles.dropdownWrapper}>
+                      <button
+                        onClick={() => setDropdownOpen(dropdownOpen === 'gender' ? null : 'gender')}
+                        className={styles.dropdownBtn}
+                      >
+                        {editValue ? t(editValue.toLowerCase()) : t('selectGender')}
+                        <span className={styles.dropdownArrow}>{dropdownOpen === 'gender' ? '▲' : '▼'}</span>
+                      </button>
+                      {dropdownOpen === 'gender' && (
+                        <div className={styles.dropdownMenu}>
+                          <button
+                            onClick={() => {
+                              setEditValue('FEMALE');
+                              setDropdownOpen(null);
+                            }}
+                            className={`${styles.dropdownItem} ${editValue === 'FEMALE' ? styles.selected : ''}`}
+                          >
+                            {t('female')}
+                          </button>
+                          <button
+                            onClick={() => {
+                              setEditValue('MALE');
+                              setDropdownOpen(null);
+                            }}
+                            className={`${styles.dropdownItem} ${editValue === 'MALE' ? styles.selected : ''}`}
+                          >
+                            {t('male')}
+                          </button>
+                          <button
+                            onClick={() => {
+                              setEditValue('TRANS');
+                              setDropdownOpen(null);
+                            }}
+                            className={`${styles.dropdownItem} ${editValue === 'TRANS' ? styles.selected : ''}`}
+                          >
+                            {t('trans')}
+                          </button>
+                        </div>
+                      )}
+                    </div>
                     <div className={styles.editButtons}>
                       <button onClick={saveChanges} className={styles.applyBtn} disabled={isUpdating}>
                         {isUpdating ? t('saving') : t('apply')}
