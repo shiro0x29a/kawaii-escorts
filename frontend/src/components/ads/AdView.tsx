@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useAd } from '@/hooks/use-ads';
 import { useMyProfiles } from '@/hooks/useMyProfiles';
 import { useAuthStore } from '@/stores/auth-store';
+import { useCities } from '@/hooks/use-cities';
 import styles from './AdView.module.css';
 
 interface AdViewProps {
@@ -18,6 +19,7 @@ export function AdView({ id }: AdViewProps) {
   const { user } = useAuthStore();
   const { data: ad, isLoading, refetch } = useAd(id);
   const { updateProfile, isUpdating } = useMyProfiles();
+  const { data: cities } = useCities('en');
 
   // State for managing edit modes
   const [editingField, setEditingField] = useState<string | null>(null);
@@ -135,13 +137,18 @@ export function AdView({ id }: AdViewProps) {
 
           {editingField === 'city' ? (
             <div className={styles.editContainer}>
-              <input
-                type="text"
+              <select
                 value={editValue}
                 onChange={(e) => setEditValue(e.target.value)}
-                className={styles.editInput}
+                className={styles.editSelect}
                 autoFocus
-              />
+              >
+                {cities?.map((city) => (
+                  <option key={city.id} value={city.name}>
+                    {city.name}
+                  </option>
+                ))}
+              </select>
               <div className={styles.editButtons}>
                 <button onClick={saveChanges} className={styles.applyBtn} disabled={isUpdating}>
                   {isUpdating ? t('saving') : t('apply')}
@@ -153,10 +160,10 @@ export function AdView({ id }: AdViewProps) {
             </div>
           ) : (
             <p className={styles.city}>
-              {ad.city.nameEn}
+              {ad.city.name}
               {isOwner && (
                 <button
-                  onClick={() => startEditing('city', ad.city.nameEn)}
+                  onClick={() => startEditing('city', ad.city.name)}
                   className={styles.editIcon}
                 >
                   ✏️

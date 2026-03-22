@@ -71,10 +71,43 @@ export class ProfilesService {
   }
 
   async update(id: number, data: any) {
+    // Convert string values to appropriate types for numeric fields
+    const processedData: any = { ...data };
+
+    if (data.height !== undefined && data.height !== null) {
+      processedData.height = parseInt(data.height) || null;
+    }
+
+    if (data.weight !== undefined && data.weight !== null) {
+      processedData.weight = parseInt(data.weight) || null;
+    }
+
+    if (data.age !== undefined && data.age !== null) {
+      processedData.age = parseInt(data.age) || null;
+    }
+
+    // Handle city field update - find city by name and set the cityId
+    if (data.city) {
+      // Look for city by name (checking both nameEn and nameRu)
+      const city = await this.prisma.city.findFirst({
+        where: {
+          OR: [
+            { nameEn: data.city },
+            { nameRu: data.city },
+          ],
+        },
+      });
+
+      if (city) {
+        processedData.cityId = city.id;
+        delete processedData.city; // Remove the city string from the update data
+      }
+    }
+
     const profile = await this.prisma.profile.update({
       where: { id },
       data: {
-        ...data,
+        ...processedData,
         services: data.services ? JSON.stringify(data.services) : undefined,
         languages: data.languages ? JSON.stringify(data.languages) : undefined,
         workType: data.workType ? JSON.stringify(data.workType) : undefined,
