@@ -83,6 +83,14 @@ export const api = {
         },
       });
     },
+    update: (profileId: number, token: string, data: any) =>
+      fetchApi<any>(`/profiles/${profileId}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      }),
   },
 
   // Search

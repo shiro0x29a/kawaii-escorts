@@ -75,7 +75,10 @@
     "kg": "kg",
     "female": "Female",
     "male": "Male",
-    "transgender": "Transgender"
+    "transgender": "Transgender",
+    "apply": "Apply",
+    "saving": "Saving...",
+    "cancel": "Cancel"
   },
   "AddAd": {
     "title": "Add Ad",

@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/stores/auth-store';
 
@@ -7,16 +7,53 @@ interface UseMyProfilesOptions {
   limit?: number;
 }
 
+// Define the profile update data interface
+interface ProfileUpdateData {
+  name?: string;
+  age?: number;
+  gender?: string;
+  height?: number;
+  weight?: number;
+  cityId?: number;
+  about?: string;
+  languages?: string[];
+  tel?: string;
+  avatar?: File | string | null;
+  photos?: (File | string)[];
+}
+
 export function useMyProfiles(options: UseMyProfilesOptions = {}) {
   const { page = 1, limit = 10 } = options;
   const { user, token } = useAuthStore();
+  const queryClient = useQueryClient();
 
-  return useQuery({
+  // Query for fetching profiles
+  const query = useQuery({
     queryKey: ['myProfiles', user?.id, page, limit],
     queryFn: () => {
       if (!user?.id || !token) return Promise.resolve({ data: [], pagination: { page, limit, total: 0, pages: 0 } });
-      return api.profiles.getMy(user.id, token, { page, limit });
+      return api.profiles.getMy(String(user.id), token, { page, limit });
     },
     enabled: !!user?.id && !!token,
   });
+
+  // Mutation for updating a profile
+  const updateProfileMutation = useMutation({
+    mutationFn: ({ profileId, data }: { profileId: number; data: ProfileUpdateData }) => {
+      if (!token) throw new Error('No authentication token');
+      return api.profiles.update(profileId, token, data);
+    },
+    onSuccess: () => {
+      // Invalidate and refetch the profiles data
+      queryClient.invalidateQueries({ queryKey: ['myProfiles'] });
+    },
+  });
+
+  return {
+    ...query,
+    updateProfile: updateProfileMutation.mutate,
+    updateProfileAsync: updateProfileMutation.mutateAsync,
+    isUpdating: updateProfileMutation.isPending,
+    updateError: updateProfileMutation.error,
+  };
 }
