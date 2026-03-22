@@ -1,6 +1,7 @@
 .container {
   max-width: 56rem;
   margin: 0 auto;
+  padding: 0 1rem;
   background: transparent;
   border-radius: 0.5rem;
   overflow: hidden;
