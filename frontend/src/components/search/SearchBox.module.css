@@ -81,6 +81,7 @@
   max-height: 16rem;
   overflow-y: auto;
   z-index: 10;
+  background: var(--background);
 }
 
 .suggestion {
@@ -88,8 +89,17 @@
   cursor: pointer;
   transition: background-color 0.2s;
   color: var(--text-primary);
+  /* background: var(--bg-secondary); */
+  /* backdrop-filter: none; */
+  /* background: #000; */
 }
 
 .suggestion:hover {
-  background: var(--bg-tertiary);
+  /* background: var(--bg-tertiary); */
+  /* backdrop-filter: none; */
+  
+}
+
+.suggestion:hover {
+  background: var(--input-bg);
 }

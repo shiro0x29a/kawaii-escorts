@@ -26,7 +26,7 @@ export function SearchBox({ placeholder, value, onChange, onSubmit }: SearchBoxP
   };
 
   const handleFocus = () => {
-    if (value) setIsOpen(true);
+    setIsOpen(true);
   };
 
   const handleSelect = (cityName: string) => {
@@ -34,9 +34,11 @@ export function SearchBox({ placeholder, value, onChange, onSubmit }: SearchBoxP
     setIsOpen(false);
   };
 
-  const filteredCities = cities?.filter((city) =>
-    city.name?.toLowerCase().startsWith(value?.toLowerCase() || '')
-  ) || [];
+  const filteredCities = value
+    ? cities?.filter((city) =>
+        city.name?.toLowerCase().startsWith(value?.toLowerCase() || '')
+      ) || []
+    : cities || [];
 
   return (
     <div className={styles.searchBoxWrapper}>
