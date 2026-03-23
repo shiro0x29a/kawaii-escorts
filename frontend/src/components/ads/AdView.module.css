@@ -442,18 +442,19 @@
 }
 
 .addPhotoBtn {
-  background: #374151;
+  background: #ec4899;
   color: white;
-  border: 1px solid #d1d5db;
+  border: none;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
   font-size: 0.875rem;
   transition: all 0.2s;
+  font-weight: 500;
 }
 
 .addPhotoBtn:hover {
-  background: #4b5563;
+  background: #db2777;
 }
 
 
