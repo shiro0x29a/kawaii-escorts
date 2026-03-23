@@ -264,6 +264,28 @@ export function AdView({ id }: AdViewProps) {
                 onChange={handleAvatarChange}
                 className={styles.fileInput}
               />
+
+              {/* Avatar-specific save/cancel buttons */}
+              {avatarFile && (
+                <div className={styles.editButtons}>
+                  <button
+                    onClick={saveAllChanges}
+                    className={styles.applyBtn}
+                    disabled={isUpdating}
+                  >
+                    {isUpdating ? t('saving') : t('apply')}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setAvatarFile(null);
+                      setPreviewAvatar(null);
+                    }}
+                    className={styles.cancelBtn}
+                  >
+                    {t('cancel')}
+                  </button>
+                </div>
+              )}
             </div>
           )}
         </div>

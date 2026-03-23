@@ -321,7 +321,6 @@
 .editButtons {
   display: flex;
   gap: 0.5rem;
-  margin-top: 0.5rem;
 }
 
 .applyBtn {
@@ -417,13 +416,16 @@
 .uploadLabel {
   background: rgba(0, 0, 0, 0.7);
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 1rem;
+  height: 40px;
   border-radius: 0.5rem;
   cursor: pointer;
   font-size: 0.875rem;
   font-weight: 500;
   transition: background-color 0.2s;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .uploadLabel:hover {
