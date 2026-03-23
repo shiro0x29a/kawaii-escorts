@@ -6,6 +6,7 @@ import { useAd } from '@/hooks/use-ads';
 import { useMyProfiles } from '@/hooks/useMyProfiles';
 import { useAuthStore } from '@/stores/auth-store';
 import { useCities } from '@/hooks/use-cities';
+import { Lightbox } from '@/components/common/Lightbox';
 import styles from './AdView.module.css';
 
 interface AdViewProps {
@@ -31,6 +32,10 @@ export function AdView({ id }: AdViewProps) {
   const [newPhotos, setNewPhotos] = useState<File[]>([]);
   const [previewAvatar, setPreviewAvatar] = useState<string | null>(null);
   const [deletingPhotoIndex, setDeletingPhotoIndex] = useState<number | null>(null);
+
+  // State for lightbox
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxStartIndex, setLightboxStartIndex] = useState(0);
 
   // Check if current user owns this ad
   const isOwner = user && ad && user.id === ad.userId;
@@ -136,6 +141,28 @@ export function AdView({ id }: AdViewProps) {
       setDeletingPhotoIndex(null);
     }
   };
+
+  // Function to open lightbox with a specific image
+  const openLightbox = (startIndex: number) => {
+    setLightboxStartIndex(startIndex);
+    setLightboxOpen(true);
+  };
+
+  // Function to close lightbox
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+  };
+
+  // Function to handle photo deletion from lightbox
+  const handleDeleteFromLightbox = async (index: number) => {
+    await handleDeletePhoto(index);
+    closeLightbox();
+  };
+
+  // Combine all photos for the lightbox (existing + new)
+  const allPhotos = [...ad.photos.map((photo: string) =>
+    photo.startsWith('http') ? photo : `/api${photo.startsWith('/') ? photo : `/${photo}`}`
+  ), ...newPhotos.map(photo => URL.createObjectURL(photo))];
 
   // Function to save all changes including files
   const saveAllChanges = async () => {
@@ -656,7 +683,11 @@ export function AdView({ id }: AdViewProps) {
                 : null;
               if (!photoUrl) return null;
               return (
-                <div key={`existing-${index}`} className={styles.galleryItem}>
+                <div
+                  key={`existing-${index}`}
+                  className={styles.galleryItem}
+                  onClick={() => openLightbox(index)}
+                >
                   <img
                     src={photoUrl}
                     alt={`${ad.name} ${index + 1}`}
@@ -664,7 +695,10 @@ export function AdView({ id }: AdViewProps) {
                   />
                   {isOwner && (
                     <button
-                      onClick={() => handleDeletePhoto(index)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeletePhoto(index);
+                      }}
                       className={styles.deletePhotoBtn}
                       disabled={deletingPhotoIndex === index}
                     >
@@ -722,6 +756,17 @@ export function AdView({ id }: AdViewProps) {
           )}
         </div>
       ) : null}
+
+      {/* Lightbox for photo viewing */}
+      {lightboxOpen && (
+        <Lightbox
+          images={allPhotos}
+          startIndex={lightboxStartIndex}
+          onClose={closeLightbox}
+          onDelete={isOwner ? handleDeleteFromLightbox : undefined}
+          showDelete={!!isOwner}
+        />
+      )}
     </div>
   );
 }
