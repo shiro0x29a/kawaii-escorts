@@ -252,7 +252,7 @@ export function AdView({ id }: AdViewProps) {
           )}
 
           {/* Avatar upload controls for owner */}
-          {isOwner && (
+          {isOwner && isAdsRoute && (
             <div className={styles.avatarControls}>
               <label htmlFor={`avatar-upload-${id}`} className={styles.uploadLabel}>
                 {t('changeAvatar')}
