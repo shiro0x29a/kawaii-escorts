@@ -12,7 +12,6 @@ interface AdViewProps {
   id: number;
 }
 
-const API_URL = '';
 
 export function AdView({ id }: AdViewProps) {
   const t = useTranslations('Ad');
@@ -26,6 +25,12 @@ export function AdView({ id }: AdViewProps) {
   const [editingField, setEditingField] = useState<string | null>(null);
   const [editValue, setEditValue] = useState<string>('');
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
+
+  // State for file uploads
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
+  const [newPhotos, setNewPhotos] = useState<File[]>([]);
+  const [previewAvatar, setPreviewAvatar] = useState<string | null>(null);
+  const [deletingPhotoIndex, setDeletingPhotoIndex] = useState<number | null>(null);
 
   // Check if current user owns this ad
   const isOwner = user && ad && user.id === ad.userId;
@@ -57,7 +62,7 @@ export function AdView({ id }: AdViewProps) {
     : null;
 
   // Function to start editing a field
-  const startEditing = (fieldName: string, currentValue: any) => {
+  const startEditing = (fieldName: string, currentValue: string | number | boolean | undefined) => {
     setEditingField(fieldName);
     setEditValue(currentValue?.toString() || '');
   };
@@ -81,6 +86,118 @@ export function AdView({ id }: AdViewProps) {
     }
   };
 
+  // Function to handle avatar change
+  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setAvatarFile(file);
+
+      // Create a preview URL for the new avatar
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          setPreviewAvatar(event.target.result as string);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Function to handle adding new photos
+  const handleAddPhotos = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const files = Array.from(e.target.files);
+      setNewPhotos(prev => [...prev, ...files]);
+    }
+  };
+
+  // Function to handle deleting a photo
+  const handleDeletePhoto = async (index: number) => {
+    if (!window.confirm(t('confirmDeletePhoto'))) return;
+
+    setDeletingPhotoIndex(index);
+    try {
+      // We need to send a request to delete the specific photo
+      // Since we don't have a specific endpoint for photo deletion,
+      // we'll update the profile with the photos array excluding the deleted photo
+      const updatedPhotos = [...ad.photos];
+      updatedPhotos.splice(index, 1);
+
+      await updateProfile({
+        profileId: id,
+        data: { photos: updatedPhotos }
+      });
+
+      // Refetch the ad data to reflect changes
+      refetch();
+    } catch (error) {
+      console.error('Error deleting photo:', error);
+    } finally {
+      setDeletingPhotoIndex(null);
+    }
+  };
+
+  // Function to save all changes including files
+  const saveAllChanges = async () => {
+    try {
+      const formData = new FormData();
+
+      // Add avatar file if selected
+      if (avatarFile) {
+        formData.append('avatar', avatarFile);
+      }
+
+      // Add new photos if any
+      newPhotos.forEach(photo => {
+        formData.append('photos', photo);
+      });
+
+      // Add any other field changes if not already being handled separately
+      if (editingField && editValue) {
+        formData.append(editingField, editValue);
+      }
+
+      // If there are files to upload, use multipart form data
+      if (avatarFile || newPhotos.length > 0) {
+        // We need to create a custom API call for multipart form data
+        const token = localStorage.getItem('token'); // Get the auth token
+
+        const response = await fetch(`/api/profiles/${id}`, {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to update profile');
+        }
+
+        // Clear file states after successful upload
+        setAvatarFile(null);
+        setNewPhotos([]);
+        setPreviewAvatar(null);
+      } else {
+        // If no files, use the existing updateProfile function
+        if (editingField && editValue) {
+          await updateProfile({
+            profileId: id,
+            data: { [editingField]: editValue }
+          });
+        }
+      }
+
+      // Refetch the ad data to reflect changes
+      refetch();
+      setEditingField(null);
+      setEditValue('');
+      setDropdownOpen(null);
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    }
+  };
+
   // Function to cancel editing
   const cancelEditing = () => {
     setEditingField(null);
@@ -92,14 +209,30 @@ export function AdView({ id }: AdViewProps) {
     <div className={styles.container}>
       <div className={styles.grid}>
         <div className={styles.imageWrapper}>
-          {avatarUrl ? (
+          {avatarUrl || previewAvatar ? (
             <img
-              src={avatarUrl}
+              src={previewAvatar || avatarUrl}
               alt={ad.name}
               className="object-cover w-full h-full"
             />
           ) : (
             <div className={styles.noAvatar}>No Avatar</div>
+          )}
+
+          {/* Avatar upload controls for owner */}
+          {isOwner && (
+            <div className={styles.avatarControls}>
+              <label htmlFor={`avatar-upload-${id}`} className={styles.uploadLabel}>
+                {t('changeAvatar')}
+              </label>
+              <input
+                id={`avatar-upload-${id}`}
+                type="file"
+                accept="image/*"
+                onChange={handleAvatarChange}
+                className={styles.fileInput}
+              />
+            </div>
           )}
         </div>
 
@@ -115,7 +248,11 @@ export function AdView({ id }: AdViewProps) {
                   autoFocus
                 />
                 <div className={styles.editButtons}>
-                  <button onClick={saveChanges} className={styles.applyBtn} disabled={isUpdating}>
+                  <button
+                    onClick={saveAllChanges}
+                    className={styles.applyBtn}
+                    disabled={isUpdating || (!editValue && !avatarFile && newPhotos.length === 0)}
+                  >
                     {isUpdating ? t('saving') : t('apply')}
                   </button>
                   <button onClick={cancelEditing} className={styles.cancelBtn}>
@@ -468,11 +605,50 @@ export function AdView({ id }: AdViewProps) {
         </div>
       </div>
 
-      {ad.photos && ad.photos.length > 0 && (
+      {isOwner && (
+        <div className={styles.photoUploadSection}>
+          <h3 className={styles.galleryTitle}>{t('gallery')}</h3>
+
+          {/* Add photos control for owner */}
+          <div className={styles.photoGalleryControls}>
+            <label htmlFor={`photos-upload-${id}`} className={styles.addPhotoBtn}>
+              {t('addPhotos')}
+            </label>
+            <input
+              id={`photos-upload-${id}`}
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={handleAddPhotos}
+              className={styles.hiddenFileInput}
+            />
+          </div>
+
+          {/* Preview of new photos being added */}
+          {newPhotos.length > 0 && (
+            <div className={styles.galleryGrid}>
+              {newPhotos.map((photo, index) => {
+                const previewUrl = URL.createObjectURL(photo);
+                return (
+                  <div key={`new-${index}`} className={styles.galleryItem}>
+                    <img
+                      src={previewUrl}
+                      alt={`Preview ${index + 1}`}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
+
+      {(ad.photos && ad.photos.length > 0) || (isOwner && newPhotos.length > 0) ? (
         <div className={styles.gallery}>
-          <h3 className={styles.galleryTitle}>Gallery</h3>
+          <h3 className={styles.galleryTitle}>{ad.photos && ad.photos.length > 0 ? t('existingPhotos') : t('gallery')}</h3>
           <div className={styles.galleryGrid}>
-            {ad.photos.map((photo: string, index: number) => {
+            {ad.photos?.map((photo: string, index: number) => {
               const photoUrl = photo
                 ? photo.startsWith('http')
                   ? photo
@@ -480,18 +656,72 @@ export function AdView({ id }: AdViewProps) {
                 : null;
               if (!photoUrl) return null;
               return (
-                <div key={index} className={styles.galleryItem}>
+                <div key={`existing-${index}`} className={styles.galleryItem}>
                   <img
                     src={photoUrl}
                     alt={`${ad.name} ${index + 1}`}
                     className="object-cover w-full h-full"
                   />
+                  {isOwner && (
+                    <button
+                      onClick={() => handleDeletePhoto(index)}
+                      className={styles.deletePhotoBtn}
+                      disabled={deletingPhotoIndex === index}
+                    >
+                      {deletingPhotoIndex === index ? t('deleting') : t('delete')}
+                    </button>
+                  )}
+                </div>
+              );
+            })}
+
+            {/* Render new photos being added */}
+            {newPhotos.map((photo, index) => {
+              const previewUrl = URL.createObjectURL(photo);
+              return (
+                <div key={`new-${index}`} className={styles.galleryItem}>
+                  <img
+                    src={previewUrl}
+                    alt={`Preview ${index + 1}`}
+                    className="object-cover w-full h-full"
+                  />
+                  <button
+                    onClick={() => {
+                      setNewPhotos(newPhotos.filter((_, i) => i !== index));
+                    }}
+                    className={styles.deletePhotoBtn}
+                  >
+                    {t('remove')}
+                  </button>
                 </div>
               );
             })}
           </div>
+
+          {/* Save all changes button for photo management */}
+          {(avatarFile || newPhotos.length > 0) && isOwner && (
+            <div className={styles.editButtons}>
+              <button
+                onClick={saveAllChanges}
+                className={styles.applyBtn}
+                disabled={isUpdating}
+              >
+                {isUpdating ? t('saving') : t('saveChanges')}
+              </button>
+              <button
+                onClick={() => {
+                  setAvatarFile(null);
+                  setNewPhotos([]);
+                  setPreviewAvatar(null);
+                }}
+                className={styles.cancelBtn}
+              >
+                {t('cancel')}
+              </button>
+            </div>
+          )}
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

@@ -87,8 +87,71 @@ export class ProfilesController {
   }
 
   @Put(':id')
-  async updateProfile(@Param('id', ParseIntPipe) id: number, @Body() body: any) {
-    return this.profilesService.update(id, body);
+  @UseInterceptors(
+    FileFieldsInterceptor([
+      { name: 'avatar', maxCount: 1 },
+      { name: 'photos', maxCount: 15 },
+    ], {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (_req, file, cb) => {
+          const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+          cb(null, `${uniqueSuffix}-${file.originalname}`);
+        },
+      }),
+    }),
+  )
+  async updateProfile(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: any,
+    @UploadedFiles() files: { avatar?: any[]; photos?: any[] },
+  ) {
+    // Process uploaded files
+    const avatarPath = files?.avatar?.[0]?.path;
+    const photosPaths = files?.photos ? files.photos.map((f) => f.path).filter(Boolean) : [];
+
+    // Merge file paths with body data
+    const data: any = {
+      ...body,
+      avatar: avatarPath ? `/${avatarPath}` : body.avatar,
+    };
+
+    // Append new photos to existing photos if they exist
+    if (photosPaths.length > 0) {
+      // Get the existing profile to access current photos
+      const existingProfile = await this.profilesService.findOne(id);
+
+      // Combine existing photos with new photos
+      const existingPhotos = Array.isArray(existingProfile.photos) ? existingProfile.photos : [];
+      const newPhotos = photosPaths.map((p) => `/${p}`);
+      data.photos = [...existingPhotos, ...newPhotos];
+    }
+
+    // Process other fields that need special handling
+    if (data.services) {
+      data.services = typeof data.services === 'string' ? JSON.parse(data.services) : data.services;
+    }
+    if (data.languages) {
+      data.languages = typeof data.languages === 'string' ? JSON.parse(data.languages) : data.languages;
+    }
+    if (data.workType) {
+      data.workType = typeof data.workType === 'string' ? JSON.parse(data.workType) : data.workType;
+    }
+    if (data.age) {
+      data.age = parseInt(data.age);
+    }
+    if (data.height) {
+      data.height = parseInt(data.height);
+    }
+    if (data.weight) {
+      data.weight = parseInt(data.weight);
+    }
+    if (data.city) {
+      data.cityId = parseInt(data.city);
+      delete data.city; // Remove the city string from the update data
+    }
+
+    return this.profilesService.update(id, data);
   }
 
   @Delete(':id')

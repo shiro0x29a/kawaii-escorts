@@ -403,3 +403,87 @@
 .editTagButton:hover {
   background: #e9d5ff;
 }
+
+/* Avatar upload controls */
+.avatarControls {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.uploadLabel {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  display: inline-block;
+}
+
+.uploadLabel:hover {
+  background: rgba(236, 72, 153, 0.8);
+}
+
+.fileInput {
+  display: none;
+}
+
+/* Photo gallery controls */
+.photoGalleryControls {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.addPhotoBtn {
+  background: #374151;
+  color: white;
+  border: 1px solid #d1d5db;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.addPhotoBtn:hover {
+  background: #4b5563;
+}
+
+.deletePhotoBtn {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: background-color 0.2s;
+}
+
+.deletePhotoBtn:hover {
+  background: #b91c1c;
+}
+
+.photoUploadArea {
+  border: 2px dashed #d1d5db;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.photoUploadArea:hover {
+  border-color: #ec4899;
+  background-color: rgba(236, 72, 153, 0.05);
+}
+
+.hiddenFileInput {
+  display: none;
+}
