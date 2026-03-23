@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
+import { usePathname } from 'next/navigation';
 import { useAd } from '@/hooks/use-ads';
 import { useMyProfiles } from '@/hooks/useMyProfiles';
 import { useAuthStore } from '@/stores/auth-store';
@@ -17,6 +18,7 @@ interface AdViewProps {
 export function AdView({ id }: AdViewProps) {
   const t = useTranslations('Ad');
   const locale = useLocale();
+  const pathname = usePathname();
   const { user } = useAuthStore();
   const { data: ad, isLoading, refetch } = useAd(id);
   const { updateProfile, isUpdating } = useMyProfiles();
@@ -39,6 +41,9 @@ export function AdView({ id }: AdViewProps) {
 
   // Check if current user owns this ad
   const isOwner = user && ad && user.id === ad.userId;
+
+  // Check if we're on the ads management route (where delete should be allowed)
+  const isAdsRoute = pathname.startsWith(`/${locale}/ads/`) && !pathname.includes('/profiles/');
 
   if (isLoading) {
     return (
@@ -763,8 +768,8 @@ export function AdView({ id }: AdViewProps) {
           images={allPhotos}
           startIndex={lightboxStartIndex}
           onClose={closeLightbox}
-          onDelete={isOwner ? handleDeleteFromLightbox : undefined}
-          showDelete={!!isOwner}
+          onDelete={isOwner && isAdsRoute ? handleDeleteFromLightbox : undefined}
+          showDelete={!!isOwner && isAdsRoute}
         />
       )}
     </div>
