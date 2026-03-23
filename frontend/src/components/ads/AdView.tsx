@@ -679,7 +679,7 @@ export function AdView({ id }: AdViewProps) {
             </div>
 
             {/* Owner controls for adding photos */}
-            {isOwner && (
+            {isOwner && isAdsRoute && (
               <>
                 <div className={styles.photoGalleryControls}>
                   <label htmlFor={`photos-upload-${id}`} className={styles.addPhotoBtn}>
