@@ -635,132 +635,93 @@ export function AdView({ id }: AdViewProps) {
             )}
           </div>
         </div>
-      </div>
 
-      {isOwner && (
-        <div className={styles.photoUploadSection}>
-          <h3 className={styles.galleryTitle}>{t('gallery')}</h3>
+        {/* Gallery on the right side */}
+        {(ad.photos && ad.photos.length > 0) || (isOwner && newPhotos.length > 0) ? (
+          <div className={styles.rightGallery}>
+            <h3 className={styles.rightGalleryTitle}>{ad.photos && ad.photos.length > 0 ? t('gallery') : t('gallery')}</h3>
+            <div className={styles.horizontalScrollGallery}>
+              {ad.photos?.map((photo: string, index: number) => {
+                const photoUrl = photo
+                  ? photo.startsWith('http')
+                    ? photo
+                    : `/api${photo.startsWith('/') ? photo : `/${photo}`}`
+                  : null;
+                if (!photoUrl) return null;
+                return (
+                  <div
+                    key={`existing-${index}`}
+                    className={styles.horizontalGalleryItem}
+                    onClick={() => openLightbox(index)}
+                  >
+                    <img
+                      src={photoUrl}
+                      alt={`${ad.name} ${index + 1}`}
+                      className={styles.horizontalGalleryImage}
+                    />
+                  </div>
+                );
+              })}
 
-          {/* Add photos control for owner */}
-          <div className={styles.photoGalleryControls}>
-            <label htmlFor={`photos-upload-${id}`} className={styles.addPhotoBtn}>
-              {t('addPhotos')}
-            </label>
-            <input
-              id={`photos-upload-${id}`}
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={handleAddPhotos}
-              className={styles.hiddenFileInput}
-            />
-          </div>
-
-          {/* Preview of new photos being added */}
-          {newPhotos.length > 0 && (
-            <div className={styles.galleryGrid}>
+              {/* Render new photos being added */}
               {newPhotos.map((photo, index) => {
                 const previewUrl = URL.createObjectURL(photo);
                 return (
-                  <div key={`new-${index}`} className={styles.galleryItem}>
+                  <div key={`new-${index}`} className={styles.horizontalGalleryItem}>
                     <img
                       src={previewUrl}
                       alt={`Preview ${index + 1}`}
-                      className="object-cover w-full h-full"
+                      className={styles.horizontalGalleryImage}
                     />
                   </div>
                 );
               })}
             </div>
-          )}
-        </div>
-      )}
 
-      {(ad.photos && ad.photos.length > 0) || (isOwner && newPhotos.length > 0) ? (
-        <div className={styles.gallery}>
-          <h3 className={styles.galleryTitle}>{ad.photos && ad.photos.length > 0 ? t('existingPhotos') : t('gallery')}</h3>
-          <div className={styles.galleryGrid}>
-            {ad.photos?.map((photo: string, index: number) => {
-              const photoUrl = photo
-                ? photo.startsWith('http')
-                  ? photo
-                  : `/api${photo.startsWith('/') ? photo : `/${photo}`}`
-                : null;
-              if (!photoUrl) return null;
-              return (
-                <div
-                  key={`existing-${index}`}
-                  className={styles.galleryItem}
-                  onClick={() => openLightbox(index)}
-                >
-                  <img
-                    src={photoUrl}
-                    alt={`${ad.name} ${index + 1}`}
-                    className="object-cover w-full h-full"
+            {/* Owner controls for adding photos */}
+            {isOwner && (
+              <>
+                <div className={styles.photoGalleryControls}>
+                  <label htmlFor={`photos-upload-${id}`} className={styles.addPhotoBtn}>
+                    {t('addPhotos')}
+                  </label>
+                  <input
+                    id={`photos-upload-${id}`}
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={handleAddPhotos}
+                    className={styles.hiddenFileInput}
                   />
-                  {isOwner && (
+                </div>
+
+                {/* Save all changes button for photo management */}
+                {(avatarFile || newPhotos.length > 0) && (
+                  <div className={styles.editButtons}>
                     <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDeletePhoto(index);
-                      }}
-                      className={styles.deletePhotoBtn}
-                      disabled={deletingPhotoIndex === index}
+                      onClick={saveAllChanges}
+                      className={styles.applyBtn}
+                      disabled={isUpdating}
                     >
-                      {deletingPhotoIndex === index ? t('deleting') : t('delete')}
+                      {isUpdating ? t('saving') : t('saveChanges')}
                     </button>
-                  )}
-                </div>
-              );
-            })}
-
-            {/* Render new photos being added */}
-            {newPhotos.map((photo, index) => {
-              const previewUrl = URL.createObjectURL(photo);
-              return (
-                <div key={`new-${index}`} className={styles.galleryItem}>
-                  <img
-                    src={previewUrl}
-                    alt={`Preview ${index + 1}`}
-                    className="object-cover w-full h-full"
-                  />
-                  <button
-                    onClick={() => {
-                      setNewPhotos(newPhotos.filter((_, i) => i !== index));
-                    }}
-                    className={styles.deletePhotoBtn}
-                  >
-                    {t('remove')}
-                  </button>
-                </div>
-              );
-            })}
+                    <button
+                      onClick={() => {
+                        setAvatarFile(null);
+                        setNewPhotos([]);
+                        setPreviewAvatar(null);
+                      }}
+                      className={styles.cancelBtn}
+                    >
+                      {t('cancel')}
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
           </div>
-
-          {/* Save all changes button for photo management */}
-          {(avatarFile || newPhotos.length > 0) && isOwner && (
-            <div className={styles.editButtons}>
-              <button
-                onClick={saveAllChanges}
-                className={styles.applyBtn}
-                disabled={isUpdating}
-              >
-                {isUpdating ? t('saving') : t('saveChanges')}
-              </button>
-              <button
-                onClick={() => {
-                  setAvatarFile(null);
-                  setNewPhotos([]);
-                  setPreviewAvatar(null);
-                }}
-                className={styles.cancelBtn}
-              >
-                {t('cancel')}
-              </button>
-            </div>
-          )}
-        </div>
-      ) : null}
+        ) : null}
+      </div>
 
       {/* Lightbox for photo viewing */}
       {lightboxOpen && (
