@@ -500,27 +500,57 @@
   overflow-x: auto;
   gap: 0.75rem;
   padding: 0.5rem;
-  scrollbar-width: thin;
-  scrollbar-color: #888 #f1f1f1;
   max-height: 60vh;
+  /* Hide scrollbar by default */
+  scrollbar-width: none; /* Firefox */
 }
 
+/* Show scrollbar on hover/focus for accessibility */
+.horizontalScrollGallery:hover {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #4b5563;
+}
+
+.horizontalScrollGallery:focus-within {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #4b5563;
+}
+
+/* Webkit browsers (Chrome, Safari, Edge) */
 .horizontalScrollGallery::-webkit-scrollbar {
-  height: 6px;
+  width: 12px;
+  height: 8px;
+  background: transparent;
 }
 
-.horizontalScrollGallery::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-
+/* Hide scrollbar track and thumb by default */
+.horizontalScrollGallery::-webkit-scrollbar-track,
 .horizontalScrollGallery::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
+  background: transparent;
+  border-radius: 4px;
 }
 
-.horizontalScrollGallery::-webkit-scrollbar-thumb:hover {
+/* Show scrollbar on hover/focus for accessibility */
+.horizontalScrollGallery:hover::-webkit-scrollbar-track,
+.horizontalScrollGallery:focus-within::-webkit-scrollbar-track {
+  background: #4b5563;
+}
+
+.horizontalScrollGallery:hover::-webkit-scrollbar-thumb,
+.horizontalScrollGallery:focus-within::-webkit-scrollbar-thumb {
+  background: #888;
+  border: 1px solid #4b5563;
+}
+
+.horizontalScrollGallery:hover::-webkit-scrollbar-thumb:hover,
+.horizontalScrollGallery:focus-within::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+/* Remove scrollbar arrows/prefixes */
+.horizontalScrollGallery::-webkit-scrollbar-button,
+.horizontalScrollGallery::-webkit-scrollbar-corner {
+  display: none;
 }
 
 /* Gallery items for horizontal scrolling */
