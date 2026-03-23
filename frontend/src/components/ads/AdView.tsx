@@ -702,44 +702,47 @@ export function AdView({ id }: AdViewProps) {
 
             {/* Owner controls for adding photos */}
             {isOwner && isAdsRoute && (
-              <>
-                <div className={styles.photoGalleryControls}>
-                  <label htmlFor={`photos-upload-${id}`} className={styles.addPhotoBtn}>
-                    {t('addPhotos')}
-                  </label>
-                  <input
-                    id={`photos-upload-${id}`}
-                    type="file"
-                    accept="image/*"
-                    multiple
-                    onChange={handleAddPhotos}
-                    className={styles.hiddenFileInput}
-                  />
-                </div>
-
-                {/* Save all changes button for photo management */}
-                {(avatarFile || newPhotos.length > 0) && (
-                  <div className={styles.editButtons}>
-                    <button
-                      onClick={saveAllChanges}
-                      className={styles.applyBtn}
-                      disabled={isUpdating}
-                    >
-                      {isUpdating ? t('saving') : t('saveChanges')}
-                    </button>
-                    <button
-                      onClick={() => {
-                        setAvatarFile(null);
-                        setNewPhotos([]);
-                        setPreviewAvatar(null);
-                      }}
-                      className={styles.cancelBtn}
-                    >
-                      {t('cancel')}
-                    </button>
+              <div className={styles.photoGalleryControls}>
+                <div className={styles.photoActionsContainer}>
+                  <div className={styles.photoActionsLeft}>
+                    <label htmlFor={`photos-upload-${id}`} className={styles.addPhotoBtn}>
+                      {t('addPhotos')}
+                    </label>
+                    <input
+                      id={`photos-upload-${id}`}
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      onChange={handleAddPhotos}
+                      className={styles.hiddenFileInput}
+                    />
                   </div>
-                )}
-              </>
+                  <div className={styles.photoActionsRight}>
+                    {/* Save all changes button for photo management */}
+                    {(avatarFile || newPhotos.length > 0) && (
+                      <div className={styles.photoGalleryActions}>
+                        <button
+                          onClick={saveAllChanges}
+                          className={styles.applyBtn}
+                          disabled={isUpdating}
+                        >
+                          {isUpdating ? t('saving') : t('saveChanges')}
+                        </button>
+                        <button
+                          onClick={() => {
+                            setAvatarFile(null);
+                            setNewPhotos([]);
+                            setPreviewAvatar(null);
+                          }}
+                          className={styles.cancelBtn}
+                        >
+                          {t('cancel')}
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
             )}
           </div>
         ) : null}

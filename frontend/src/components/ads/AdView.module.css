@@ -439,8 +439,15 @@
 /* Photo gallery controls */
 .photoGalleryControls {
   display: flex;
+  flex-direction: column;
   gap: 0.5rem;
   margin-top: 1rem;
+}
+
+.photoGalleryActions {
+  display: flex;
+  gap: 0.5rem;
+  /* margin-top: 0.5rem; */
 }
 
 .addPhotoBtn {
@@ -453,6 +460,34 @@
   font-size: 0.875rem;
   transition: all 0.2s;
   font-weight: 500;
+  width: fit-content;
+  align-self: flex-start;
+}
+
+/* Container for photo actions to align add button with action buttons */
+.photoActionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .photoActionsContainer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+
+  .photoActionsLeft {
+    order: 1;
+  }
+
+  .photoActionsRight {
+    order: 2;
+    display: flex;
+    gap: 0.5rem;
+  }
 }
 
 .addPhotoBtn:hover {
