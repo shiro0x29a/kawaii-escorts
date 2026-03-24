@@ -22,7 +22,7 @@
 
 .imageWrapper {
   position: relative;
-  height: 24rem;
+  height: 20rem;
   background: var(--bg-secondary);
 }
 
@@ -40,7 +40,7 @@
 @media (min-width: 768px) {
   .imageWrapper {
     height: 100%;
-    min-height: 24rem;
+    min-height: 20rem;
   }
 }
 
@@ -177,7 +177,7 @@
 }
 
 .skeletonImage {
-  height: 24rem;
+  height: 20rem;
   background: #e5e7eb;
 }
 

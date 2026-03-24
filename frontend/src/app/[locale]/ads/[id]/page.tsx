@@ -1,16 +1,17 @@
-import { useTranslations } from 'next-intl';
+'use client';
+
+import { useParams } from 'next/navigation';
 import { AdView } from '@/components/ads/AdView';
+import styles from './page.module.css';
 
-interface AdPageProps {
-  params: Promise<{ id: string }>;
-}
-
-export default async function AdPage({ params }: AdPageProps) {
-  const { id } = await params;
+export default function AdPage() {
+  const params = useParams();
+  const id = Number(params.id);
 
   return (
-    <div className="container py-8">
-      <AdView id={parseInt(id)} />
+    <div className={styles.page}>
+      <AdView id={id} />
     </div>
   );
 }
+
