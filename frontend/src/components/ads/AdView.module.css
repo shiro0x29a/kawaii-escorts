@@ -327,11 +327,15 @@
   background: #ec4899;
   color: white;
   border: none;
-  padding: 0.5rem 0.5rem;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.2s;
+  /* padding: 0.5rem 1rem; */
+  /* height: 40px; */
+  /* border-radius: 0.5rem; */
+  /* cursor: pointer; */
+  /* font-weight: 500; */
+  /* transition: background-color 0.2s; */
+  /* display: inline-flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
 }
 
 .applyBtn:hover:not(:disabled) {
@@ -352,11 +356,15 @@
   background: #6b7280;
   color: white;
   border: none;
-  padding: 0.5rem 0.5rem;
-  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  height: 40px;
+  border-radius: 0.5rem;
   cursor: pointer;
   font-weight: 500;
   transition: background-color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cancelBtn:hover {
@@ -416,8 +424,7 @@
 .uploadLabel {
   background: rgba(0, 0, 0, 0.7);
   color: white;
-  padding: 0.25rem 1rem;
-  height: 40px;
+  padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
   font-size: 0.875rem;

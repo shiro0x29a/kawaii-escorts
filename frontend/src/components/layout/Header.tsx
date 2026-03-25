@@ -37,7 +37,7 @@ export function Header() {
               <>
                 <li>
                   <Link href="/ads/profiles" className={styles.menuLink}>
-                    {t('myProfiles')}
+                    {t('myAds')}
                   </Link>
                 </li>
                 <li>
