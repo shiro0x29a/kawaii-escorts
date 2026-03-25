@@ -20,11 +20,12 @@ export function Profiles() {
   }
 
   const allProfiles = data?.data || [];
-  const totalPages = data?.pagination?.pages || Math.ceil(allProfiles.length / PROFILES_PER_PAGE);
-  const reversedProfiles = [...allProfiles].reverse();
-  const startIdx = (page - 1) * PROFILES_PER_PAGE;
-  const endIdx = startIdx + PROFILES_PER_PAGE;
-  const currentPageProfiles = reversedProfiles.slice(startIdx, endIdx);
+  const chunks = Array.from({ length: Math.ceil(allProfiles.length / PROFILES_PER_PAGE) }, (_, i) =>
+    allProfiles.slice(i * PROFILES_PER_PAGE, (i + 1) * PROFILES_PER_PAGE)
+  );
+  const reversedChunks = chunks.reverse();
+  const totalPages = reversedChunks.length;
+  const currentPageProfiles = reversedChunks[page - 1] || [];
 
   return (
     <section className={styles.section}>

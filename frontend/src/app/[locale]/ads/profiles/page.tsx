@@ -10,11 +10,13 @@ import styles from './page.module.css';
 
 const API_URL = '';
 
+const PROFILES_PER_PAGE = 6;
+
 export default function ProfilesPage() {
   const t = useTranslations('Ads.profiles');
   const { isAuthenticated } = useAuthStore();
   const [page, setPage] = useState(1);
-  const { data, isLoading } = useMyProfiles({ page, limit: 6 });
+  const { data, isLoading } = useMyProfiles({ limit: 20 });
 
   if (!isAuthenticated) {
     return (
@@ -34,8 +36,13 @@ export default function ProfilesPage() {
     );
   }
 
-  const profiles = data?.data || [];
-  const totalPages = data?.pagination?.pages || 1;
+  const allProfiles = data?.data || [];
+  const chunks = Array.from({ length: Math.ceil(allProfiles.length / PROFILES_PER_PAGE) }, (_, i) =>
+    allProfiles.slice(i * PROFILES_PER_PAGE, (i + 1) * PROFILES_PER_PAGE)
+  );
+  const reversedChunks = chunks.reverse();
+  const totalPages = reversedChunks.length;
+  const currentPageProfiles = reversedChunks[page - 1] || [];
 
   return (
     <div className={styles.page}>
@@ -49,10 +56,10 @@ export default function ProfilesPage() {
 
         {isLoading ? (
           <div className={styles.loading}>{t('loading')}</div>
-        ) : profiles.length > 0 ? (
+        ) : currentPageProfiles.length > 0 ? (
           <>
             <div className={styles.grid}>
-              {profiles.map((profile) => {
+              {currentPageProfiles.map((profile) => {
                 const avatarUrl = profile.avatar
                   ? profile.avatar.startsWith('http')
                     ? profile.avatar

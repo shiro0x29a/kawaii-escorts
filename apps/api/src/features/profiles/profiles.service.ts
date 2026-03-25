@@ -14,7 +14,7 @@ export class ProfilesService {
     page?: number;
     limit?: number;
   }) {
-    const { cityId, gender, minAge, maxAge, isActive = true, limit = 20 } = filters;
+    const { cityId, gender, minAge, maxAge, isActive = true, limit = 24 } = filters;
 
     const where: any = { isActive };
 
@@ -120,21 +120,19 @@ export class ProfilesService {
     await this.prisma.profile.delete({ where: { id } });
   }
 
-  async findByUser(userId: string, page: number = 1, limit: number = 10) {
-    const [profiles, total] = await Promise.all([
-      this.prisma.profile.findMany({
-        where: { userId },
-        include: { city: true },
-        orderBy: { createdAt: 'desc' },
-        skip: (page - 1) * limit,
-        take: limit,
-      }),
-      this.prisma.profile.count({ where: { userId } }),
-    ]);
+  async findByUser(userId: string, page: number = 1, limit: number = 24) {
+    const profiles = await this.prisma.profile.findMany({
+      where: { userId },
+      include: { city: true },
+      orderBy: { createdAt: 'desc' },
+      take: limit,
+    });
+
+    const total = profiles.length;
 
     return {
       data: profiles.map((p: any) => this.mapProfile(p)),
-      pagination: { page, limit, total, pages: Math.ceil(total / limit) },
+      pagination: { page: 1, limit, total, pages: Math.ceil(total / 6) },
     };
   }
 
