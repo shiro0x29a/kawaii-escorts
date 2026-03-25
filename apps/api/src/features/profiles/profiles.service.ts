@@ -14,7 +14,7 @@ export class ProfilesService {
     page?: number;
     limit?: number;
   }) {
-    const { cityId, gender, minAge, maxAge, isActive = true, page = 1, limit = 20 } = filters;
+    const { cityId, gender, minAge, maxAge, isActive = true, limit = 20 } = filters;
 
     const where: any = { isActive };
 
@@ -26,20 +26,18 @@ export class ProfilesService {
       if (maxAge) where.age.lte = maxAge;
     }
 
-    const [profiles, total] = await Promise.all([
-      this.prisma.profile.findMany({
-        where,
-        include: { city: true },
-        orderBy: { createdAt: 'desc' },
-        skip: (page - 1) * limit,
-        take: limit,
-      }),
-      this.prisma.profile.count({ where }),
-    ]);
+    const profiles = await this.prisma.profile.findMany({
+      where,
+      include: { city: true },
+      orderBy: { createdAt: 'desc' },
+      take: limit,
+    });
+
+    const total = profiles.length;
 
     return {
       data: profiles.map((p: any) => this.mapProfile(p)),
-      pagination: { page, limit, total, pages: Math.ceil(total / limit) },
+      pagination: { page: 1, limit, total, pages: Math.ceil(total / 6) },
     };
   }
 

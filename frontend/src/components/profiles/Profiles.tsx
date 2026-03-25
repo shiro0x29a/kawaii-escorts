@@ -8,18 +8,23 @@ import { Pagination } from '@/components/shared/Pagination';
 
 type Gender = 'FEMALE' | 'MALE';
 
-const API_URL = '';
+const PROFILES_PER_PAGE = 6;
 
 export function Profiles() {
   const [gender, setGender] = useState<Gender>('FEMALE');
   const [page, setPage] = useState(1);
-  const { data, isLoading } = useAds({ limit: 6, gender, page });
+  const { data, isLoading } = useAds({ limit: 20, gender });
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  const totalPages = data?.pagination?.pages || 1;
+  const allProfiles = data?.data || [];
+  const totalPages = data?.pagination?.pages || Math.ceil(allProfiles.length / PROFILES_PER_PAGE);
+  const reversedProfiles = [...allProfiles].reverse();
+  const startIdx = (page - 1) * PROFILES_PER_PAGE;
+  const endIdx = startIdx + PROFILES_PER_PAGE;
+  const currentPageProfiles = reversedProfiles.slice(startIdx, endIdx);
 
   return (
     <section className={styles.section}>
@@ -40,7 +45,7 @@ export function Profiles() {
         </div>
 
         <div className={styles.grid}>
-          {data?.data?.map((profile) => {
+          {currentPageProfiles.map((profile) => {
             const avatarUrl = profile.avatar
               ? profile.avatar.startsWith('http')
                 ? profile.avatar
