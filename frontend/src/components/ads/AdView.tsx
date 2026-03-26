@@ -7,7 +7,7 @@ import { useAd } from '@/hooks/use-ads';
 import { useMyProfiles } from '@/hooks/useMyProfiles';
 import { useAuthStore } from '@/stores/auth-store';
 import { useCities } from '@/hooks/use-cities';
-import { Lightbox } from '@/components/common/Lightbox';
+import { Lightbox } from '@/components/ui/Lightbox';
 import styles from './AdView.module.css';
 
 interface AdViewProps {

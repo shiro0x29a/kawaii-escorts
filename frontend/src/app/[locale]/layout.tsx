@@ -9,7 +9,6 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { LangSwitcher } from '@/components/shared/LangSwitcher';
 import { ThemeSwitcher } from '@/components/shared/ThemeSwitcher';
-import { Eruda } from '@/components/shared/Eruda';
 import { LayoutWrapper } from './LayoutWrapper';
 
 const geistSans = Geist({
@@ -49,7 +48,6 @@ export default async function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
           <Providers>
-            <Eruda />
             <LayoutWrapper>
               <Header />
               <div className="switchersContainer">

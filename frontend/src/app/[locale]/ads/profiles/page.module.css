@@ -25,7 +25,7 @@
 }
 
 .addBtn {
-  background: #db2777;
+  background: #ec4899;
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
@@ -35,7 +35,7 @@
 }
 
 .addBtn:hover {
-  background: #be185d;
+  background: #db2777;
 }
 
 .loginPrompt {

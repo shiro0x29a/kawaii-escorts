@@ -47,7 +47,7 @@
 }
 
 .authButton {
-  background: #db2777;
+  background: #ec4899;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 9999px;
@@ -56,7 +56,7 @@
 }
 
 .authButton:hover {
-  background: #be185d;
+  background: #db2777;
 }
 
 .logoutButton {

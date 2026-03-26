@@ -23,16 +23,6 @@ export function Header() {
                 {t('home')}
               </Link>
             </li>
-            <li>
-              <Link href="/search" className={styles.menuLink}>
-                {t('search')}
-              </Link>
-            </li>
-            <li>
-              <Link href="/cart" className={styles.menuLink}>
-                {t('cart')}
-              </Link>
-            </li>
             {isAuthenticated ? (
               <>
                 <li>
