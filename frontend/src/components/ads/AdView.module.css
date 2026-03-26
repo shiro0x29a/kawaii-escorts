@@ -51,12 +51,12 @@
 .title {
   font-size: 1.875rem;
   font-weight: 700;
-  color: white;
+  color: #9ca3af;
   margin-bottom: 0.5rem;
 }
 
 .city {
-  color: #d1d5db;
+  color: #9ca3af;
   margin-bottom: 1.5rem;
 }
 
@@ -74,7 +74,7 @@
 }
 
 .detailLabel {
-  color: #d1d5db;
+  color: #9ca3af;
 }
 
 .detailValue {
@@ -93,7 +93,7 @@
 }
 
 .sectionText {
-  color: #d1d5db;
+  color: #9ca3af;
   line-height: 1.6;
 }
 

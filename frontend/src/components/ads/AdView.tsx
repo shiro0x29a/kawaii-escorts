@@ -291,7 +291,7 @@ export function AdView({ id }: AdViewProps) {
         </div>
 
         <div className={styles.content}>
-          <h1 className={styles.title}>
+          <h2 className={styles.title}>
             {editingField === 'name' ? (
               <div className={styles.editContainer}>
                 <input
@@ -327,7 +327,7 @@ export function AdView({ id }: AdViewProps) {
                 )}
               </>
             )}
-          </h1>
+          </h2>
 
           {editingField === 'city' ? (
             <div className={styles.editContainer}>
