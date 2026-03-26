@@ -1,3 +1,4 @@
+/* Container & Layout */
 .container {
   max-width: 100%;
   margin: 0 auto;
@@ -15,16 +16,24 @@
 
 @media (min-width: 1024px) {
   .grid {
-    grid-template-columns: 1fr 300px; /* Main content takes 2/3, gallery takes 1/3 */
+    grid-template-columns: 1fr 300px;
     gap: 1.5rem;
   }
 }
 
+/* Image Wrapper */
 .imageWrapper {
   position: relative;
   height: 20rem;
   background: var(--bg-secondary);
   max-height: 40rem;
+}
+
+@media (min-width: 768px) {
+  .imageWrapper {
+    height: 100%;
+    min-height: 20rem;
+  }
 }
 
 .noAvatar {
@@ -38,13 +47,7 @@
   font-weight: 600;
 }
 
-@media (min-width: 768px) {
-  .imageWrapper {
-    height: 100%;
-    min-height: 20rem;
-  }
-}
-
+/* Content */
 .content {
   padding: 2rem;
 }
@@ -61,6 +64,7 @@
   margin-bottom: 1.5rem;
 }
 
+/* Details */
 .details {
   display: flex;
   flex-direction: column;
@@ -83,6 +87,7 @@
   color: white;
 }
 
+/* Sections */
 .section {
   margin-top: 1.5rem;
 }
@@ -98,6 +103,7 @@
   line-height: 1.6;
 }
 
+/* Tags */
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -113,6 +119,7 @@
   font-size: 0.875rem;
 }
 
+/* Contact Button */
 .contactBtn {
   display: block;
   width: 100%;
@@ -131,35 +138,352 @@
   background: #db2777;
 }
 
-.gallery {
-  padding: 2rem;
-}
-
-.galleryTitle {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.galleryGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-}
-
-@media (min-width: 768px) {
-  .galleryGrid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.galleryItem {
-  position: relative;
-  height: 12rem;
+/* Buttons - Shared Styles */
+.applyBtn,
+.cancelBtn,
+.addPhotoBtn,
+.uploadLabel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
   border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+  border: none;
+  cursor: pointer;
+  height: 40px;
+}
+
+.applyBtn {
+  background: #ec4899;
+  color: white;
+}
+
+.applyBtn:hover:not(:disabled) {
+  background: #db2777;
+}
+
+.applyBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cancelBtn,
+.addPhotoBtn {
+  background: #6b7280;
+  color: white;
+}
+
+.cancelBtn:hover,
+.addPhotoBtn:hover {
+  background: #4b5563;
+}
+
+.uploadLabel {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+.uploadLabel:hover {
+  background: rgba(236, 72, 153, 0.8);
+}
+
+/* Edit Controls */
+.editContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.editButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.editIcon {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: color 0.2s;
+}
+
+.editIcon:hover {
+  color: white;
+  background-color: #4b5563;
+}
+
+.editTagButton {
+  background: #f3e8ff;
+  color: #7e22ce;
+  border: none;
+  border-radius: 9999px;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: background-color 0.2s;
+}
+
+.editTagButton:hover {
+  background: #e9d5ff;
+}
+
+/* Inputs */
+.editInput,
+.editTextarea,
+.dropdownBtn {
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: #1f2937;
+  color: white;
+  font-size: inherit;
+  transition: border-color 0.2s;
+}
+
+.editInput,
+.editTextarea {
+  width: 100%;
+}
+
+.editTextarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.dropdownBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  min-width: 150px;
+}
+
+.dropdownBtn:hover {
+  border-color: #ec4899;
+}
+
+.dropdownArrow {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+/* Dropdown */
+.dropdownWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.25rem;
+  background-color: #1f2937;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  z-index: 50;
+  min-width: 100%;
+  max-width: 180px;
   overflow: hidden;
 }
 
+.dropdownItem {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  color: white;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+}
+
+.dropdownItem:hover {
+  background-color: #374151;
+}
+
+.dropdownItem.selected {
+  background-color: #ec4899;
+  color: white;
+}
+
+/* Gallery - Right Side */
+.rightGallery {
+  background: var(--bg-secondary);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  height: fit-content;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.rightGalleryTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #9ca3af;
+}
+
+/* Horizontal Scroll Gallery */
+.horizontalScrollGallery {
+  display: flex;
+  overflow-x: auto;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  max-height: 60vh;
+  scrollbar-width: none;
+}
+
+.horizontalScrollGallery:hover,
+.horizontalScrollGallery:focus-within {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #4b5563;
+}
+
+.horizontalScrollGallery::-webkit-scrollbar {
+  width: 12px;
+  height: 8px;
+  background: transparent;
+}
+
+.horizontalScrollGallery::-webkit-scrollbar-track,
+.horizontalScrollGallery::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+}
+
+.horizontalScrollGallery:hover::-webkit-scrollbar-track,
+.horizontalScrollGallery:focus-within::-webkit-scrollbar-track {
+  background: #4b5563;
+}
+
+.horizontalScrollGallery:hover::-webkit-scrollbar-thumb,
+.horizontalScrollGallery:focus-within::-webkit-scrollbar-thumb {
+  background: #888;
+  border: 1px solid #4b5563;
+}
+
+.horizontalScrollGallery:hover::-webkit-scrollbar-thumb:hover,
+.horizontalScrollGallery:focus-within::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.horizontalScrollGallery::-webkit-scrollbar-button,
+.horizontalScrollGallery::-webkit-scrollbar-corner {
+  display: none;
+}
+
+/* Gallery Items */
+.horizontalGalleryItem,
+.rightGalleryItem {
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.horizontalGalleryItem {
+  flex: 0 0 auto;
+  width: 140px;
+  height: 140px;
+}
+
+.horizontalGalleryItem:hover,
+.rightGalleryItem:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.horizontalGalleryImage,
+.rightGalleryImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rightGalleryItem {
+  aspect-ratio: 1/1;
+}
+
+/* Photo Controls */
+.photoGalleryControls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.photoActionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .photoActionsContainer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .photoActionsLeft {
+    order: 1;
+  }
+
+  .photoActionsRight {
+    order: 2;
+    display: flex;
+    gap: 0.5rem;
+  }
+}
+
+.photoGalleryActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.addPhotoBtn {
+  background: #ec4899;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+  font-weight: 500;
+  width: fit-content;
+  align-self: flex-start;
+  border: none;
+  cursor: pointer;
+}
+
+.addPhotoBtn:hover {
+  background: #db2777;
+}
+
+.hiddenFileInput {
+  display: none;
+}
+
+/* Skeleton Loader */
 .skeleton {
   background: white;
   border-radius: 0.5rem;
@@ -201,219 +525,7 @@
   margin-bottom: 0.5rem;
 }
 
-.editContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-.optionsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 0.5rem;
-}
-
-.optionBtn {
-  padding: 0.75rem 1rem;
-  background-color: #374151;
-  color: white;
-  border: 2px solid transparent;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: all 0.2s;
-  text-align: center;
-}
-
-.optionBtn:hover {
-  background-color: #4b5563;
-}
-
-.optionBtn.selected {
-  background-color: #ec4899;
-  border-color: #ec4899;
-  color: white;
-}
-
-.editInput,
-.editTextarea {
-  padding: 0.5rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
-  background-color: #1f2937;
-  color: white;
-  font-size: inherit;
-}
-
-.dropdownWrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdownBtn {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background-color: #1f2937;
-  color: white;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  font-size: inherit;
-  min-width: 150px;
-  transition: border-color 0.2s;
-}
-
-.dropdownBtn:hover {
-  border-color: #ec4899;
-}
-
-.dropdownArrow {
-  font-size: 0.75rem;
-  color: #9ca3af;
-}
-
-.dropdownMenu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  margin-top: 0.25rem;
-  background-color: #1f2937;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-  z-index: 50;
-  min-width: 100%;
-  max-width: 180px;
-  overflow: hidden;
-}
-
-.dropdownItem {
-  display: block;
-  width: 100%;
-  padding: 0.5rem 1rem;
-  background: transparent;
-  border: none;
-  color: white;
-  text-align: left;
-  cursor: pointer;
-  font-size: 0.875rem;
-  transition: background-color 0.2s;
-}
-
-.dropdownItem:hover {
-  background-color: #374151;
-}
-
-.dropdownItem.selected {
-  background-color: #ec4899;
-  color: white;
-}
-
-.editTextarea {
-  min-height: 80px;
-  resize: vertical;
-}
-
-.editButtons {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.applyBtn {
-  background: #ec4899;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  height: 40px;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.2s;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.applyBtn:hover:not(:disabled) {
-  background: #db2777;
-}
-
-.applyBtn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.title .applyBtn {
-  padding: 0.5rem 0.5rem;
-  font-size: 1rem;
-}
-
-.cancelBtn {
-  background: #6b7280;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  height: 40px;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.2s;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cancelBtn:hover {
-  background: #4b5563;
-}
-
-.title .cancelBtn {
-  padding: 0.5rem 0.5rem;
-  font-size: 1rem;
-}
-
-.editIcon {
-  background: none;
-  border: none;
-  color: #9ca3af;
-  cursor: pointer;
-  font-size: 1rem;
-  margin-left: 0.5rem;
-  padding: 0.25rem;
-  border-radius: 0.25rem;
-  transition: color 0.2s;
-}
-
-.editIcon:hover {
-  color: white;
-  background-color: #4b5563;
-}
-
-.editTagButton {
-  background: #f3e8ff;
-  color: #7e22ce;
-  border: none;
-  border-radius: 9999px;
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 0.75rem;
-  transition: background-color 0.2s;
-}
-
-.editTagButton:hover {
-  background: #e9d5ff;
-}
-
-/* Avatar upload controls */
+/* Avatar Controls */
 .avatarControls {
   position: absolute;
   bottom: 1rem;
@@ -422,245 +534,8 @@
   gap: 0.5rem;
 }
 
-.uploadLabel {
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: background-color 0.2s;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.uploadLabel:hover {
-  background: rgba(236, 72, 153, 0.8);
-}
-
-.fileInput {
-  display: none;
-}
-
-/* Photo gallery controls */
-.photoGalleryControls {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.photoGalleryActions {
-  display: flex;
-  gap: 0.5rem;
-  /* margin-top: 0.5rem; */
-}
-
-.addPhotoBtn {
-  background: #ec4899;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-size: 0.875rem;
-  transition: all 0.2s;
-  font-weight: 500;
-  width: fit-content;
-  align-self: flex-start;
-}
-
-/* Container for photo actions to align add button with action buttons */
-.photoActionsContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-@media (min-width: 768px) {
-  .photoActionsContainer {
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-  }
-
-  .photoActionsLeft {
-    order: 1;
-  }
-
-  .photoActionsRight {
-    order: 2;
-    display: flex;
-    gap: 0.5rem;
-  }
-}
-
-.addPhotoBtn:hover {
-  background: #db2777;
-}
-
-
-.photoUploadArea {
-  border: 2px dashed #d1d5db;
-  border-radius: 0.5rem;
-  padding: 1rem;
-  text-align: center;
-  margin-top: 1rem;
-  cursor: pointer;
-}
-
-.photoUploadArea:hover {
-  border-color: #ec4899;
-  background-color: rgba(236, 72, 153, 0.05);
-}
-
-.hiddenFileInput {
-  display: none;
-}
-
-/* Right-side gallery styles */
-.rightGallery {
-  background: var(--bg-secondary);
-  border: none; /* Remove outline */
-  border-radius: 0.5rem;
-  padding: 1rem;
-  height: fit-content;
-  max-height: 80vh;
-  overflow-y: auto;
-}
-
-.rightGalleryTitle {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-align: center;
-  color: #9ca3af;
-}
-
-/* Horizontal scrolling gallery */
-.horizontalScrollGallery {
-  display: flex;
-  overflow-x: auto;
-  gap: 0.75rem;
-  padding: 0.5rem;
-  max-height: 60vh;
-  /* Hide scrollbar by default */
-  scrollbar-width: none; /* Firefox */
-}
-
-/* Show scrollbar on hover/focus for accessibility */
-.horizontalScrollGallery:hover {
-  scrollbar-width: thin;
-  scrollbar-color: #888 #4b5563;
-}
-
-.horizontalScrollGallery:focus-within {
-  scrollbar-width: thin;
-  scrollbar-color: #888 #4b5563;
-}
-
-/* Webkit browsers (Chrome, Safari, Edge) */
-.horizontalScrollGallery::-webkit-scrollbar {
-  width: 12px;
-  height: 8px;
-  background: transparent;
-}
-
-/* Hide scrollbar track and thumb by default */
-.horizontalScrollGallery::-webkit-scrollbar-track,
-.horizontalScrollGallery::-webkit-scrollbar-thumb {
-  background: transparent;
-  border-radius: 4px;
-}
-
-/* Show scrollbar on hover/focus for accessibility */
-.horizontalScrollGallery:hover::-webkit-scrollbar-track,
-.horizontalScrollGallery:focus-within::-webkit-scrollbar-track {
-  background: #4b5563;
-}
-
-.horizontalScrollGallery:hover::-webkit-scrollbar-thumb,
-.horizontalScrollGallery:focus-within::-webkit-scrollbar-thumb {
-  background: #888;
-  border: 1px solid #4b5563;
-}
-
-.horizontalScrollGallery:hover::-webkit-scrollbar-thumb:hover,
-.horizontalScrollGallery:focus-within::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-/* Remove scrollbar arrows/prefixes */
-.horizontalScrollGallery::-webkit-scrollbar-button,
-.horizontalScrollGallery::-webkit-scrollbar-corner {
-  display: none;
-}
-
-/* Gallery items for horizontal scrolling */
-.horizontalGalleryItem {
-  flex: 0 0 auto;
-  width: 140px;
-  height: 140px;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  position: relative;
-}
-
-.horizontalGalleryItem:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-.horizontalGalleryImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.rightGalleryItem {
-  position: relative;
-  aspect-ratio: 1/1;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.rightGalleryItem:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-.rightGalleryImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.scrollableGallery {
-  max-height: 60vh;
-  overflow-y: auto;
-  padding-right: 0.5rem;
-}
-
-.scrollableGallery::-webkit-scrollbar {
-  width: 6px;
-}
-
-.scrollableGallery::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-
-.scrollableGallery::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
-}
-
-.scrollableGallery::-webkit-scrollbar-thumb:hover {
-  background: #555;
+.title .applyBtn,
+.title .cancelBtn {
+  padding: 0.5rem 0.5rem;
+  font-size: 1rem;
 }

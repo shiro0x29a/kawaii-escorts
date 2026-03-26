@@ -9,7 +9,7 @@ export function useLogin() {
     mutationFn: ({ email, password }: { email: string; password: string }) =>
       api.auth.login(email, password),
     onSuccess: ({ user, token }) => {
-      setUser(user);
+      setUser({ ...user, role: user.role as 'USER' | 'ADMIN' });
       setToken(token);
     },
     onError(err: any) {
@@ -25,7 +25,7 @@ export function useRegister() {
     mutationFn: ({ username, email, password }: { username: string; email: string; password: string }) =>
       api.auth.register(username, email, password),
     onSuccess: ({ user, token }) => {
-      setUser(user);
+      setUser({ ...user, role: user.role as 'USER' | 'ADMIN' });
       setToken(token);
     },
     onError(err: any) {
