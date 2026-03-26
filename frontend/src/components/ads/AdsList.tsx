@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { useAds } from '@/hooks/use-ads';
+import { useAds } from '@/hooks/useAds';
 import { useState } from 'react';
 import { Pagination } from '@/components/shared/Pagination';
 import styles from './AdsList.module.css';

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { useRegister } from '@/hooks/use-auth';
+import { useRegister } from '@/hooks/useAuth';
 import { useAuthStore } from '@/stores/auth-store';
 import { LangSwitcher } from '../shared/LangSwitcher';
 import { ThemeSwitcher } from '../shared/ThemeSwitcher';

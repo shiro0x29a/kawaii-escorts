@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { useSearch } from '@/hooks/use-search';
+import { useSearch } from '@/hooks/useSearch';
 import { SearchBox } from '@/components/search/SearchBox';
 import { Pagination } from '@/components/shared/Pagination';
 import styles from './SearchResults.module.css';

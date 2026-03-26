@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { useLogin } from '@/hooks/use-auth';
+import { useLogin } from '@/hooks/useAuth';
 import { useAuthStore } from '@/stores/auth-store';
 import styles from './LoginForm.module.css';
 

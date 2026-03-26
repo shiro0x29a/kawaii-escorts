@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { useCities } from '@/hooks/use-cities';
+import { useCities } from '@/hooks/useCities';
 import { useAuthStore } from '@/stores/auth-store';
 import Link from 'next/link';
 import styles from './page.module.css';

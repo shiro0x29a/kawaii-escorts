@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { usePathname } from 'next/navigation';
-import { useAd } from '@/hooks/use-ads';
+import { useAd } from '@/hooks/useAds';
 import { useMyProfiles } from '@/hooks/useMyProfiles';
 import { useAuthStore } from '@/stores/auth-store';
-import { useCities } from '@/hooks/use-cities';
+import { useCities } from '@/hooks/useCities';
 import { Lightbox } from '@/components/ui/Lightbox';
 import styles from './AdView.module.css';
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useAds } from '@/hooks/use-ads';
+import { useAds } from '@/hooks/useAds';
 import Link from 'next/link';
 import styles from './Profiles.module.css';
 import { Pagination } from '@/components/shared/Pagination';

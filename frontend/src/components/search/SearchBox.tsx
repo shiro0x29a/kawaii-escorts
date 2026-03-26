@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { useCities } from '@/hooks/use-cities';
+import { useCities } from '@/hooks/useCities';
 import styles from './SearchBox.module.css';
 
 interface SearchBoxProps {
