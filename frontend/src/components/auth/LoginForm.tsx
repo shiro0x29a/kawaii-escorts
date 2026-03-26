@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useLogin } from '@/hooks/useAuth';
-import { useAuthStore } from '@/stores/auth-store';
+import { useAuthStore } from '@/stores/authStore';
 import styles from './LoginForm.module.css';
 
 export function LoginForm() {

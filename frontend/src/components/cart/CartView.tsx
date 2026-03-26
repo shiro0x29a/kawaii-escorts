@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useCartStore } from '@/stores/cart-store';
+import { useCartStore } from '@/stores/cartStore';
 import { useRouter } from 'next/navigation';
 import styles from './CartView.module.css';
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useAuthStore } from '@/stores/auth-store';
+import { useAuthStore } from '@/stores/authStore';
 import Link from 'next/link';
 import styles from './page.module.css';
 
