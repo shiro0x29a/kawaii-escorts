@@ -23,9 +23,18 @@ export function Profiles() {
   const chunks = Array.from({ length: Math.ceil(allProfiles.length / PROFILES_PER_PAGE) }, (_, i) =>
     allProfiles.slice(i * PROFILES_PER_PAGE, (i + 1) * PROFILES_PER_PAGE)
   );
-  const reversedChunks = chunks.reverse();
-  const totalPages = reversedChunks.length;
-  const currentPageProfiles = reversedChunks[page - 1] || [];
+  const totalPages = chunks.length;
+  const currentPageProfiles = chunks[page - 1] || [];
+
+  console.log(allProfiles);
+  console.log(chunks);
+  console.log('Filtered profiles for pagination:', {
+    page,
+    totalPages,
+    totalProfiles: allProfiles.length,
+    gender,
+    currentPageProfiles,
+  });
 
   return (
     <section className={styles.section}>
