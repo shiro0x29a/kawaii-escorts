@@ -535,7 +535,7 @@
   font-weight: 700;
   margin-bottom: 1rem;
   text-align: center;
-  color: white;
+  color: #9ca3af;
 }
 
 /* Horizontal scrolling gallery */
@@ -600,8 +600,8 @@
 /* Gallery items for horizontal scrolling */
 .horizontalGalleryItem {
   flex: 0 0 auto;
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   border-radius: 0.5rem;
   overflow: hidden;
   cursor: pointer;
