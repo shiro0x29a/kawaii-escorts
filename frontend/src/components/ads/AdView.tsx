@@ -705,9 +705,12 @@ export function AdView({ id }: AdViewProps) {
               <div className={styles.photoGalleryControls}>
                 <div className={styles.photoActionsContainer}>
                   <div className={styles.photoActionsLeft}>
-                    <label htmlFor={`photos-upload-${id}`} className={styles.addPhotoBtn}>
+                    <div
+                      onClick={() => document.getElementById(`photos-upload-${id}`)?.click()}
+                      className={styles.addPhotoBtn}
+                    >
                       {t('addPhotos')}
-                    </label>
+                    </div>
                     <input
                       id={`photos-upload-${id}`}
                       type="file"
@@ -726,7 +729,7 @@ export function AdView({ id }: AdViewProps) {
                           className={styles.applyBtn}
                           disabled={isUpdating}
                         >
-                          {isUpdating ? t('saving') : t('saveChanges')}
+                          {isUpdating ? t('saving') : t('apply')}
                         </button>
                         <button
                           onClick={() => {

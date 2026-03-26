@@ -102,13 +102,14 @@
     "redirecting": "Перенаправление на оплату..."
   },
   "Ad": {
-    "changeAvatar": "Изменить аватар",
+    "changeAvatar": "Изменить",
     "addPhotos": "Добавить фото",
     "existingPhotos": "Существующие фото",
     "gallery": "Галерея",
     "delete": "Удалить",
     "deleting": "Удаление...",
     "remove": "Удалить",
+    "apply": "Применить",
     "saveChanges": "Сохранить изменения",
     "saving": "Сохранение...",
     "confirmDeletePhoto": "Вы уверены, что хотите удалить это фото?",
