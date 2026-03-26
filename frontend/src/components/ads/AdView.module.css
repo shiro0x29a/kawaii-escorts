@@ -24,6 +24,7 @@
   position: relative;
   height: 20rem;
   background: var(--bg-secondary);
+  max-height: 40rem;
 }
 
 .noAvatar {

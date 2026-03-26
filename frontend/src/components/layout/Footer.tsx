@@ -11,7 +11,7 @@ export function Footer() {
           <div className={styles.section}>
             <h3 className={styles.title}>{t('about')}</h3>
             <p className={styles.description}>
-              kawaii escorts - your trusted partner in finding the perfect companion.
+              {t('description')}
             </p>
           </div>
 
