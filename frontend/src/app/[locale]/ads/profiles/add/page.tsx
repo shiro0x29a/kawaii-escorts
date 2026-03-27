@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useCities } from '@/hooks/useCities';
 import { useAuthStore } from '@/stores/authStore';
+import { Input, Dropdown, Button } from '@/components/ui';
 import Link from 'next/link';
 import styles from './page.module.css';
 
@@ -260,13 +261,12 @@ export default function AddAdPage() {
             <label className={styles.label}>
               {t('name')} <span className={styles.required}>*</span>
             </label>
-            <input
+            <Input
               type="text"
               required
               maxLength={20}
               value={formData.name}
               onChange={(e) => handleChange('name', e.target.value)}
-              className={styles.input}
               placeholder={t('namePlaceholder')}
             />
             <p className={styles.hint}>{t('nameHint')}</p>
@@ -277,14 +277,13 @@ export default function AddAdPage() {
             <label className={styles.label}>
               {t('age')} <span className={styles.required}>*</span>
             </label>
-            <input
+            <Input
               type="number"
               required
               min={18}
               max={99}
               value={formData.age}
               onChange={(e) => handleChange('age', e.target.value)}
-              className={styles.input}
             />
           </div>
 
@@ -293,16 +292,15 @@ export default function AddAdPage() {
             <label className={styles.label}>
               {t('gender')} <span className={styles.required}>*</span>
             </label>
-            <select
-              required
+            <Dropdown
+              options={[
+                { label: t('female'), value: 'female' },
+                { label: t('male'), value: 'male' },
+                { label: t('trans'), value: 'trans' },
+              ]}
               value={formData.gender}
-              onChange={(e) => handleChange('gender', e.target.value)}
-              className={styles.select}
-            >
-              <option value="female">{t('female')}</option>
-              <option value="male">{t('male')}</option>
-              <option value="trans">{t('trans')}</option>
-            </select>
+              onChange={(value) => handleChange('gender', value)}
+            />
           </div>
 
           {/* Phone */}
@@ -310,12 +308,11 @@ export default function AddAdPage() {
             <label className={styles.label}>
               {t('phone')} <span className={styles.required}>*</span>
             </label>
-            <input
+            <Input
               type="tel"
               required
               value={formData.tel}
               onChange={(e) => handleChange('tel', e.target.value)}
-              className={styles.input}
             />
           </div>
 
@@ -324,12 +321,11 @@ export default function AddAdPage() {
             <label className={styles.label}>
               {t('email')} <span className={styles.required}>*</span>
             </label>
-            <input
+            <Input
               type="email"
               required
               value={formData.email}
               onChange={(e) => handleChange('email', e.target.value)}
-              className={styles.input}
             />
           </div>
 
@@ -338,23 +334,17 @@ export default function AddAdPage() {
             <label className={styles.label}>
               {t('city')} <span className={styles.required}>*</span>
             </label>
-            <select
-              required
+            <Dropdown
+              options={[
+                { label: t('selectCity'), value: '' },
+                ...(cities || []).map((city) => ({
+                  label: city.name,
+                  value: String(city.id),
+                })),
+              ]}
               value={formData.city}
-              onChange={(e) => handleChange('city', e.target.value)}
-              className={styles.select}
-            >
-              <option value="">{t('selectCity')}</option>
-              {cities && cities.length > 0 ? (
-                cities.map((city) => (
-                  <option key={city.id} value={city.id}>
-                    {city.name}
-                  </option>
-                ))
-              ) : (
-                <option value="" disabled>No cities available</option>
-              )}
-            </select>
+              onChange={(value) => handleChange('city', value)}
+            />
           </div>
 
           {/* Contact methods */}
@@ -469,24 +459,22 @@ export default function AddAdPage() {
               <label className={styles.label}>
                 {t('height')} <span className={styles.required}>*</span>
               </label>
-              <input
+              <Input
                 type="number"
                 required
                 value={formData.height}
                 onChange={(e) => handleChange('height', e.target.value)}
-                className={styles.input}
               />
             </div>
             <div className={styles.formGroup}>
               <label className={styles.label}>
                 {t('weight')} <span className={styles.required}>*</span>
               </label>
-              <input
+              <Input
                 type="number"
                 required
                 value={formData.weight}
                 onChange={(e) => handleChange('weight', e.target.value)}
-                className={styles.input}
               />
             </div>
           </div>
@@ -605,13 +593,9 @@ export default function AddAdPage() {
           </div>
 
           {/* Submit */}
-          <button
-            type="submit"
-            disabled={isLoading}
-            className={styles.submitBtn}
-          >
+          <Button type="submit" disabled={isLoading} fullWidth>
             {isLoading ? t('submitting') : t('submit')}
-          </button>
+          </Button>
         </form>
       </div>
     </div>
