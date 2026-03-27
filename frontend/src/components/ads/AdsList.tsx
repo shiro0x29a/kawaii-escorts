@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useAds } from '@/hooks/useAds';
 import { useState } from 'react';
-import { Pagination } from '@/components/shared/Pagination';
+import { Pagination } from '@/components/ui';
 import styles from './AdsList.module.css';
 
 type Gender = 'FEMALE' | 'MALE';

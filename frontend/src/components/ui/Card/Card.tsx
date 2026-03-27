@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import Link from 'next/link';
 import styles from './Card.module.css';
 
-interface CardProps {
+export interface CardProps {
   href?: string;
   image?: string;
   imageHeight?: string;

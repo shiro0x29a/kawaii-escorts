@@ -2,12 +2,12 @@
 
 import styles from './Tabs.module.css';
 
-interface Tab {
+export interface Tab {
   label: string;
   value: string;
 }
 
-interface TabsProps {
+export interface TabsProps {
   tabs: Tab[];
   value: string;
   onChange: (value: string) => void;

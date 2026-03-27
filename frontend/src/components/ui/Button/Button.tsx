@@ -17,10 +17,11 @@ type ButtonAsButton = BaseButtonProps &
   ButtonHTMLAttributes<HTMLButtonElement> & {
     as?: 'button';
     href?: never;
+    type?: 'button' | 'submit' | 'reset';
   };
 
 type ButtonAsAnchor = BaseButtonProps &
-  AnchorHTMLAttributes<HTMLAnchorElement> & {
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'onClick'> & {
     as: 'a';
     href: string;
   };
@@ -48,15 +49,17 @@ export function Button({
     .join(' ');
 
   if (as === 'a') {
+    const anchorProps = props as Omit<ButtonAsAnchor, keyof BaseButtonProps | 'href'>;
     return (
-      <a className={classNames} href={props.href} {...props}>
+      <a className={classNames} href={(props as ButtonAsAnchor).href} {...anchorProps}>
         {children}
       </a>
     );
   }
 
+  const buttonProps = props as Omit<ButtonAsButton, keyof BaseButtonProps>;
   return (
-    <button className={classNames} disabled={disabled} {...props}>
+    <button className={classNames} disabled={disabled} {...buttonProps}>
       {children}
     </button>
   );

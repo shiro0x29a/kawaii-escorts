@@ -3,13 +3,13 @@
 import { useState, useRef, useEffect, ReactNode } from 'react';
 import styles from './Dropdown.module.css';
 
-interface DropdownOption {
+export interface DropdownOption {
   label: string;
   value: string;
   disabled?: boolean;
 }
 
-interface DropdownProps {
+export interface DropdownProps {
   options: DropdownOption[];
   value?: string;
   onChange?: (value: string) => void;

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useAds } from '@/hooks/useAds';
 import Link from 'next/link';
 import styles from './Profiles.module.css';
-import { Pagination } from '@/components/shared/Pagination';
+import { Pagination } from '@/components/ui';
 
 type Gender = 'FEMALE' | 'MALE';
 

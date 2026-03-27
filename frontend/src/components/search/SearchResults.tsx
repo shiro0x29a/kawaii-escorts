@@ -6,8 +6,7 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useSearch } from '@/hooks/useSearch';
-import { SearchBox } from '@/components/search/SearchBox';
-import { Pagination } from '@/components/shared/Pagination';
+import { SearchBox, Pagination } from '@/components/ui';
 import styles from './SearchResults.module.css';
 
 interface SearchResultsProps {
@@ -30,13 +29,6 @@ export function SearchResults({ city = '', showSearchBox = true }: SearchResults
     setPage(1);
   }, [searchCity]);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchCity.trim()) {
-      router.push(`/search?city=${encodeURIComponent(searchCity.trim())}`);
-    }
-  };
-
   const totalPages = data?.pagination?.pages || 1;
 
   return (
@@ -46,7 +38,11 @@ export function SearchResults({ city = '', showSearchBox = true }: SearchResults
           placeholder={t('placeholder')}
           value={searchCity}
           onChange={setSearchCity}
-          onSubmit={handleSearch}
+          onSearch={(value) => {
+            if (value.trim()) {
+              router.push(`/search?city=${encodeURIComponent(value.trim())}`);
+            }
+          }}
         />
       )}
 

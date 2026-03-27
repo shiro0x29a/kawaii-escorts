@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { SearchBox } from '@/components/search/SearchBox';
+import { SearchBox } from '@/components/ui';
 import { Profiles } from '@/components/profiles/Profiles';
 import { SearchResults } from '@/components/search/SearchResults';
 import styles from './page.module.css';
@@ -25,7 +25,6 @@ export default function HomePage() {
               placeholder={t('searchPlaceholder')}
               value={searchCity}
               onChange={setSearchCity}
-              onSubmit={(e) => e.preventDefault()}
             />
           </div>
         </div>

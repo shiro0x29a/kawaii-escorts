@@ -1,11 +1,11 @@
 import { InputHTMLAttributes, forwardRef } from 'react';
 import styles from './Input.module.css';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   label?: string;
   error?: string;
   variant?: 'default' | 'rounded';
-  size?: 'small' | 'medium' | 'large';
+  inputSize?: 'small' | 'medium' | 'large';
   iconLeft?: React.ReactNode;
   iconRight?: React.ReactNode;
   className?: string;
@@ -17,7 +17,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       label,
       error,
       variant = 'default',
-      size = 'medium',
+      inputSize = 'medium',
       iconLeft,
       iconRight,
       className = '',
@@ -29,7 +29,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const classNames = [
       styles.input,
       styles[variant],
-      styles[size],
+      styles[inputSize],
       iconLeft ? styles.withIconLeft : '',
       iconRight ? styles.withIconRight : '',
       error ? styles.error : '',
