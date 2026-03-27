@@ -483,6 +483,15 @@
   display: none;
 }
 
+.fileInput {
+  position: absolute;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
 /* Skeleton Loader */
 .skeleton {
   background: white;
