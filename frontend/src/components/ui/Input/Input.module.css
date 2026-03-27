@@ -1,0 +1,106 @@
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--input-border);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: var(--input-bg);
+  color: var(--input-text);
+}
+
+.input:focus {
+  outline: none;
+  border-color: #db2777;
+  box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.1);
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+.input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Rounded variant */
+.rounded {
+  border-radius: 9999px;
+}
+
+/* Error state */
+.error {
+  border-color: #ef4444;
+}
+
+.error:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Sizes */
+.small {
+  padding: 0.5rem 0.875rem;
+  font-size: 0.875rem;
+}
+
+.medium {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+}
+
+.large {
+  padding: 1rem 1.25rem;
+  font-size: 1.125rem;
+}
+
+/* With icon */
+.withIconLeft {
+  padding-left: 2.75rem;
+}
+
+.withIconRight {
+  padding-right: 2.75rem;
+}
+
+/* Wrapper for icons */
+.inputWrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.iconLeft,
+.iconRight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.iconLeft {
+  left: 1rem;
+}
+
+.iconRight {
+  right: 1rem;
+}
+
+/* Label */
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Error message */
+.errorMessage {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: #ef4444;
+}

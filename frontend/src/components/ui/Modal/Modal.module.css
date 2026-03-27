@@ -1,0 +1,144 @@
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 1000;
+}
+
+.overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Container */
+.container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 28rem;
+  min-height: 28rem;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 1001;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.container.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Sizes */
+.small {
+  max-width: 24rem;
+  min-height: 20rem;
+}
+
+.medium {
+  max-width: 28rem;
+  min-height: 28rem;
+}
+
+.large {
+  max-width: 40rem;
+  min-height: 36rem;
+}
+
+.fullWidth {
+  max-width: 90%;
+}
+
+/* Close button */
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  font-size: 1.25rem;
+  color: #fff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  transition: color 0.2s;
+}
+
+.closeButton:hover {
+  color: #ec4899;
+}
+
+/* Content */
+.content {
+  width: 100%;
+  padding: 2.5rem;
+}
+
+/* Header */
+.header {
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+}
+
+/* Variant: default (glassmorphism) */
+.default .container {
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Variant: plain */
+.plain .container {
+  border: none;
+  backdrop-filter: none;
+  background: var(--bg-secondary);
+  border-radius: 1rem;
+}
+
+.plain .title {
+  color: var(--text-primary);
+}
+
+.plain .closeButton {
+  color: var(--text-primary);
+}
+
+/* Variant: centered */
+.centered .content {
+  text-align: center;
+}
+
+/* Footer */
+.footer {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}

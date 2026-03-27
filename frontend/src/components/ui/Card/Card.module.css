@@ -1,0 +1,116 @@
+.card {
+  display: block;
+  background: var(--card-bg, var(--bg-secondary));
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+  text-decoration: none;
+}
+
+.card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Image wrapper */
+.imageWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.imageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.card:hover .imageWrapper img {
+  transform: scale(1.05);
+}
+
+/* Content */
+.content {
+  padding: 1rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--input-text);
+  margin-bottom: 0.25rem;
+}
+
+.description {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+/* Variants */
+.interactive {
+  cursor: pointer;
+}
+
+.borderless {
+  box-shadow: none;
+}
+
+.borderless:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+/* Sizes */
+.compact .content {
+  padding: 0.75rem;
+}
+
+.comfortable .content {
+  padding: 1.5rem;
+}
+
+/* Skeleton loader */
+.skeleton {
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.skeletonImage {
+  height: 16rem;
+  background: #e5e7eb;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonContent {
+  padding: 1rem;
+}
+
+.skeletonTitle {
+  height: 1rem;
+  background: #e5e7eb;
+  border-radius: 0.25rem;
+  width: 75%;
+  margin-bottom: 0.5rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonText {
+  height: 0.75rem;
+  background: #e5e7eb;
+  border-radius: 0.25rem;
+  width: 50%;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,92 @@
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.tab {
+  padding: 0.75rem 2rem;
+  border: 2px solid #e5e7eb;
+  background: white;
+  border-radius: 9999px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #9ca3af;
+  font-size: 1rem;
+}
+
+.tab:hover {
+  border-color: #ec4899;
+  color: #ec4899;
+}
+
+.tab.active {
+  border-color: #ec4899;
+  background: #ec4899;
+  color: var(--input-text);
+}
+
+/* Variant: pills */
+.pills .tab {
+  border-radius: 0.5rem;
+  border: none;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.pills .tab:hover {
+  background: var(--bg-tertiary);
+}
+
+.pills .tab.active {
+  background: #ec4899;
+  color: white;
+}
+
+/* Variant: underline */
+.underline .tab {
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  padding: 0.75rem 1rem;
+}
+
+.underline .tab:hover {
+  color: #ec4899;
+}
+
+.underline .tab.active {
+  color: #ec4899;
+  border-bottom-color: #ec4899;
+  background: transparent;
+}
+
+/* Sizes */
+.small .tab {
+  padding: 0.5rem 1.5rem;
+  font-size: 0.875rem;
+}
+
+.medium .tab {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+}
+
+.large .tab {
+  padding: 1rem 2.5rem;
+  font-size: 1.125rem;
+}
+
+/* Full width */
+.fullWidth .tabs {
+  justify-content: stretch;
+}
+
+.fullWidth .tab {
+  flex: 1;
+  text-align: center;
+}
