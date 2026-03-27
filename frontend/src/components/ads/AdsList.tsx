@@ -1,11 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useAds } from '@/hooks/useAds';
 import { useState } from 'react';
-import { Pagination } from '@/components/ui';
+import { Tabs, Card, Pagination } from '@/components/ui';
+import { getAssetUrl } from '@/lib/utils';
 import styles from './AdsList.module.css';
 
 type Gender = 'FEMALE' | 'MALE';
@@ -22,13 +22,7 @@ export function AdsList() {
     return (
       <div className={styles.grid}>
         {[...Array(6)].map((_, i) => (
-          <div key={i} className={styles.skeleton}>
-            <div className={styles.skeletonImage} />
-            <div className={styles.skeletonInfo}>
-              <div className={styles.skeletonTitle} />
-              <div className={styles.skeletonText} />
-            </div>
-          </div>
+          <Card key={i} isLoading imageHeight="16rem" />
         ))}
       </div>
     );
@@ -45,62 +39,30 @@ export function AdsList() {
   const totalPages = chunks.length;
   const currentPageProfiles = chunks[page - 1] || [];
 
-  console.log(allProfiles);
-  console.log(chunks);
-  console.log('Filtered profiles for pagination:', {
-    page,
-    totalPages,
-    totalProfiles: allProfiles.length,
-    gender,
-    currentPageProfiles,
-  });
-
   return (
     <div>
-      <div className={styles.tabs}>
-        <button
-          className={`${styles.tab} ${gender === 'FEMALE' ? styles.active : ''}`}
-          onClick={() => { setGender('FEMALE'); setPage(1); }}
-        >
-          Female
-        </button>
-        <button
-          className={`${styles.tab} ${gender === 'MALE' ? styles.active : ''}`}
-          onClick={() => { setGender('MALE'); setPage(1); }}
-        >
-          Male
-        </button>
-      </div>
+      <Tabs
+        tabs={[
+          { label: 'Female', value: 'FEMALE' },
+          { label: 'Male', value: 'MALE' },
+        ]}
+        value={gender}
+        onChange={(value) => { setGender(value as Gender); setPage(1); }}
+      />
 
       <div className={styles.grid}>
         {currentPageProfiles.map((ad: any) => {
-          const avatarUrl = ad.avatar
-            ? ad.avatar.startsWith('http')
-              ? ad.avatar
-              : `/api${ad.avatar.startsWith('/') ? ad.avatar : `/${ad.avatar}`}`
-            : null;
+          const avatarUrl = getAssetUrl(ad.avatar);
           if (!avatarUrl) return null;
           return (
-            <Link
+            <Card
               key={ad.id}
               href={`/ads/${ad.id}`}
-              className={styles.card}
-            >
-              <div className={styles.imageWrapper}>
-                <Image
-                  src={avatarUrl}
-                  alt={ad.name}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className={styles.info}>
-                <h3 className={styles.name}>
-                  {ad.name}, {ad.age}
-                </h3>
-                <p className={styles.city}>{ad.city.nameEn}</p>
-              </div>
-            </Link>
+              image={avatarUrl}
+              imageHeight="16rem"
+              title={`${ad.name}, ${ad.age}`}
+              description={ad.city.nameEn}
+            />
           );
         })}
       </div>
