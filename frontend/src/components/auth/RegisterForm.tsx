@@ -7,6 +7,7 @@ import { useRegister } from '@/hooks/useAuth';
 import { useAuthStore } from '@/stores/authStore';
 import { LangSwitcher } from '../shared/LangSwitcher';
 import { ThemeSwitcher } from '../shared/ThemeSwitcher';
+import { Input, Button } from '@/components/ui';
 import styles from './LoginForm.module.css';
 
 export function RegisterForm() {
@@ -59,49 +60,45 @@ export function RegisterForm() {
           {error && <div className={styles.errorBox}>{error}</div>}
 
           <form onSubmit={handleSubmit}>
-            <div className={styles.inputBox}>
-              <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-              <label>Username</label>
-            </div>
+            <Input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              placeholder=" "
+              label="Username"
+            />
 
-            <div className={styles.inputBox}>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <label>{t('email')}</label>
-            </div>
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              placeholder=" "
+              label={t('email')}
+            />
 
-            <div className={styles.inputBox}>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <label>{t('password')}</label>
-            </div>
+            <Input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder=" "
+              label={t('password')}
+            />
 
-            <div className={styles.inputBox}>
-              <input
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              />
-              <label>{t('confirmPassword')}</label>
-            </div>
+            <Input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              placeholder=" "
+              label={t('confirmPassword')}
+            />
 
-            <button type="submit" disabled={register.isPending} className={styles.submitBtn}>
+            <Button type="submit" disabled={register.isPending} fullWidth>
               {register.isPending ? t('loading') : t('register')}
-            </button>
+            </Button>
 
             <div className={styles.registerBlock}>
               {t('hasAccount')}{' '}

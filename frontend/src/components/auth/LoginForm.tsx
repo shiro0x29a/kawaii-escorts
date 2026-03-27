@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useLogin } from '@/hooks/useAuth';
 import { useAuthStore } from '@/stores/authStore';
+import { Input, Button } from '@/components/ui';
 import styles from './LoginForm.module.css';
 
 export function LoginForm() {
@@ -46,25 +47,23 @@ export function LoginForm() {
           {error && <div className={styles.errorBox}>{error}</div>}
 
           <form onSubmit={handleSubmit}>
-            <div className={styles.inputBox}>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <label>{t('email')}</label>
-            </div>
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              placeholder=" "
+              label={t('email')}
+            />
 
-            <div className={styles.inputBox}>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <label>{t('password')}</label>
-            </div>
+            <Input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder=" "
+              label={t('password')}
+            />
 
             <div className={styles.forget}>
               <label>
@@ -73,9 +72,9 @@ export function LoginForm() {
               <a href="/forgot-password">{t('forgotPassword')}</a>
             </div>
 
-            <button type="submit" disabled={login.isPending} className={styles.submitBtn}>
+            <Button type="submit" disabled={login.isPending} fullWidth>
               {login.isPending ? t('loading') : t('login')}
-            </button>
+            </Button>
 
             <div className={styles.registerBlock}>
               {t('noAccount')}{' '}

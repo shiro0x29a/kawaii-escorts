@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { useCartStore } from '@/stores/cartStore';
 import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui';
 import styles from './CartView.module.css';
 
 export function CartView() {
@@ -18,12 +19,9 @@ export function CartView() {
     return (
       <div className={styles.emptyState}>
         <p className={styles.emptyText}>{t('empty')}</p>
-        <button
-          onClick={() => router.push('/profiles')}
-          className={styles.checkoutBtn}
-        >
+        <Button onClick={() => router.push('/profiles')}>
           {t('continueShopping')}
-        </button>
+        </Button>
       </div>
     );
   }
