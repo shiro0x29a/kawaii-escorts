@@ -3,10 +3,19 @@
 }
 
 .container {
-  max-width: 480px;
   margin: 0 auto;
   padding: 0 1rem;
+}
+
+.form {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.formBorder {
+  margin: 0 auto;
   border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 2rem;
 }
 
 .title {

@@ -255,7 +255,9 @@ export default function AddAdPage() {
           <div className={styles.errorBox}>{error}</div>
         )}
 
-        <form onSubmit={handleSubmit} className={styles.form} encType="multipart/form-data">
+        <div className={styles.formBorder}>
+          <div className={styles.form}>
+          <form onSubmit={handleSubmit} encType="multipart/form-data">
           {/* Name */}
           <div className={styles.formGroup}>
             <label className={styles.label}>
@@ -597,6 +599,8 @@ export default function AddAdPage() {
             {isLoading ? t('submitting') : t('submit')}
           </Button>
         </form>
+        </div>
+        </div>
       </div>
     </div>
   );
