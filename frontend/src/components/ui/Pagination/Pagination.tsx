@@ -19,6 +19,8 @@ export function Pagination({
   className = '',
   showPageInfo = true,
 }: PaginationProps) {
+  if (totalPages <= 1) return null;
+
   const classNames = [
     styles.pagination,
     styles[variant],
