@@ -26,7 +26,7 @@
 .tab.active {
   border-color: #ec4899;
   background: #ec4899;
-  color: var(--input-text);
+  color: #e5e7eb;
 }
 
 /* Variant: pills */
