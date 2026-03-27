@@ -57,26 +57,17 @@ export function CartView() {
         </div>
 
         <div className={styles.buttonGroup}>
-          <button
-            onClick={() => router.push('/profiles')}
-            className={styles.continueBtn}
-          >
+          <Button variant="secondary" onClick={() => router.push('/profiles')}>
             {t('continueShopping')}
-          </button>
-          <button
-            onClick={handleCheckout}
-            className={styles.checkoutBtn}
-          >
+          </Button>
+          <Button onClick={handleCheckout}>
             {t('checkout')}
-          </button>
+          </Button>
         </div>
 
-        <button
-          onClick={clearCart}
-          className={styles.clearBtn}
-        >
+        <Button variant="ghost" onClick={clearCart} fullWidth>
           Clear Cart
-        </button>
+        </Button>
       </div>
     </div>
   );
