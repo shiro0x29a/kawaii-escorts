@@ -13,6 +13,7 @@
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 1.5rem;
+  padding-top: 5rem;
 }
 
 .header {
@@ -40,7 +41,7 @@
 
 .loginPrompt {
   text-align: center;
-  padding: 3rem 1rem;
+  padding: 5rem 1rem;
 }
 
 .loginPromptText {
