@@ -43,9 +43,9 @@ export function AdsList() {
     <div>
       <Tabs
         tabs={[
-          { label: 'Female', value: 'FEMALE' },
-          { label: 'Male', value: 'MALE' },
-          { label: 'Trans', value: 'TRANS' },
+          { label: t('female'), value: 'FEMALE' },
+          { label: t('male'), value: 'MALE' },
+          { label: t('transgender'), value: 'TRANS' },
         ]}
         value={gender}
         onChange={(value) => { setGender(value as Gender); setPage(1); }}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { useAds } from '@/hooks/useAds';
 import { getAssetUrl } from '@/lib/utils';
 import { Tabs, Card, Pagination } from '@/components/ui';
@@ -11,6 +12,7 @@ type Gender = 'FEMALE' | 'MALE' | 'TRANS';
 const PROFILES_PER_PAGE = 6;
 
 export function Profiles() {
+  const t = useTranslations('Ads');
   const [gender, setGender] = useState<Gender>('FEMALE');
   const [page, setPage] = useState(1);
   const { data, isLoading } = useAds({ limit: 20, gender });
@@ -31,9 +33,9 @@ export function Profiles() {
       <div className={styles.container}>
         <Tabs
           tabs={[
-            { label: 'Female', value: 'FEMALE' },
-            { label: 'Male', value: 'MALE' },
-            { label: 'Trans', value: 'TRANS' },
+            { label: t('female'), value: 'FEMALE' },
+            { label: t('male'), value: 'MALE' },
+            { label: t('transgender'), value: 'TRANS' },
           ]}
           value={gender}
           onChange={(value) => { setGender(value as Gender); setPage(1); }}
