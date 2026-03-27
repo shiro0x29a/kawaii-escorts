@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useSearch } from '@/hooks/useSearch';
+import { useCities } from '@/hooks/useCities';
 import { SearchBox, Pagination } from '@/components/ui';
 import styles from './SearchResults.module.css';
 
@@ -20,6 +21,7 @@ export function SearchResults({ city = '', showSearchBox = true }: SearchResults
   const [searchCity, setSearchCity] = useState(city);
   const [page, setPage] = useState(1);
   const { data, isLoading } = useSearch(searchCity ? { city: searchCity, page, limit: 6 } : undefined);
+  const { data: cities } = useCities('en');
 
   useEffect(() => {
     setSearchCity(city);
@@ -31,6 +33,12 @@ export function SearchResults({ city = '', showSearchBox = true }: SearchResults
 
   const totalPages = data?.pagination?.pages || 1;
 
+  const suggestions = cities
+    ?.filter((c) =>
+      searchCity ? c.name.toLowerCase().startsWith(searchCity.toLowerCase()) : true
+    )
+    .map((c) => ({ label: c.name, value: c.name })) || [];
+
   return (
     <div className={styles.searchResults}>
       {showSearchBox && (
@@ -38,6 +46,12 @@ export function SearchResults({ city = '', showSearchBox = true }: SearchResults
           placeholder={t('placeholder')}
           value={searchCity}
           onChange={setSearchCity}
+          suggestions={suggestions}
+          onSuggestionSelect={(value) => {
+            if (value.trim()) {
+              router.push(`/search?city=${encodeURIComponent(value.trim())}`);
+            }
+          }}
           onSearch={(value) => {
             if (value.trim()) {
               router.push(`/search?city=${encodeURIComponent(value.trim())}`);
