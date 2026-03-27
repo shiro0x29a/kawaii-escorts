@@ -68,7 +68,7 @@ model Profile {
 enum Gender {
   FEMALE
   MALE
-  TRANSGENDER
+  TRANS
 }
 
 model CartItem {

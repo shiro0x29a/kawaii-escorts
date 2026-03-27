@@ -8,7 +8,7 @@ import { Tabs, Card, Pagination } from '@/components/ui';
 import { getAssetUrl } from '@/lib/utils';
 import styles from './AdsList.module.css';
 
-type Gender = 'FEMALE' | 'MALE';
+type Gender = 'FEMALE' | 'MALE' | 'TRANS';
 
 const PROFILES_PER_PAGE = 6;
 
@@ -45,6 +45,7 @@ export function AdsList() {
         tabs={[
           { label: 'Female', value: 'FEMALE' },
           { label: 'Male', value: 'MALE' },
+          { label: 'Trans', value: 'TRANS' },
         ]}
         value={gender}
         onChange={(value) => { setGender(value as Gender); setPage(1); }}

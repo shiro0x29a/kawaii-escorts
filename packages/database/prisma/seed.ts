@@ -243,7 +243,7 @@ const profiles = [
   {
     name: 'Diana',
     age: 25,
-    gender: Gender.TRANSGENDER,
+    gender: Gender.TRANS,
     citySlug: 'tel-aviv',
     avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500',
     photos: [
