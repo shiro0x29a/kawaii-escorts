@@ -199,7 +199,7 @@ export default function AddAdPage() {
       }
 
       const profile = await response.json();
-      router.push(`/profiles/${profile.id}`);
+      router.push(`/ads/${profile.id}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : t('error'));
     } finally {

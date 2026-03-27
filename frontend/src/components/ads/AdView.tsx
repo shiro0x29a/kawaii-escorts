@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useAd } from '@/hooks/useAds';
 import { useMyProfiles } from '@/hooks/useMyProfiles';
 import { useAuthStore } from '@/stores/authStore';
@@ -48,9 +48,10 @@ export function AdView({ id }: AdViewProps) {
   const t = useTranslations('Ad');
   const locale = useLocale();
   const pathname = usePathname();
+  const router = useRouter();
   const { user } = useAuthStore();
   const { data: ad, isLoading, refetch } = useAd(id);
-  const { updateProfile, isUpdating } = useMyProfiles();
+  const { updateProfile, isUpdating, deleteProfile, isDeleting } = useMyProfiles();
   const { data: cities } = useCities(locale === 'ru' ? 'ru' : 'en');
 
   const editMode = useEditMode();
@@ -163,6 +164,17 @@ export function AdView({ id }: AdViewProps) {
     setAvatarFile(null);
     setNewPhotos([]);
     setPreviewAvatar(null);
+  };
+
+  const handleDeleteProfile = async () => {
+    if (!window.confirm(t('confirmDeleteProfile'))) return;
+
+    try {
+      await deleteProfile({ profileId: id });
+      router.push(`/${locale}/ads/profiles`);
+    } catch (error) {
+      console.error('Error deleting profile:', error);
+    }
   };
 
   if (isLoading) {
@@ -562,6 +574,18 @@ export function AdView({ id }: AdViewProps) {
               </div>
             )}
           </div>
+
+          {isOwner && isAdsRoute && (
+            <div className={styles.deleteSection}>
+              <button
+                onClick={handleDeleteProfile}
+                disabled={isDeleting}
+                className={styles.deleteProfileBtn}
+              >
+                {isDeleting ? t('deleting') : t('deleteProfile')}
+              </button>
+            </div>
+          )}
         </div>
 
         <AdViewGallery

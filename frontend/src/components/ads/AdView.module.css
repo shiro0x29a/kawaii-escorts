@@ -539,3 +539,32 @@
   padding: 0.5rem 0.5rem;
   font-size: 1rem;
 }
+
+/* Delete Profile Button */
+.deleteSection {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #374151;
+}
+
+.deleteProfileBtn {
+  width: 100%;
+  background: #dc2626;
+  color: white;
+  padding: 0.875rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.deleteProfileBtn:hover:not(:disabled) {
+  background: #b91c1c;
+}
+
+.deleteProfileBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

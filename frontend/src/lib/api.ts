@@ -91,6 +91,13 @@ export const api = {
         },
         body: JSON.stringify(data),
       }),
+    delete: (profileId: number, token: string) =>
+      fetchApi<void>(`/profiles/${profileId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
   },
 
   // Search

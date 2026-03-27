@@ -49,11 +49,28 @@ export function useMyProfiles(options: UseMyProfilesOptions = {}) {
     },
   });
 
+  // Mutation for deleting a profile
+  const deleteProfileMutation = useMutation({
+    mutationFn: ({ profileId }: { profileId: number }) => {
+      if (!token) throw new Error('No authentication token');
+      return api.profiles.delete(profileId, token);
+    },
+    onSuccess: () => {
+      // Invalidate and refetch the profiles data
+      queryClient.invalidateQueries({ queryKey: ['myProfiles'] });
+      queryClient.invalidateQueries({ queryKey: ['ads'] });
+    },
+  });
+
   return {
     ...query,
     updateProfile: updateProfileMutation.mutate,
     updateProfileAsync: updateProfileMutation.mutateAsync,
     isUpdating: updateProfileMutation.isPending,
     updateError: updateProfileMutation.error,
+    deleteProfile: deleteProfileMutation.mutate,
+    deleteProfileAsync: deleteProfileMutation.mutateAsync,
+    isDeleting: deleteProfileMutation.isPending,
+    deleteError: deleteProfileMutation.error,
   };
 }
