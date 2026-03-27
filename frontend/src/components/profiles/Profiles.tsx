@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import { useAds } from '@/hooks/useAds';
-import Link from 'next/link';
+import { getAssetUrl } from '@/lib/utils';
+import { Tabs, Card, Pagination } from '@/components/ui';
 import styles from './Profiles.module.css';
-import { Pagination } from '@/components/ui';
 
 type Gender = 'FEMALE' | 'MALE';
 
@@ -26,52 +26,31 @@ export function Profiles() {
   const totalPages = chunks.length;
   const currentPageProfiles = chunks[page - 1] || [];
 
-  console.log(allProfiles);
-  console.log(chunks);
-  console.log('Filtered profiles for pagination:', {
-    page,
-    totalPages,
-    totalProfiles: allProfiles.length,
-    gender,
-    currentPageProfiles,
-  });
-
   return (
     <section className={styles.section}>
       <div className={styles.container}>
-        <div className={styles.tabs}>
-          <button
-            className={`${styles.tab} ${gender === 'FEMALE' ? styles.active : ''}`}
-            onClick={() => { setGender('FEMALE'); setPage(1); }}
-          >
-            Female
-          </button>
-          <button
-            className={`${styles.tab} ${gender === 'MALE' ? styles.active : ''}`}
-            onClick={() => { setGender('MALE'); setPage(1); }}
-          >
-            Male
-          </button>
-        </div>
+        <Tabs
+          tabs={[
+            { label: 'Female', value: 'FEMALE' },
+            { label: 'Male', value: 'MALE' },
+          ]}
+          value={gender}
+          onChange={(value) => { setGender(value as Gender); setPage(1); }}
+        />
 
         <div className={styles.grid}>
           {currentPageProfiles.map((profile) => {
-            const avatarUrl = profile.avatar
-              ? profile.avatar.startsWith('http')
-                ? profile.avatar
-                : `/api${profile.avatar.startsWith('/') ? profile.avatar : `/${profile.avatar}`}`
-              : null;
+            const avatarUrl = getAssetUrl(profile.avatar);
             if (!avatarUrl) return null;
             return (
-              <Link key={profile.id} href={`/profiles/${profile.id}`} className={styles.card}>
-                <div className={styles.imageWrapper}>
-                  <img src={avatarUrl} alt={profile.name} className="object-cover w-full h-full" />
-                </div>
-                <div className={styles.info}>
-                  <h3 className={styles.name}>{profile.name}, {profile.age}</h3>
-                  <p className={styles.city}>{profile.city.nameEn}</p>
-                </div>
-              </Link>
+              <Card
+                key={profile.id}
+                href={`/profiles/${profile.id}`}
+                image={avatarUrl}
+                imageHeight="350px"
+                title={`${profile.name}, ${profile.age}`}
+                description={profile.city.nameEn}
+              />
             );
           })}
         </div>
