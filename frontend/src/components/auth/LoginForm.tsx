@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useLogin } from '@/hooks/useAuth';
@@ -18,6 +18,12 @@ export function LoginForm() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  useEffect(() => {
+    if (token) {
+      router.push('/');
+    }
+  }, [token, router]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -31,7 +37,6 @@ export function LoginForm() {
   };
 
   if (token) {
-    router.push('/');
     return null;
   }
 
