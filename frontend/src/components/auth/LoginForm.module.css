@@ -101,11 +101,12 @@
 }
 
 .forget {
-  margin: -15px 0 15px;
+  margin: 15px 0;
   font-size: 0.9em;
   color: #fff;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .forget label input {

@@ -138,6 +138,7 @@
     "password": "Пароль",
     "confirmPassword": "Подтвердите пароль",
     "forgotPassword": "Забыли пароль?",
+    "rememberMe": "Запомнить меня",
     "noAccount": "Нет аккаунта?",
     "hasAccount": "Уже есть аккаунт?",
     "loginSuccess": "Вход успешен",
